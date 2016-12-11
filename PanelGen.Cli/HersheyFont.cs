@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -44,9 +43,24 @@ namespace PanelGen.Cli
             }
         }
 
-        public float MeasureWidth(string text)
+        /// <summary>
+        /// Total width of text
+        /// </summary>
+        /// <param name="text">Text to measure</param>
+        /// <returns></returns>
+        public float Width(string text)
         {
             return text.Select(c => GetGlyph(c) ?? new Glyph()).Select(glyph => glyph.posR - glyph.posL).Sum() * _scale;
+        }
+
+        /// <summary>
+        /// CC-width (from center of first character to center of last).
+        /// </summary>
+        /// <param name="text">Text to measure</param>
+        /// <returns></returns>
+        public float InnerWidth(string text)
+        {
+            return Width(text) - ((GetGlyph(text.Last()).posR - GetGlyph(text.First()).posL) * _scale);
         }
 
         private void LoadFont(string file)

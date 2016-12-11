@@ -57,18 +57,6 @@ namespace PanelGen.Display
 
             var sdrw = new ScreenDraw(g, _tickPen, scale, new PointF((int)xc, (int)yc));
             d.DrawDial(sdrw, 0, 0);
-
-            // Draw text
-            var size = g.MeasureString(d.text, _cncFont);
-            g.DrawLine(Pens.CadetBlue,
-                xc - size.Width / 2, yc + (d.innerRadius + d.markerLength) * scale,
-                xc + size.Width / 2, yc + (d.innerRadius + d.markerLength) * scale + size.Height);
-
-            var font = new HersheyFont(@"W:\Projekt\gcam\PanelGen\hershey");
-            var fWidth = font.MeasureWidth(d.text);
-            font.DrawString(sdrw, d.text, -fWidth/2 + 1, d.innerRadius + d.markerLength + 1);
-
-            //g.DrawString(d.text, _cncFont, _fontBrush, xc - size.Width / 2, yc + (d.innerRadius + d.markerLength) * scale);
         }
 #if OLDIMPL
         private void RenderDial(Graphics g, Dial d)

@@ -21,33 +21,37 @@ namespace PanelGen.Cli
         public float tickLength; // Length of tick line
         public int tickCount; // Number of tick lines between each marker
 
-        public string text;
+        // Labels and text
+        public string text; // Dial label
+        public HersheyFont Font { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey");
+        public float markerLabelOffset = 1.5f;
 
         public void DrawDial(IDraw drw, float xc, float yc)
         {
             var startAng = (360 - arcSpan) * Math.PI / 360;
-            var mCount = (maxValue - minValue) / step + 1;
+            var mCount = (maxValue - minValue) / step;
             var markerArc = arcSpan / mCount * Math.PI / 180;
             var tickArc = markerArc / tickCount;
+            var outerRadius = innerRadius + markerLength;
 
             for (var i = 0; i < mCount; i++)
             {
                 var mArc = startAng + i * markerArc;
-                DrawTick(mArc, xc, yc, innerRadius, innerRadius + markerLength, drw);
+                DrawTick(mArc, xc, yc, innerRadius, outerRadius, drw);
+                DrawTickLabel((i*10).ToString(), mArc, xc, yc, outerRadius + markerLabelOffset, drw);
                 for (var j = tickArc; j < markerArc; j += tickArc)
                 {
                     DrawTick(mArc + j, xc, yc, innerRadius, innerRadius + tickLength, drw);
                 }
             }
             // Max marker
-            DrawTick(startAng + mCount*markerArc, xc, yc, innerRadius, innerRadius + markerLength, drw);
+            var maxAngle = startAng + mCount * markerArc;
+            DrawTick(maxAngle, xc, yc, innerRadius, outerRadius, drw);
+            DrawTickLabel((mCount * 10).ToString(), maxAngle, xc, yc, outerRadius + markerLabelOffset, drw);
 
             // Dial text
-            //var size = g.MeasureString(d.text, _cncFont);
-            //g.DrawLine(Pens.CadetBlue,
-            //    xc - size.Width / 2, yc + (d.innerRadius + d.markerLength) * scale,
-            //    xc + size.Width / 2, yc + (d.innerRadius + d.markerLength) * scale + size.Height);
-            //g.DrawString(d.text, _cncFont, _fontBrush, xc - size.Width / 2, yc + (d.innerRadius + d.markerLength) * scale);
+            var fWidth = Font.Width(text);
+            Font.DrawString(drw, text, -fWidth / 2 + 1, innerRadius + markerLength + 3f); //TODO: Fix offsets - letters are rendered offset to center
         }
 
         private static void DrawTick(double angle, float xc, float yc, float rInner, float rOuter, IDraw drw)
@@ -58,5 +62,19 @@ namespace PanelGen.Cli
             drw.LineTo(xc + xk * rOuter, yc - yk * rOuter);
         }
 
+        private void DrawTickLabel(string text, double angle, float xc, float yc, float dist, IDraw drw)
+        {
+            var w = Font.InnerWidth(text);
+            var xk = -(float)Math.Sin(angle);
+            var yk = -(float)Math.Cos(angle);
+            if (xk < -1e-8)
+                w = -w; // Left side, align to end
+            else if (xk <= 0)
+                w = -w / 2; // Top side, align to center
+            else
+                w = 0; // Right side align to start
+
+            Font.DrawString(drw, text, xc + xk * dist + w, yc - yk * dist);
+        }
     }
 }

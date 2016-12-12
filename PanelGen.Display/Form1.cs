@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Gcode;
 using PanelGen.Cli;
+using System.IO;
 
 namespace PanelGen.Display
 {
@@ -15,10 +16,39 @@ namespace PanelGen.Display
             panel1.Paint += Panel1_Paint;
             _dial = CreateDummyDial();
             RenderDial2(panel1.CreateGraphics(), _dial);
+            GCode();
+        }
+
+        private void GCode()
+        {
             var gceng = new GCodeEngraver();
             gceng.Init();
+            _dial.minValue = 0;
+            _dial.maxValue = 11;
             _dial.DrawDial(gceng, 0, 0);
+
+            _dial.text = "Fine tune".ToUpper();
+            _dial.minValue = -5;
+            _dial.maxValue = 5;
+            _dial.tickCount = 1;
+            _dial.DrawDial(gceng, 30, 0);
+
+            _dial.text = "Pulse width".ToUpper();
+            _dial.minValue = 0;
+            _dial.maxValue = 100;
+            _dial.step = 10;
+            _dial.tickCount = 1;
+            _dial.DrawDial(gceng, 0, 30);
+
+            _dial.DrawDial(gceng, 30, 30);
+
+            _dial.DrawDial(gceng, 0, 60);
+
+            _dial.text = "MIM";
+            _dial.DrawDial(gceng, 30, 60);
+            gceng.Finish();
             var result = gceng.GCode();
+            File.WriteAllText(@"C:\Projekt\PanelGen\test.nc", result);
         }
 
         private Dial CreateDummyDial()
@@ -35,9 +65,9 @@ namespace PanelGen.Display
                 innerRadius = 7.5f,
                 arcSpan = 300,
                 markerLength = 3.5f,
-                tickCount = 5,
+                tickCount = 4, // 4 lines for 5 intervals
                 tickLength = 2,
-                text = "KNOBHEAD"
+                text = "Frequency".ToUpper()
             };
         }
 

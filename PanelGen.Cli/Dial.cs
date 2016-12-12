@@ -31,14 +31,16 @@ namespace PanelGen.Cli
             var startAng = (360 - arcSpan) * Math.PI / 360;
             var mCount = (maxValue - minValue) / step;
             var markerArc = arcSpan / mCount * Math.PI / 180;
-            var tickArc = markerArc / tickCount;
+            var tickArc = markerArc / (tickCount + 1);
             var outerRadius = innerRadius + markerLength;
+
+            Font.Size = 1.5f;
 
             for (var i = 0; i < mCount; i++)
             {
                 var mArc = startAng + i * markerArc;
                 DrawTick(mArc, xc, yc, innerRadius, outerRadius, drw);
-                DrawTickLabel((i*10).ToString(), mArc, xc, yc, outerRadius + markerLabelOffset, drw);
+                DrawTickLabel((minValue + i*step).ToString(), mArc, xc, yc, outerRadius + markerLabelOffset, drw);
                 for (var j = tickArc; j < markerArc; j += tickArc)
                 {
                     DrawTick(mArc + j, xc, yc, innerRadius, innerRadius + tickLength, drw);
@@ -47,11 +49,12 @@ namespace PanelGen.Cli
             // Max marker
             var maxAngle = startAng + mCount * markerArc;
             DrawTick(maxAngle, xc, yc, innerRadius, outerRadius, drw);
-            DrawTickLabel((mCount * 10).ToString(), maxAngle, xc, yc, outerRadius + markerLabelOffset, drw);
+            DrawTickLabel(maxValue.ToString(), maxAngle, xc, yc, outerRadius + markerLabelOffset, drw);
 
             // Dial text
+            Font.Size = 3f;
             var fWidth = Font.Width(text);
-            Font.DrawString(drw, text, -fWidth / 2 + 1, innerRadius + markerLength + 3f); //TODO: Fix offsets - letters are rendered offset to center
+            Font.DrawString(drw, text, xc - fWidth / 2, yc + innerRadius + markerLength + 3f, false); //TODO: Fix offsets - letters are rendered offset to center
         }
 
         private static void DrawTick(double angle, float xc, float yc, float rInner, float rOuter, IDraw drw)

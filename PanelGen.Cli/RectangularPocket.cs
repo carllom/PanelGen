@@ -1,0 +1,167 @@
+﻿using System;
+using System.IO;
+
+namespace PanelGen.Cli
+{
+    public class RectangularPocket
+    {
+        public float xc; // Pocket X center 
+        public float yc; // Pocket Y center
+        public float width; // Pocket width
+        public float height; // Pocket height
+        public float depth; // Pocket depth
+
+        //private enum Corner
+        //{
+        //    BottomLeft,
+        //    TopLeft,
+        //    TopRight,
+        //    BottomRight
+        //};
+
+        private struct Rect
+        {
+            public float centerX;
+            public float centerY;
+            public float width;
+            public float height;
+            public float left => centerX - width/2;
+            public float right => centerX + width/2;
+            public float top => centerY + height/2;
+            public float bottom => centerY - height/2;
+        }
+
+        private const float Stepover = 0.1f; // Tool overlap (fraction of tool diameter) when doing surface milling
+
+        public void Draw(StringWriter output, Tool tool)
+        {
+            if (width < tool.diameter || height < tool.diameter)
+            {
+                output.WriteLine("(ERROR: Pocket is too small for tool)");
+                return;
+            }
+
+            // Create tool compensated rectangle
+            var toolOutline = new Rect
+            {
+                centerX = xc,
+                centerY = yc,
+                width = width - tool.diameter,
+                height = height - tool.diameter
+            };
+
+            // z = 0 (surface)
+            for (var z = -tool.zStep; z < depth; z -= tool.zStep)
+            {
+                MillPlane(output, tool, z, toolOutline);
+            }
+            MillPlane(output, tool, depth, toolOutline);
+        }
+
+        private void MillPlane(TextWriter output, Tool tool, float z, Rect toolOutline)
+        {
+            var toolSurface = toolOutline;
+            toolSurface.width = toolOutline.width - tool.diameter;
+            toolSurface.height = toolOutline.height - tool.diameter;
+
+            output.WriteLine($"G00 X{toolSurface.left:0.###} Y{toolSurface.bottom:0.###}"); // Quick move to surface start
+            output.WriteLine($"G01 Z{z:0.###}"); // Next z-step
+            // Is there any point in milling a surface or have we covered it with the outline?
+            if (Math.Min(width, height) - 2*tool.diameter > 0)
+            {
+                MillSurfaceSnake(output, toolSurface, tool.diameter*Stepover);
+            }
+            output.WriteLine($"G01 X{toolOutline.left:0.###} Y{toolOutline.bottom:0.###}"); // Move to outline start
+            MillOutline(output, toolOutline);
+        }
+
+        // Mill outermost rectangle - assume (for now) that we are at bottom left when starting
+        private static void MillOutline(TextWriter output, Rect r)
+        {
+            output.WriteLine($"G01 Y{r.top:0.###}"); // Mill left side
+            output.WriteLine($"G01 X{r.right:0.###}"); // Mill top side
+            output.WriteLine($"G01 Y{r.bottom:0.###}"); // Mill right side
+            output.WriteLine($"G01 X{r.left:0.###}"); // Mill bottom side
+        }
+
+        private static void MillSurfaceSnake(TextWriter output, Rect r, float step)
+        {
+            var pos = true; // Positive (right/up) movement 
+            if (r.width > r.height) // horizontal strips
+            {
+                var ypos = r.bottom;
+                while (ypos < r.top)
+                {
+                    output.WriteLine($"G01 X{(pos ? r.right : r.left):0.###}"); // long mill
+                    output.WriteLine($"G01 Y{ypos:0.###}"); // short mill
+                    ypos += step;
+                    pos = !pos;
+                }
+                output.WriteLine($"G01 X{(pos ? r.right : r.left):0.###}"); // long mill
+                output.WriteLine($"G01 Y{r.top:0.###}"); // short mill
+            }
+            else // vertical strips
+            {
+                var xpos = r.left;
+                while (xpos < r.right)
+                {
+                    output.WriteLine($"G01 Y{(pos ? r.top : r.bottom):0.###}"); // long mill
+                    output.WriteLine($"G01 X{xpos:0.###}"); // short mill
+                    xpos += step;
+                    pos = !pos;
+                }
+                output.WriteLine($"G01 Y{(pos ? r.top : r.bottom):0.###}"); // long mill
+                output.WriteLine($"G01 X{r.right:0.###}"); // short mill
+            }
+        }
+#if OPTIMIZE
+        private static Corner Snake(TextWriter output, Corner start, Rect r, float step)
+        {
+            var horiz = r.width > r.height;
+            var longLabel = horiz ? "X" : "Y"; // Coordinate label for long side
+            var shortLabel = horiz ? "Y" : "X"; // Coordinate label for short side
+
+            // Does the long side start with positive direction?
+            var longPos = horiz && (start == Corner.TopLeft || start == Corner.BottomLeft) ||
+                          !horiz && (start == Corner.BottomLeft || start == Corner.BottomRight);
+
+            // Does the short side have positive direction?
+            var shortPos = horiz && (start == Corner.BottomLeft || start == Corner.BottomRight) ||
+                           !horiz && (start == Corner.BottomLeft || start == Corner.TopLeft);
+
+            // Negate step direction if necessary
+            if (!shortPos)
+                step = -step;
+
+            var shortStart = 0f;
+            var shortEnd = 0f;
+            var longStart = 0f;
+            var longEnd = 0f;
+
+            switch (start)
+            {
+                case Corner.BottomLeft:
+                    break;
+                case Corner.BottomRight:
+                    break;
+                case Corner.TopLeft:
+                    break;
+                case Corner.TopRight:
+                    break;
+            }
+
+            var sPos = shortStart;
+            while (step < 0 ? sPos > shortEnd : sPos < shortEnd)
+            {
+                output.WriteLine($"G01 {longLabel}{(longPos ? longEnd : longStart):0.###}"); // long mill
+                output.WriteLine($"G01 {shortLabel}{sPos:0.###}"); // short mill
+                sPos += step;
+                longPos = !longPos;
+            }
+            output.WriteLine($"G01 {longLabel}{(longPos ? longEnd : longStart):0.###}"); // long mill
+            output.WriteLine($"G01 {shortLabel}{shortEnd:0.###}"); // short mill
+            longPos = !longPos;
+        }
+#endif
+    }
+}

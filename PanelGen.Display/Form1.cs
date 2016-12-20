@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Gcode;
 using PanelGen.Cli;
 using System.IO;
+using System.Globalization;
 
 namespace PanelGen.Display
 {
@@ -49,6 +50,40 @@ namespace PanelGen.Display
             gceng.Finish();
             var result = gceng.GCode();
             File.WriteAllText(@"C:\Projekt\PanelGen\test.nc", result);
+
+            var output = new StringWriter(CultureInfo.InvariantCulture);
+            output.WriteLine("G17"); // Select XY plane
+            output.WriteLine("G21"); // Units in mm
+            output.WriteLine("M3 S1000"); // Spindle on speed 1000
+            output.WriteLine("F100"); // Feed
+
+            var cp = new CircularPocket()
+            {
+                x = 10,
+                y = 10,
+                diameter = 5,
+                depth = 3
+            };
+            var t = new Tool()
+            {
+                diameter = 3.175f,
+                zStep = 0.256f
+            };
+            cp.Draw(output, t);
+
+            output.WriteLine("G0 Z1");
+
+            var rp = new RectangularPocket()
+            {
+                xc = 30,
+                yc = 15,
+                height = 20,
+                width = 30,
+                depth = 3
+            };
+            rp.Draw(output, t);
+            output.WriteLine("M5"); // Spindle off
+            File.WriteAllText(@"C:\Projekt\PanelGen\pocket.nc", output.ToString());
         }
 
         private Dial CreateDummyDial()

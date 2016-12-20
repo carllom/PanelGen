@@ -41,6 +41,9 @@ namespace PanelGen.Cli
                 return;
             }
 
+
+            output.WriteLine("(DEBUG: RectangularPocket start)");
+
             // Create tool compensated rectangle
             var toolOutline = new Rect
             {
@@ -51,11 +54,13 @@ namespace PanelGen.Cli
             };
 
             // z = 0 (surface)
-            for (var z = -tool.zStep; z < depth; z -= tool.zStep)
+            for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
             {
                 MillPlane(output, tool, z, toolOutline);
             }
-            MillPlane(output, tool, depth, toolOutline);
+            MillPlane(output, tool, -depth, toolOutline);
+
+            output.WriteLine("(DEBUG: RectangularPocket end)");
         }
 
         private void MillPlane(TextWriter output, Tool tool, float z, Rect toolOutline)
@@ -64,24 +69,24 @@ namespace PanelGen.Cli
             toolSurface.width = toolOutline.width - tool.diameter;
             toolSurface.height = toolOutline.height - tool.diameter;
 
-            output.WriteLine($"G00 X{toolSurface.left:0.###} Y{toolSurface.bottom:0.###}"); // Quick move to surface start
-            output.WriteLine($"G01 Z{z:0.###}"); // Next z-step
+            output.WriteLine("G00 X{0:0.###} Y{1:0.###}", toolSurface.left, toolSurface.bottom); // Quick move to surface start
+            output.WriteLine("G01 Z{0:0.###}", z); // Next z-step
             // Is there any point in milling a surface or have we covered it with the outline?
             if (Math.Min(width, height) - 2*tool.diameter > 0)
             {
-                MillSurfaceSnake(output, toolSurface, tool.diameter*Stepover);
+                MillSurfaceSnake(output, toolSurface, tool.diameter*(1-Stepover));
             }
-            output.WriteLine($"G01 X{toolOutline.left:0.###} Y{toolOutline.bottom:0.###}"); // Move to outline start
+            output.WriteLine("G01 X{0:0.###} Y{1:0.###}", toolOutline.left, toolOutline.bottom); // Move to outline start
             MillOutline(output, toolOutline);
         }
 
         // Mill outermost rectangle - assume (for now) that we are at bottom left when starting
         private static void MillOutline(TextWriter output, Rect r)
         {
-            output.WriteLine($"G01 Y{r.top:0.###}"); // Mill left side
-            output.WriteLine($"G01 X{r.right:0.###}"); // Mill top side
-            output.WriteLine($"G01 Y{r.bottom:0.###}"); // Mill right side
-            output.WriteLine($"G01 X{r.left:0.###}"); // Mill bottom side
+            output.WriteLine("G01 Y{0:0.###}", r.top); // Mill left side
+            output.WriteLine("G01 X{0:0.###}", r.right); // Mill top side
+            output.WriteLine("G01 Y{0:0.###}", r.bottom); // Mill right side
+            output.WriteLine("G01 X{0:0.###}", r.left); // Mill bottom side
         }
 
         private static void MillSurfaceSnake(TextWriter output, Rect r, float step)
@@ -89,29 +94,33 @@ namespace PanelGen.Cli
             var pos = true; // Positive (right/up) movement 
             if (r.width > r.height) // horizontal strips
             {
-                var ypos = r.bottom;
+                var ypos = r.bottom + step; // we are already @r.bottom, ypos represents "next" line
                 while (ypos < r.top)
                 {
-                    output.WriteLine($"G01 X{(pos ? r.right : r.left):0.###}"); // long mill
-                    output.WriteLine($"G01 Y{ypos:0.###}"); // short mill
+                    output.WriteLine("G01 X{0:0.###}", pos ? r.right : r.left); // long mill
+                    output.WriteLine("G01 Y{0:0.###}", ypos); // short mill
                     ypos += step;
                     pos = !pos;
                 }
-                output.WriteLine($"G01 X{(pos ? r.right : r.left):0.###}"); // long mill
-                output.WriteLine($"G01 Y{r.top:0.###}"); // short mill
+                output.WriteLine("G01 X{0:0.###}", pos ? r.right : r.left); // long mill
+                output.WriteLine("G01 Y{0:0.###}", r.top); // short mill
+                pos = !pos;
+                output.WriteLine("G01 X{0:0.###}", pos ? r.right : r.left); // long mill
             }
             else // vertical strips
             {
-                var xpos = r.left;
+                var xpos = r.left + step;
                 while (xpos < r.right)
                 {
-                    output.WriteLine($"G01 Y{(pos ? r.top : r.bottom):0.###}"); // long mill
-                    output.WriteLine($"G01 X{xpos:0.###}"); // short mill
+                    output.WriteLine("G01 Y{0:0.###}", pos ? r.top : r.bottom); // long mill
+                    output.WriteLine("G01 X{0:0.###}", xpos); // short mill
                     xpos += step;
                     pos = !pos;
                 }
-                output.WriteLine($"G01 Y{(pos ? r.top : r.bottom):0.###}"); // long mill
-                output.WriteLine($"G01 X{r.right:0.###}"); // short mill
+                output.WriteLine("G01 Y{0:0.###}", pos ? r.top : r.bottom); // long mill
+                output.WriteLine("G01 X{0:0.###}", r.right); // short mill
+                pos = !pos;
+                output.WriteLine("G01 Y{0:0.###}", pos ? r.top : r.bottom); // long mill
             }
         }
 #if OPTIMIZE

@@ -23,26 +23,42 @@ namespace PanelGen.Cli
 
             output.WriteLine("(DEBUG: CircularPocket start)");
 
-            output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x, y); // Move to center (x,y)
-            // z = 0 (surface)
-            for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
+            if (diameter < tool.diameter * 2) // Pocket is small enough to mill using a helix
             {
-                output.WriteLine("G01 X{0:0.###}", x); // Move to center - we assume to be at safe height
-                output.WriteLine("G01 Z{0:0.###}", z); // Next z-step
-                //MillSurfaceCircular(output, tool);
+                var maxRadius = (diameter / 2) - tool.radius; // tool compensated outer radius
+
+                output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x + maxRadius, y); // Move to center (x,y)
+                                                                     // z = 0 (surface)
+                for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
+                {
+                    output.WriteLine("G02 I{0:0.###} Z{1:0.###}", -maxRadius, z); // Helix w center @x,y
+                }
+                output.WriteLine("G02 I{0:0.###} Z{1:0.###}", -maxRadius, -depth); // Helix w center @x,y
+                output.WriteLine("G02 I{0:0.###}", -maxRadius); // Circle w center @x,y
+            }
+            else // Pocket must be surface milled
+            {
+                output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x, y); // Move to center (x,y)
+                                                                     // z = 0 (surface)
+
+                for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
+                {
+                    output.WriteLine("G01 X{0:0.###}", x); // Move to center - we assume to be at safe height
+                    output.WriteLine("G01 Z{0:0.###}", z); // Next z-step
+                                                           //MillSurfaceCircular(output, tool);
+                    MillSurfaceSpiral(output, tool);
+                }
+                output.WriteLine("G01 X{0:0.###}", x);
+                output.WriteLine("G01 Z{0:0.###}", -depth); // Finish with surface @z=depth
+                                                            //MillSurfaceCircular(output, tool);
                 MillSurfaceSpiral(output, tool);
             }
-            output.WriteLine("G01 X{0:0.###}", x);
-            output.WriteLine("G01 Z{0:0.###}",-depth); // Finish with surface @z=depth
-            //MillSurfaceCircular(output, tool);
-            MillSurfaceSpiral(output, tool);
-
             output.WriteLine("(DEBUG: CircularPocket end)");
         }
 
         private void MillSurfaceCircular(TextWriter output, Tool tool)
         {
-            var maxRadius = x + (diameter/2) - tool.radius;
+            var maxRadius = (diameter/2) - tool.radius; // Tool compensated outer radius
             var xDelta = tool.diameter*(1 - Stepover); // Amount to move for each
             var xr = x + xDelta;
 
@@ -53,8 +69,8 @@ namespace PanelGen.Cli
                 xr += xDelta; // Next circle/radius
             }
             // Do outermost circle
-            output.WriteLine("G01 X{0:0.###}", maxRadius); // Move to outer radius
-            output.WriteLine("G02 I{0:0.###}", x-maxRadius); // Circle w center @x,y
+            output.WriteLine("G01 X{0:0.###}", x + maxRadius); // Move to outer radius
+            output.WriteLine("G02 I{0:0.###}", -maxRadius); // Circle w center @x,y
         }
 
         #region Spiral cutting

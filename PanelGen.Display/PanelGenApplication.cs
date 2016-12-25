@@ -1,4 +1,5 @@
 ﻿using PanelGen.Cli;
+using System.IO;
 
 namespace PanelGen.Display
 {
@@ -8,12 +9,28 @@ namespace PanelGen.Display
 
         public void LoadPanel(string path)
         {
-            System.Diagnostics.Debug.WriteLine($"Load Panel @{path}");
+            if (panel == null)
+                panel = new PanelStock();
+            using (var str = File.OpenRead(path))
+            {
+                using (var br = new BinaryReader(str))
+                {
+                    panel.Load(br);
+                    // TODO: Load view state
+                }
+            }
         }
 
         public void SavePanel(string path)
         {
-            System.Diagnostics.Debug.WriteLine($"Save Panel @{path}");
+            using (var str = File.Create(path))
+            {
+                using (var br = new BinaryWriter(str))
+                {
+                    panel.Save(br);
+                    // TODO: Save view state
+                }
+            }
         }
 
         public void NewPanel(float width, float height, float thickness)
@@ -24,7 +41,6 @@ namespace PanelGen.Display
                 height = height,
                 thickness = thickness
             };
-            //System.Diagnostics.Debug.WriteLine($"New Panel ({width}x{height}x{thickness})");
         }
     }
 }

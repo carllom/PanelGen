@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace PanelGen.Cli
 {
@@ -37,7 +38,7 @@ namespace PanelGen.Cli
             {
                 var mArc = startAng + i * markerArc;
                 DrawTick(mArc, xc, yc, innerRadius, outerRadius, drw);
-                DrawTickLabel((minValue + i*step).ToString(), mArc, xc, yc, outerRadius + markerLabelOffset, drw);
+                DrawTickLabel((minValue + i * step).ToString(), mArc, xc, yc, outerRadius + markerLabelOffset, drw);
                 for (var j = tickArc; j < markerArc; j += tickArc)
                 {
                     DrawTick(mArc + j, xc, yc, innerRadius, innerRadius + tickLength, drw);
@@ -76,5 +77,39 @@ namespace PanelGen.Cli
 
             Font.DrawString(drw, text, xc + xk * dist + w, yc - yk * dist);
         }
+
+        #region Save/Restore object
+        public override void Load(BinaryReader data)
+        {
+            base.Load(data);
+            holeRadius = data.ReadSingle();
+            innerRadius = data.ReadSingle();
+            arcSpan = data.ReadSingle();
+            markerLength = data.ReadSingle();
+            minValue = data.ReadInt32();
+            maxValue = data.ReadInt32();
+            step = data.ReadInt32();
+            tickLength = data.ReadSingle();
+            tickCount = data.ReadInt32();
+            text = data.ReadString();
+            markerLabelOffset = data.ReadSingle();
+        }
+
+        public override void Save(BinaryWriter data)
+        {
+            base.Save(data);
+            data.Write(holeRadius);
+            data.Write(innerRadius);
+            data.Write(arcSpan);
+            data.Write(markerLength);
+            data.Write(minValue);
+            data.Write(maxValue);
+            data.Write(step);
+            data.Write(tickLength);
+            data.Write(tickCount);
+            data.Write(text);
+            data.Write(markerLabelOffset);
+        }
+        #endregion
     }
 }

@@ -30,11 +30,13 @@ namespace PanelGen.Display
             }
             else if (sender == fileOpenMenuItem)
             {
-                _app.LoadPanel("");
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    _app.LoadPanel(openFileDialog1.FileName);
             }
             else if (sender == fileSaveMenuItem)
             {
-                _app.SavePanel("");
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    _app.SavePanel(saveFileDialog1.FileName);
             }
             else if (sender == fileExitMenuItem)
             {
@@ -58,15 +60,42 @@ namespace PanelGen.Display
             }
             else if (sender == panelAddRectPocket)
             {
-
+                var rp = new RectangularPocket();
+                var settings = new RectangularPocketSettings(rp);
+                if (settings.ShowDialog() == DialogResult.OK)
+                {
+                    _app.panel.items.Add(rp);
+                    viewPanel.Invalidate();
+                }
             }
             else if (sender == panelAddCircPocket)
             {
                 var cp = new CircularPocket();
                 var settings = new CircularPocketSettings(cp);
-                settings.ShowDialog();
+                if (settings.ShowDialog()==DialogResult.OK)
+                {
+                    _app.panel.items.Add(cp);
+                    viewPanel.Invalidate();
+                }
             }
         }
+
+        private void tool_Click(object sender, EventArgs e)
+        {
+            if (sender == dialTool)
+            {
+                MenuItem_Click(panelAddDialMenuItem, e);
+            }
+            else if (sender == circPocketTool)
+            {
+                MenuItem_Click(panelAddCircPocket, e);
+            }
+            else if (sender == rectPocketTool)
+            {
+                MenuItem_Click(panelAddRectPocket, e);
+            }
+        }
+
 
         private Dial CreateDummyDial()
         {
@@ -97,5 +126,6 @@ namespace PanelGen.Display
         private void viewPanel_Paint(object sender, PaintEventArgs e)
         {
         }
+
     }
 }

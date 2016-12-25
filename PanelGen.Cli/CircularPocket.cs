@@ -104,6 +104,22 @@ namespace PanelGen.Cli
         }
 
         #endregion
+
+        #region Save/Restore object
+        public override void Load(BinaryReader data)
+        {
+            base.Load(data);
+            diameter = data.ReadSingle();
+            depth = data.ReadSingle();
+        }
+
+        public override void Save(BinaryWriter data)
+        {
+            base.Save(data);
+            data.Write(diameter);
+            data.Write(depth);
+        }
+        #endregion
     }
 }
 

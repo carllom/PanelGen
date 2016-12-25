@@ -48,6 +48,8 @@
             this.dialTool = new System.Windows.Forms.ToolStripButton();
             this.circPocketTool = new System.Windows.Forms.ToolStripButton();
             this.rectPocketTool = new System.Windows.Forms.ToolStripButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -201,7 +203,7 @@
             this.rectPocketTool});
             this.toolStrip1.Location = new System.Drawing.Point(0, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(93, 80);
+            this.toolStrip1.Size = new System.Drawing.Size(93, 99);
             this.toolStrip1.TabIndex = 0;
             // 
             // dialTool
@@ -211,6 +213,7 @@
             this.dialTool.Name = "dialTool";
             this.dialTool.Size = new System.Drawing.Size(91, 20);
             this.dialTool.Text = "Dial";
+            this.dialTool.Click += new System.EventHandler(this.tool_Click);
             // 
             // circPocketTool
             // 
@@ -219,6 +222,7 @@
             this.circPocketTool.Name = "circPocketTool";
             this.circPocketTool.Size = new System.Drawing.Size(91, 20);
             this.circPocketTool.Text = "Circ. pocket";
+            this.circPocketTool.Click += new System.EventHandler(this.tool_Click);
             // 
             // rectPocketTool
             // 
@@ -227,6 +231,18 @@
             this.rectPocketTool.Name = "rectPocketTool";
             this.rectPocketTool.Size = new System.Drawing.Size(91, 20);
             this.rectPocketTool.Text = "Rect. pocket";
+            this.rectPocketTool.Click += new System.EventHandler(this.tool_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "pnl";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "pnl";
+            this.saveFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
             // 
             // PanelEditor
             // 
@@ -272,5 +288,7 @@
         private System.Windows.Forms.ToolStripButton circPocketTool;
         private System.Windows.Forms.ToolStripButton rectPocketTool;
         private ViewPanel viewPanel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

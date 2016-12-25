@@ -1,17 +1,13 @@
 ﻿using PanelGen.Cli;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PanelGen.Display
 {
     public class ViewPanel : Panel
     {
-        public PointF Origo = new PointF();
+        public PointF Origo = new PointF(float.NaN, float.NaN);
         private float origoSize = 10;
 
         public PanelGenApplication Model;
@@ -25,7 +21,7 @@ namespace PanelGen.Display
             e.Graphics.DrawLine(Pens.Green, Origo.X, Origo.Y - origoSize, Origo.X, Origo.Y + origoSize);
 
             var draw = new ScreenDraw(e.Graphics, Pens.LightCyan, _zoom, Origo);
-            if (Model.panel != null)
+            if (Model?.panel != null)
             {
                 Model.panel.Draw(draw);
                 foreach (var item in Model.panel.items)
@@ -34,6 +30,32 @@ namespace PanelGen.Display
                     {
                         var d = item as Dial;
                         d.DrawDial(draw, d.x, d.y);
+                        e.Graphics.DrawEllipse(Pens.Purple,
+                            Origo.X + ((d.x - d.holeRadius) * _zoom),
+                            Origo.Y - ((d.y + d.holeRadius) * _zoom),
+                            d.holeRadius * 2 * _zoom,
+                            d.holeRadius * 2 * _zoom);
+
+                    }
+                    else if (item is RectangularPocket)
+                    {
+                        var rp = item as RectangularPocket;
+                        // Screen representation
+                        e.Graphics.DrawRectangle(Pens.Purple,
+                            Origo.X + ((rp.x - rp.width / 2) * _zoom),
+                            Origo.Y - ((rp.y + rp.height / 2) * _zoom),
+                            rp.width * _zoom,
+                            rp.height * _zoom);
+                    }
+                    else if (item is CircularPocket)
+                    {
+                        var cp = item as CircularPocket;
+                        // Screen representation
+                        e.Graphics.DrawEllipse(Pens.Purple,
+                            Origo.X + ((cp.x - cp.diameter / 2) * _zoom),
+                            Origo.Y - ((cp.y + cp.diameter / 2) * _zoom),
+                            cp.diameter * _zoom,
+                            cp.diameter * _zoom);
                     }
                     // Draw them as well
                 }
@@ -51,6 +73,10 @@ namespace PanelGen.Display
         protected override void OnResize(EventArgs eventargs)
         {
             base.OnResize(eventargs);
+            if (float.IsNaN(Origo.X)|| float.IsNaN(Origo.Y))
+            {
+                Origo = new PointF(Width / 2, Height / 2);
+            }
             Invalidate();
         }
 

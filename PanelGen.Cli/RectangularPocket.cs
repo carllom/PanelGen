@@ -170,5 +170,21 @@ namespace PanelGen.Cli
             longPos = !longPos;
         }
 #endif
+        #region Save/Restore object
+        public override void Load(BinaryReader data)
+        {
+            base.Load(data);
+            width = data.ReadSingle();
+            height = data.ReadSingle();
+            depth = data.ReadSingle();
+        }
+        public override void Save(BinaryWriter data)
+        {
+            base.Save(data);
+            data.Write(width);
+            data.Write(height);
+            data.Write(depth);
+        }
+        #endregion
     }
 }

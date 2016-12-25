@@ -46,6 +46,8 @@
     <Compile Include="HersheyFont.cs" />
     <Compile Include="IDraw.cs" />
     <Compile Include="IDrawableItem.cs" />
+    <Compile Include="IPanelGenFileObject.cs" />
+    <Compile Include="PanelComponent.cs" />
     <Compile Include="PanelStock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,10 +3,8 @@ using System.IO;
 
 namespace PanelGen.Cli
 {
-    public class RectangularPocket
+    public class RectangularPocket : PanelStockItem
     {
-        public float xc; // Pocket X center 
-        public float yc; // Pocket Y center
         public float width; // Pocket width
         public float height; // Pocket height
         public float depth; // Pocket depth
@@ -47,8 +45,8 @@ namespace PanelGen.Cli
             // Create tool compensated rectangle
             var toolOutline = new Rect
             {
-                centerX = xc,
-                centerY = yc,
+                centerX = x,
+                centerY = y,
                 width = width - tool.diameter,
                 height = height - tool.diameter
             };

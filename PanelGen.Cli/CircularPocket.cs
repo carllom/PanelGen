@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Data.SqlTypes;
 using System.IO;
 
 namespace PanelGen.Cli
 {
-    public class CircularPocket
+    public class CircularPocket : PanelStockItem
     {
-        public float x; // Pocket X center
-        public float y; // Pocket Y center
         public float diameter; // Pocket diameter
         public float depth; // Pocket depth
 

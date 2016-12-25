@@ -61,7 +61,7 @@ namespace PanelGen.Display
             {
                 x = 10,
                 y = 10,
-                diameter = 5,
+                diameter = 6.3f,
                 depth = 3
             };
             var t = new Tool()
@@ -72,7 +72,7 @@ namespace PanelGen.Display
             cp.Draw(output, t);
 
             output.WriteLine("G0 Z1");
-
+#if false
             var rp = new RectangularPocket()
             {
                 xc = 30,
@@ -82,6 +82,7 @@ namespace PanelGen.Display
                 depth = 3
             };
             rp.Draw(output, t);
+#endif
             output.WriteLine("M5"); // Spindle off
             File.WriteAllText(@"C:\Projekt\PanelGen\pocket.nc", output.ToString());
         }

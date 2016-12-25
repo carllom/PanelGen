@@ -2,11 +2,8 @@
 
 namespace PanelGen.Cli
 {
-    public class Dial
+    public class Dial : PanelStockItem
     {
-        public float x;
-        public float y;
-
         public float holeRadius; // radius of hole for pot axis
         public float innerRadius; // inner radius for marker/tick lines
 

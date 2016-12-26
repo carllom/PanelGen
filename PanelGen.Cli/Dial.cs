@@ -52,13 +52,13 @@ namespace PanelGen.Cli
             // Dial text
             Font.Size = 3f;
             var fWidth = Font.Width(text);
-            Font.DrawString(drw, text, xc - fWidth / 2, yc + innerRadius + markerLength + 3f, false); //TODO: Fix offsets - letters are rendered offset to center
+            Font.DrawString(drw, text, xc - fWidth / 2, yc - innerRadius - markerLength - 3f, false); //TODO: Fix offsets - letters are rendered offset to center
         }
 
         private static void DrawTick(double angle, float xc, float yc, float rInner, float rOuter, IDraw drw)
         {
             var xk = -(float)Math.Sin(angle);
-            var yk = -(float)Math.Cos(angle);
+            var yk = (float)Math.Cos(angle);
             drw.MoveTo(xc + xk * rInner, yc - yk * rInner);
             drw.LineTo(xc + xk * rOuter, yc - yk * rOuter);
         }
@@ -67,7 +67,7 @@ namespace PanelGen.Cli
         {
             var w = Font.InnerWidth(text);
             var xk = -(float)Math.Sin(angle);
-            var yk = -(float)Math.Cos(angle);
+            var yk = (float)Math.Cos(angle);
             if (xk < -1e-8)
                 w = -w; // Left side, align to end
             else if (xk <= 0)

@@ -44,11 +44,11 @@ namespace PanelGen.Cli
 
                     if (raised)
                     {
-                        drw.MoveTo(gp.X*_scale + offx, gp.Y*_scale + offy);
+                        drw.MoveTo(gp.X*_scale + offx, -gp.Y*_scale + offy); // -Y because Hershey y is positive down and IDraw is positive up
                         raised = false;
                     }
                     else
-                        drw.LineTo(gp.X*_scale + offx, gp.Y*_scale + offy);
+                        drw.LineTo(gp.X*_scale + offx, -gp.Y*_scale + offy); // -Y because Hershey y is positive down and IDraw is positive up
                 }
                 offx += glyph.posR * _scale; // Add right offset portion of this glyph
             }

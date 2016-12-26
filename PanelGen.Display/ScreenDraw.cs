@@ -43,7 +43,7 @@ namespace PanelGen.Display
 
         private PointF ToScreen(float x, float y)
         {
-            return new PointF(x*_scale + _screenOrigo.X, _screenOrigo.Y + y * _scale);
+            return new PointF(x*_scale + _screenOrigo.X, _screenOrigo.Y - y * _scale);
         }
     }
 }

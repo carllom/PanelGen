@@ -23,7 +23,13 @@ namespace PanelGen.Display
             var draw = new ScreenDraw(e.Graphics, Pens.LightCyan, _zoom, Origo);
             if (Model?.panel != null)
             {
-                Model.panel.Draw(draw);
+                var p = Model.panel;
+                e.Graphics.DrawRectangle(Pens.LightCoral,
+                    ScreenX(p.x),
+                    ScreenY(p.y + p.height),
+                    p.width * _zoom,
+                    p.height * _zoom);
+                    
                 foreach (var item in Model.panel.items)
                 {
                     if (item is Dial)
@@ -31,8 +37,8 @@ namespace PanelGen.Display
                         var d = item as Dial;
                         d.DrawDial(draw, d.x, d.y);
                         e.Graphics.DrawEllipse(Pens.Purple,
-                            Origo.X + ((d.x - d.holeRadius) * _zoom),
-                            Origo.Y - ((d.y + d.holeRadius) * _zoom),
+                            ScreenX(d.x - d.holeRadius),
+                            ScreenY(d.y + d.holeRadius),
                             d.holeRadius * 2 * _zoom,
                             d.holeRadius * 2 * _zoom);
 
@@ -42,8 +48,8 @@ namespace PanelGen.Display
                         var rp = item as RectangularPocket;
                         // Screen representation
                         e.Graphics.DrawRectangle(Pens.Purple,
-                            Origo.X + ((rp.x - rp.width / 2) * _zoom),
-                            Origo.Y - ((rp.y + rp.height / 2) * _zoom),
+                            ScreenX(rp.x - rp.width / 2),
+                            ScreenY(rp.y + rp.height / 2),
                             rp.width * _zoom,
                             rp.height * _zoom);
                     }
@@ -52,8 +58,8 @@ namespace PanelGen.Display
                         var cp = item as CircularPocket;
                         // Screen representation
                         e.Graphics.DrawEllipse(Pens.Purple,
-                            Origo.X + ((cp.x - cp.diameter / 2) * _zoom),
-                            Origo.Y - ((cp.y + cp.diameter / 2) * _zoom),
+                            ScreenX(cp.x - cp.diameter / 2),
+                            ScreenY(cp.y + cp.diameter / 2),
                             cp.diameter * _zoom,
                             cp.diameter * _zoom);
                     }
@@ -62,11 +68,26 @@ namespace PanelGen.Display
             }
         }
 
+        private float ScreenX(float x)
+        {
+            return Origo.X + x * _zoom;
+        }
+
+        private float ScreenY(float y)
+        {
+            return Origo.Y - y * _zoom;
+        }
+
+
         private const float WheelScale = 1 / 120f;
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             base.OnMouseWheel(e);
             _zoom += e.Delta * WheelScale;
+            if (_zoom < 1)
+            {
+                _zoom = 1;
+            }
             Invalidate();
         }
 

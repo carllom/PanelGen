@@ -53,5 +53,6 @@ namespace PanelGen.Cli
 
     public abstract class PanelStockItem : PanelComponent
     {
+        public abstract void GenerateCode(TextWriter writer, Tool tool);
     }
 }

@@ -66,7 +66,7 @@ namespace PanelGen.Display
                     if (item is Dial)
                     {
                         var d = item as Dial;
-                        d.DrawDial(draw, d.pos.x, d.pos.y);
+                        d.Draw(draw);
                         e.Graphics.DrawEllipse(Pens.Purple,
                             ScreenX(d.pos.x - d.holeRadius),
                             ScreenY(d.pos.y + d.holeRadius),

@@ -1,17 +1,16 @@
 ﻿using System.IO;
 using System.Linq;
-using PanelGen.Cli;
 using System.Globalization;
 
-namespace Gcode
+namespace PanelGen.Cli
 {
-    public struct Point
+    public struct CncPoint
     {
         public readonly float X;
         public readonly float Y;
         public readonly float Z;
 
-        public Point(float x, float y, float z=0)
+        public CncPoint(float x, float y, float z=0)
         {
             X = x;
             Y = y;
@@ -45,7 +44,7 @@ namespace Gcode
             _writer.WriteLine("M5"); // Spindle off
             MoveTo(0, 0); // Move home
         }
-        public void AddLine(Point from, Point to, bool raise=true)
+        public void AddLine(CncPoint from, CncPoint to, bool raise=true)
         {
             Begin(from);
             _writer.WriteLine("G1 X{0:0.###} Y{1:0.###}", to.X, to.Y);
@@ -53,7 +52,7 @@ namespace Gcode
                 End();
         }
 
-        public void AddPolyLine(Point[] points, bool raise = true)
+        public void AddPolyLine(CncPoint[] points, bool raise = true)
         {
             if (points == null || points.Length == 0)
                 return;
@@ -67,7 +66,7 @@ namespace Gcode
                 End();
         }
 
-        private void Begin(Point pos)
+        private void Begin(CncPoint pos)
         {
             _writer.WriteLine("G0 X{0:0.###} Y{1:0.###}", pos.X, pos.Y); // move to start point
             _writer.WriteLine("G0 Z{0:0.###} F{1}", Surface - EngravingDepth, Feedrate); // move to engraving depth
@@ -84,7 +83,7 @@ namespace Gcode
         }
 
         #region IDraw interface
-        private Point _currPos;
+        private CncPoint _currPos;
         private bool _raised;
 
         private void Raise()
@@ -112,10 +111,6 @@ namespace Gcode
             _writer.WriteLine("G1 X{0:0.###} Y{1:0.###}", -x, y);
         }
 
-        public void ArcTo(float x, float y)
-        {
-            throw new System.NotImplementedException();
-        }
         #endregion
     }
 }

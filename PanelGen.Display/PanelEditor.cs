@@ -30,13 +30,13 @@ namespace PanelGen.Display
             }
             else if (sender == fileOpenMenuItem)
             {
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                    _app.LoadPanel(openFileDialog1.FileName);
+                if (openProjectFileDialog.ShowDialog() == DialogResult.OK)
+                    _app.LoadPanel(openProjectFileDialog.FileName);
             }
             else if (sender == fileSaveMenuItem)
             {
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                    _app.SavePanel(saveFileDialog1.FileName);
+                if (saveProjectFileDialog.ShowDialog() == DialogResult.OK)
+                    _app.SavePanel(saveProjectFileDialog.FileName);
             }
             else if (sender == fileExitMenuItem)
             {
@@ -96,6 +96,13 @@ namespace PanelGen.Display
                 {
                     _app.panel.items.Add(pl);
                     viewPanel.Invalidate();
+                }
+            }
+            else if (sender == panelGenGCode)
+            {
+                if (saveGCodeFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    _app.Generate(saveGCodeFileDialog.FileName);
                 }
             }
             else if (sender == viewShowGridMenuItem)

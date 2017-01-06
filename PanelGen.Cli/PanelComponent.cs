@@ -24,11 +24,6 @@ namespace PanelGen.Cli
                 max.y = y;
         }
 
-        public void ArcTo(float x, float y)
-        {
-            AddPos(x, y);
-        }
-
         public void LineTo(float x, float y)
         {
             AddPos(x, y);
@@ -76,6 +71,7 @@ namespace PanelGen.Cli
         public static Vertex2 operator -(Vertex2 a, Vertex2 b) => new Vertex2(a.x - b.x, a.y - b.y);
         public static Vertex2 operator +(Vertex2 a, Vertex2 b) => new Vertex2(a.x + b.x, a.y + b.y);
     }
+
     public abstract class PanelComponent : IPanelGenFileObject
     {
         public Vertex3 pos;
@@ -100,6 +96,8 @@ namespace PanelGen.Cli
         private const byte TYPE_DIAL = 1;
         private const byte TYPE_CIRCPOCKET = 2;
         private const byte TYPE_RECTPOCKET = 3;
+        private const byte TYPE_TEXT = 4;
+        private const byte TYPE_POLYLINE = 5;
 
         public static PanelComponent ReadObject(BinaryReader data)
         {
@@ -116,6 +114,12 @@ namespace PanelGen.Cli
                 case TYPE_RECTPOCKET:
                     obj = new RectangularPocket();
                     break;
+                case TYPE_TEXT:
+                    obj = new Text("");
+                    break;
+                case TYPE_POLYLINE:
+                    obj = new PolyLine();
+                    break;
                 default:
                     throw new Exception($"Got unknown Panel component type {type}");
             }
@@ -131,8 +135,11 @@ namespace PanelGen.Cli
                 data.Write(TYPE_CIRCPOCKET);
             else if (obj is RectangularPocket)
                 data.Write(TYPE_RECTPOCKET);
+            else if (obj is Text)
+                data.Write(TYPE_TEXT);
+            else if (obj is PolyLine)
+                data.Write(TYPE_POLYLINE);
             obj.Save(data);
         }
-
     }
 }

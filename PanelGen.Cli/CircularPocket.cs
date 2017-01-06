@@ -24,7 +24,7 @@ namespace PanelGen.Cli
 
         private const float Stepover = 0.1f; // Tool overlap when doing surface milling
 
-        public void Draw(StringWriter output, Tool tool)
+        public override void GenerateCode(TextWriter output, Tool tool)
         {
             if (diameter < tool.diameter)
             {

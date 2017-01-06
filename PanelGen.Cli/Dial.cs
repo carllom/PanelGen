@@ -29,7 +29,7 @@ namespace PanelGen.Cli
             get
             {
                 ExtentsRenderer xr = new ExtentsRenderer();
-                DrawDial(xr, 0, 0);
+                Draw(xr);
                 return xr.Extents;
             }
         }
@@ -37,11 +37,11 @@ namespace PanelGen.Cli
         public override bool Inside(float x, float y)
         {
             ExtentsRenderer xr = new ExtentsRenderer();
-            DrawDial(xr, pos.x, pos.y);
+            Draw(xr);
             return xr.Inside(x, y);
         }
 
-        public void DrawDial(IDraw drw, float xc, float yc)
+        public void Draw(IDraw drw)
         {
             var startAng = (360 - arcSpan) * Math.PI / 360;
             var mCount = (maxValue - minValue) / step;
@@ -54,22 +54,29 @@ namespace PanelGen.Cli
             for (var i = 0; i < mCount; i++)
             {
                 var mArc = startAng + i * markerArc;
-                DrawTick(mArc, xc, yc, innerRadius, outerRadius, drw);
-                DrawTickLabel((minValue + i * step).ToString(), mArc, xc, yc, outerRadius + markerLabelOffset, drw);
+                DrawTick(mArc, pos.x, pos.y, innerRadius, outerRadius, drw);
+                DrawTickLabel((minValue + i * step).ToString(), mArc, pos.x, pos.y, outerRadius + markerLabelOffset, drw);
                 for (var j = tickArc; j < markerArc; j += tickArc)
                 {
-                    DrawTick(mArc + j, xc, yc, innerRadius, innerRadius + tickLength, drw);
+                    DrawTick(mArc + j, pos.x, pos.y, innerRadius, innerRadius + tickLength, drw);
                 }
             }
             // Max marker
             var maxAngle = startAng + mCount * markerArc;
-            DrawTick(maxAngle, xc, yc, innerRadius, outerRadius, drw);
-            DrawTickLabel(maxValue.ToString(), maxAngle, xc, yc, outerRadius + markerLabelOffset, drw);
+            DrawTick(maxAngle, pos.x, pos.y, innerRadius, outerRadius, drw);
+            DrawTickLabel(maxValue.ToString(), maxAngle, pos.x, pos.y, outerRadius + markerLabelOffset, drw);
 
             // Dial text
             Font.Size = 3f;
             var fWidth = Font.Width(text);
-            Font.DrawString(drw, text, xc - fWidth / 2, yc - innerRadius - markerLength - 3f, false); //TODO: Fix offsets - letters are rendered offset to center
+            Font.DrawString(drw, text, pos.x - fWidth / 2, pos.y - innerRadius - markerLength - 3f, false); //TODO: Fix offsets - letters are rendered offset to center
+        }
+
+        public override void GenerateCode(TextWriter writer, Tool tool)
+        {
+            var engr = new GCodeEngraver();
+            Draw(engr);
+            writer.WriteLine(engr.GCode());
         }
 
         private static void DrawTick(double angle, float xc, float yc, float rInner, float rOuter, IDraw drw)

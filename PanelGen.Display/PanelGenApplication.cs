@@ -1,5 +1,6 @@
 ﻿using PanelGen.Cli;
 using System.IO;
+using System;
 
 namespace PanelGen.Display
 {
@@ -48,6 +49,26 @@ namespace PanelGen.Display
                 thickness = thickness
             };
             panel = _project.Stock;
+        }
+
+        internal void Generate(string path)
+        {
+            var t = new Tool()
+            {
+                diameter = 3.175f,
+                zStep = 0.256f
+            };
+
+            using (var file = new StreamWriter(path))
+            {
+                var engraver = new GCodeEngraver();
+                // Write prologue
+                foreach (var item in panel.items)
+                {
+                    item.GenerateCode(file, t);
+                }
+                // Write epilogue
+            }
         }
     }
 }

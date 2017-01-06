@@ -35,6 +35,7 @@
             this.panelAddCircPocket = new System.Windows.Forms.ToolStripMenuItem();
             this.panelAddRectPocket = new System.Windows.Forms.ToolStripMenuItem();
             this.panelAddText = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelAddPolyline = new System.Windows.Forms.ToolStripMenuItem();
             this.viewShowGridMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,18 +47,20 @@
             this.panelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.viewPanel = new PanelGen.Display.ViewPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.dialTool = new System.Windows.Forms.ToolStripButton();
             this.circPocketTool = new System.Windows.Forms.ToolStripButton();
             this.rectPocketTool = new System.Windows.Forms.ToolStripButton();
             this.textTool = new System.Windows.Forms.ToolStripButton();
+            this.polylineTool = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolEditSelected = new System.Windows.Forms.ToolStripButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.polylineTool = new System.Windows.Forms.ToolStripButton();
-            this.panelAddPolyline = new System.Windows.Forms.ToolStripMenuItem();
+            this.openProjectFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveProjectFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.panelGenGCode = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewPanel = new PanelGen.Display.ViewPanel();
+            this.saveGCodeFileDialog = new System.Windows.Forms.SaveFileDialog();
             addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -76,7 +79,7 @@
             this.panelAddText,
             this.panelAddPolyline});
             addToolStripMenuItem.Name = "addToolStripMenuItem";
-            addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            addToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             addToolStripMenuItem.Text = "Add";
             // 
             // panelAddDialMenuItem
@@ -106,6 +109,13 @@
             this.panelAddText.Size = new System.Drawing.Size(176, 22);
             this.panelAddText.Text = "Text";
             this.panelAddText.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // panelAddPolyline
+            // 
+            this.panelAddPolyline.Name = "panelAddPolyline";
+            this.panelAddPolyline.Size = new System.Drawing.Size(176, 22);
+            this.panelAddPolyline.Text = "Polyline";
+            this.panelAddPolyline.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -188,7 +198,9 @@
             // 
             this.panelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.panelSettingsMenuItem,
-            addToolStripMenuItem});
+            addToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.panelGenGCode});
             this.panelToolStripMenuItem.Name = "panelToolStripMenuItem";
             this.panelToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.panelToolStripMenuItem.Text = "&Panel";
@@ -196,7 +208,7 @@
             // panelSettingsMenuItem
             // 
             this.panelSettingsMenuItem.Name = "panelSettingsMenuItem";
-            this.panelSettingsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.panelSettingsMenuItem.Size = new System.Drawing.Size(179, 22);
             this.panelSettingsMenuItem.Text = "Settings...";
             this.panelSettingsMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
@@ -220,16 +232,6 @@
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
-            // 
-            // viewPanel
-            // 
-            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPanel.Location = new System.Drawing.Point(0, 0);
-            this.viewPanel.Name = "viewPanel";
-            this.viewPanel.ShowGrid = false;
-            this.viewPanel.Size = new System.Drawing.Size(621, 476);
-            this.viewPanel.TabIndex = 0;
-            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
             // 
             // toolStrip1
             // 
@@ -287,6 +289,16 @@
             this.textTool.Text = "Text";
             this.textTool.Click += new System.EventHandler(this.tool_Click);
             // 
+            // polylineTool
+            // 
+            this.polylineTool.Image = ((System.Drawing.Image)(resources.GetObject("polylineTool.Image")));
+            this.polylineTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.polylineTool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.polylineTool.Name = "polylineTool";
+            this.polylineTool.Size = new System.Drawing.Size(91, 20);
+            this.polylineTool.Text = "Polyline";
+            this.polylineTool.Click += new System.EventHandler(this.tool_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -302,33 +314,44 @@
             this.toolEditSelected.Text = "Edit";
             this.toolEditSelected.Click += new System.EventHandler(this.tool_Click);
             // 
-            // openFileDialog1
+            // openProjectFileDialog
             // 
-            this.openFileDialog1.DefaultExt = "pnl";
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
+            this.openProjectFileDialog.DefaultExt = "pnl";
+            this.openProjectFileDialog.FileName = "openFileDialog1";
+            this.openProjectFileDialog.Filter = "PanelGen files|*.pnl|All files|*.*";
             // 
-            // saveFileDialog1
+            // saveProjectFileDialog
             // 
-            this.saveFileDialog1.DefaultExt = "pnl";
-            this.saveFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
+            this.saveProjectFileDialog.DefaultExt = "pnl";
+            this.saveProjectFileDialog.Filter = "PanelGen files|*.pnl|All files|*.*";
             // 
-            // polylineTool
+            // toolStripSeparator3
             // 
-            this.polylineTool.Image = ((System.Drawing.Image)(resources.GetObject("polylineTool.Image")));
-            this.polylineTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.polylineTool.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.polylineTool.Name = "polylineTool";
-            this.polylineTool.Size = new System.Drawing.Size(91, 20);
-            this.polylineTool.Text = "Polyline";
-            this.polylineTool.Click += new System.EventHandler(this.tool_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(176, 6);
             // 
-            // panelAddPolyline
+            // panelGenGCode
             // 
-            this.panelAddPolyline.Name = "panelAddPolyline";
-            this.panelAddPolyline.Size = new System.Drawing.Size(176, 22);
-            this.panelAddPolyline.Text = "Polyline";
-            this.panelAddPolyline.Click += new System.EventHandler(this.MenuItem_Click);
+            this.panelGenGCode.Name = "panelGenGCode";
+            this.panelGenGCode.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.panelGenGCode.Size = new System.Drawing.Size(179, 22);
+            this.panelGenGCode.Text = "Generate GCode";
+            this.panelGenGCode.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // viewPanel
+            // 
+            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPanel.Location = new System.Drawing.Point(0, 0);
+            this.viewPanel.Name = "viewPanel";
+            this.viewPanel.ShowGrid = false;
+            this.viewPanel.Size = new System.Drawing.Size(621, 476);
+            this.viewPanel.TabIndex = 0;
+            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
+            // 
+            // saveGCodeFileDialog
+            // 
+            this.saveGCodeFileDialog.DefaultExt = "nc";
+            this.saveGCodeFileDialog.Filter = "GCode Files|*.nc|All files|*.*";
             // 
             // PanelEditor
             // 
@@ -374,8 +397,8 @@
         private System.Windows.Forms.ToolStripButton circPocketTool;
         private System.Windows.Forms.ToolStripButton rectPocketTool;
         private ViewPanel viewPanel;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openProjectFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveProjectFileDialog;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolEditSelected;
         private System.Windows.Forms.ToolStripMenuItem panelAddText;
@@ -383,5 +406,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewShowGridMenuItem;
         private System.Windows.Forms.ToolStripMenuItem panelAddPolyline;
         private System.Windows.Forms.ToolStripButton polylineTool;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem panelGenGCode;
+        private System.Windows.Forms.SaveFileDialog saveGCodeFileDialog;
     }
 }

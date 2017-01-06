@@ -31,11 +31,6 @@ namespace PanelGen.Display
             _currPos = toPos;
         }
 
-        public void ArcTo(float x, float y)
-        {
-            throw new NotImplementedException();
-        }
-
         private PointF ToScreen(PointF p)
         {
             return ToScreen(p.X, p.Y);

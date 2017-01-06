@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dial.cs" />
+    <Compile Include="GCodeEngraver.cs" />
     <Compile Include="HersheyFont.cs" />
     <Compile Include="IDraw.cs" />
     <Compile Include="IDrawableItem.cs" />

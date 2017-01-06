@@ -47,6 +47,13 @@ namespace PanelGen.Cli
             }
         }
 
+        public override void GenerateCode(TextWriter writer, Tool tool)
+        {
+            var engr = new GCodeEngraver();
+            Draw(engr);
+            writer.WriteLine(engr.GCode());
+        }
+
         public override void Load(BinaryReader data)
         {
             base.Load(data);

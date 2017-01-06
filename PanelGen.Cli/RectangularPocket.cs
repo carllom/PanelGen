@@ -39,7 +39,7 @@ namespace PanelGen.Cli
             return Math.Abs(x) <= width / 2 && Math.Abs(y) <= height / 2;
         }
 
-        public void Draw(StringWriter output, Tool tool)
+        public override void GenerateCode(TextWriter output, Tool tool)
         {
             if (width < tool.diameter || height < tool.diameter)
             {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Gcode;
 using PanelGen.Cli;
 using System.IO;
 using System.Globalization;
@@ -26,27 +25,32 @@ namespace PanelGen.Display
             gceng.Init();
             _dial.minValue = 0;
             _dial.maxValue = 11;
-            _dial.DrawDial(gceng, 0, 0);
+            _dial.Draw(gceng);
 
             _dial.text = "Fine tune".ToUpper();
+            _dial.pos = new Vertex3(30, 0);
             _dial.minValue = -5;
             _dial.maxValue = 5;
             _dial.tickCount = 1;
-            _dial.DrawDial(gceng, 30, 0);
+            _dial.Draw(gceng);
 
             _dial.text = "Pulse width".ToUpper();
+            _dial.pos = new Vertex3(0, 30);
             _dial.minValue = 0;
             _dial.maxValue = 100;
             _dial.step = 10;
             _dial.tickCount = 1;
-            _dial.DrawDial(gceng, 0, 30);
+            _dial.Draw(gceng);
 
-            _dial.DrawDial(gceng, 30, 30);
+            _dial.pos = new Vertex3(30, 30);
+            _dial.Draw(gceng);
 
-            _dial.DrawDial(gceng, 0, 60);
+            _dial.pos = new Vertex3(0, 60);
+            _dial.Draw(gceng);
 
             _dial.text = "MIM";
-            _dial.DrawDial(gceng, 30, 60);
+            _dial.pos = new Vertex3(30, 60);
+            _dial.Draw(gceng);
             gceng.Finish();
             var result = gceng.GCode();
             File.WriteAllText(@"C:\Projekt\PanelGen\test.nc", result);
@@ -68,7 +72,7 @@ namespace PanelGen.Display
                 diameter = 3.175f,
                 zStep = 0.256f
             };
-            cp.Draw(output, t);
+            //cp.Draw(output, t);
 
             output.WriteLine("G0 Z1");
 #if false
@@ -120,7 +124,7 @@ namespace PanelGen.Display
             g.DrawLine(Pens.Aquamarine, 0, 0, xc, yc);
 
             var sdrw = new ScreenDraw(g, _tickPen, scale, new PointF((int)xc, (int)yc));
-            d.DrawDial(sdrw, 0, 0);
+            d.Draw(sdrw);
         }
 #if OLDIMPL
         private void RenderDial(Graphics g, Dial d)

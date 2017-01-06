@@ -51,8 +51,7 @@ namespace PanelGen.Cli
                 height = height - tool.diameter
             };
 
-            // z = 0 (surface)
-            for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
+            for (var z = this.z - tool.zStep; z > -depth; z -= tool.zStep)
             {
                 MillPlane(output, tool, z, toolOutline);
             }

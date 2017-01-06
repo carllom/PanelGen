@@ -25,8 +25,8 @@ namespace PanelGen.Cli
                 var maxRadius = (diameter / 2) - tool.radius; // tool compensated outer radius
 
                 output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x + maxRadius, y); // Move to center (x,y)
-                                                                     // z = 0 (surface)
-                for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
+                                                                                 // z = 0 (surface)
+                for (var z = this.z - tool.zStep; z > -depth; z -= tool.zStep)
                 {
                     output.WriteLine("G02 I{0:0.###} Z{1:0.###}", -maxRadius, z); // Helix w center @x,y
                 }
@@ -38,7 +38,7 @@ namespace PanelGen.Cli
                 output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x, y); // Move to center (x,y)
                                                                      // z = 0 (surface)
 
-                for (var z = -tool.zStep; z > -depth; z -= tool.zStep)
+                for (var z = this.z - tool.zStep; z > -depth; z -= tool.zStep)
                 {
                     output.WriteLine("G01 X{0:0.###}", x); // Move to center - we assume to be at safe height
                     output.WriteLine("G01 Z{0:0.###}", z); // Next z-step

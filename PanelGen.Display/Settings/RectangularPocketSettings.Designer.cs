@@ -29,32 +29,36 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.GroupBox groupBox1;
+            System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.GroupBox groupBox2;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
-            System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label6;
+            this.numHeight = new System.Windows.Forms.NumericUpDown();
             this.numDepth = new System.Windows.Forms.NumericUpDown();
             this.numWidth = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
-            this.numHeight = new System.Windows.Forms.NumericUpDown();
+            this.numZ = new System.Windows.Forms.NumericUpDown();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numZ)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -71,6 +75,34 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Dimensions";
+            // 
+            // numHeight
+            // 
+            this.numHeight.DecimalPlaces = 3;
+            this.numHeight.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numHeight.Location = new System.Drawing.Point(86, 40);
+            this.numHeight.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numHeight.Name = "numHeight";
+            this.numHeight.Size = new System.Drawing.Size(66, 20);
+            this.numHeight.TabIndex = 5;
+            this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(6, 42);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(63, 13);
+            label3.TabIndex = 4;
+            label3.Text = "Height (mm)";
             // 
             // numDepth
             // 
@@ -130,13 +162,15 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(this.numZ);
+            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(this.numY);
             groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(this.numX);
             groupBox2.Location = new System.Drawing.Point(179, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(127, 71);
+            groupBox2.Size = new System.Drawing.Size(127, 94);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Position (Center)";
@@ -201,46 +235,46 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(230, 88);
+            this.button1.Location = new System.Drawing.Point(230, 115);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // numHeight
+            // numZ
             // 
-            this.numHeight.DecimalPlaces = 3;
-            this.numHeight.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numHeight.Location = new System.Drawing.Point(86, 40);
-            this.numHeight.Maximum = new decimal(new int[] {
+            this.numZ.DecimalPlaces = 3;
+            this.numZ.Location = new System.Drawing.Point(51, 66);
+            this.numZ.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
-            this.numHeight.Name = "numHeight";
-            this.numHeight.Size = new System.Drawing.Size(66, 20);
-            this.numHeight.TabIndex = 5;
-            this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numZ.Minimum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            -2147483648});
+            this.numZ.Name = "numZ";
+            this.numZ.Size = new System.Drawing.Size(66, 20);
+            this.numZ.TabIndex = 11;
+            this.numZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label3
+            // label6
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(6, 42);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(63, 13);
-            label3.TabIndex = 4;
-            label3.Text = "Height (mm)";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(6, 68);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(39, 13);
+            label6.TabIndex = 10;
+            label6.Text = "Z (mm)";
             // 
             // RectangularPocketSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 123);
+            this.ClientSize = new System.Drawing.Size(319, 150);
             this.Controls.Add(this.button1);
             this.Controls.Add(groupBox2);
             this.Controls.Add(groupBox1);
@@ -250,13 +284,14 @@
             this.Text = "PanelSettings";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDepth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numZ)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -268,5 +303,6 @@
         private System.Windows.Forms.NumericUpDown numX;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numHeight;
+        private System.Windows.Forms.NumericUpDown numZ;
     }
 }

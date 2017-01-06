@@ -7,17 +7,20 @@ namespace PanelGen.Cli
     {
         public float x;
         public float y;
+        public float z;
 
         public virtual void Load(BinaryReader data)
         {
             x = data.ReadSingle();
             y = data.ReadSingle();
+            z = data.ReadSingle();
         }
 
         public virtual void Save(BinaryWriter data)
         {
             data.Write(x);
             data.Write(y);
+            data.Write(z);
         }
 
         private const byte TYPE_DIAL = 1;

@@ -48,11 +48,13 @@
     <Compile Include="IDrawableItem.cs" />
     <Compile Include="IPanelGenFileObject.cs" />
     <Compile Include="PanelComponent.cs" />
+    <Compile Include="PanelGenProject.cs" />
     <Compile Include="PanelStock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CircularPocket.cs" />
     <Compile Include="RectangularPocket.cs" />
+    <Compile Include="Text.cs" />
     <Compile Include="Tool.cs" />
   </ItemGroup>
   <ItemGroup>

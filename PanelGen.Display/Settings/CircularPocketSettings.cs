@@ -22,6 +22,7 @@ namespace PanelGen.Display
             numDepth.Value = Convert.ToDecimal(pocket.depth);
             numX.Value = Convert.ToDecimal(pocket.x);
             numY.Value = Convert.ToDecimal(pocket.y);
+            numZ.Value = Convert.ToDecimal(pocket.z);
         }
 
         private void SetValues(CircularPocket pocket)
@@ -30,6 +31,7 @@ namespace PanelGen.Display
             pocket.depth = Convert.ToSingle(numDepth.Value);
             pocket.x = Convert.ToSingle(numX.Value);
             pocket.y = Convert.ToSingle(numY.Value);
+            pocket.z = Convert.ToSingle(numZ.Value);
         }
 
         private void CircularPocketSettings_Load(object sender, EventArgs e)

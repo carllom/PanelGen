@@ -6,17 +6,20 @@ namespace PanelGen.Display
     public class PanelGenApplication
     {
         public PanelStock panel;
+        private PanelGenProject _project;
 
         public void LoadPanel(string path)
         {
-            if (panel == null)
-                panel = new PanelStock();
+            if (_project == null)
+                _project = new PanelGenProject();
             using (var str = File.OpenRead(path))
             {
                 using (var br = new BinaryReader(str))
                 {
-                    panel.Load(br);
+                    var _project = new PanelGenProject();
+                    _project.Load(br);
                     // TODO: Load view state
+                    panel = _project.Stock;
                 }
             }
         }
@@ -27,7 +30,8 @@ namespace PanelGen.Display
             {
                 using (var br = new BinaryWriter(str))
                 {
-                    panel.Save(br);
+                    _project.Stock = panel;
+                    _project.Save(br);
                     // TODO: Save view state
                 }
             }
@@ -35,12 +39,14 @@ namespace PanelGen.Display
 
         public void NewPanel(float width, float height, float thickness)
         {
-            panel = new PanelStock()
+            _project = new PanelGenProject();
+            _project.Stock = new PanelStock()
             {
                 width = width,
                 height = height,
                 thickness = thickness
             };
+            panel = _project.Stock;
         }
     }
 }

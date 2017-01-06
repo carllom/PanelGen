@@ -6,11 +6,11 @@ namespace PanelGen.Display
 {
     public partial class TextSettings : Form
     {
-        private Text _dial;
+        private Text _text;
 
-        public TextSettings(Text dial)
+        public TextSettings(Text text)
         {
-            _dial = dial;
+            _text = text;
             InitializeComponent();
             Load += TextSettings_Load;
             FormClosing += TextSettings_FormClosing;
@@ -34,14 +34,14 @@ namespace PanelGen.Display
 
         private void TextSettings_Load(object sender, EventArgs e)
         {
-            GetValues(_dial);
+            GetValues(_text);
         }
 
         private void TextSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (DialogResult == DialogResult.OK)
             {
-                SetValues(_dial);
+                SetValues(_text);
             }
         }
     }

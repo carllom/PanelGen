@@ -79,6 +79,11 @@ namespace PanelGen.Display
                         var t = item as Text;
                         t.Draw(draw);
                     }
+                    else if (item is PolyLine)
+                    {
+                        var d = item as PolyLine;
+                        d.Draw(draw);
+                    }
                     else if (item is RectangularPocket)
                     {
                         var rp = item as RectangularPocket;

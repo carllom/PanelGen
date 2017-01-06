@@ -80,11 +80,21 @@ namespace PanelGen.Display
             }
             else if (sender == panelAddText)
             {
-                var cp = new Text("TEXT");
-                var settings = new TextSettings(cp);
+                var t = new Text("TEXT");
+                var settings = new TextSettings(t);
                 if (settings.ShowDialog() == DialogResult.OK)
                 {
-                    _app.panel.items.Add(cp);
+                    _app.panel.items.Add(t);
+                    viewPanel.Invalidate();
+                }
+            }
+            else if (sender == panelAddPolyline)
+            {
+                var pl = new PolyLine();
+                var settings = new PolyLineSettings(pl);
+                if (settings.ShowDialog() == DialogResult.OK)
+                {
+                    _app.panel.items.Add(pl);
                     viewPanel.Invalidate();
                 }
             }
@@ -114,6 +124,10 @@ namespace PanelGen.Display
             {
                 MenuItem_Click(panelAddText, e);
             }
+            else if (sender == polylineTool)
+            {
+                MenuItem_Click(panelAddPolyline, e);
+            }
             else if (sender == toolEditSelected)
             {
                 var sel = _app?.selected;
@@ -141,6 +155,12 @@ namespace PanelGen.Display
                 else if (sel is Text)
                 {
                     var settings = new TextSettings(sel as Text);
+                    if (settings.ShowDialog() == DialogResult.OK)
+                        viewPanel.Refresh();
+                }
+                else if (sel is PolyLine)
+                {
+                    var settings = new PolyLineSettings(sel as PolyLine);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }

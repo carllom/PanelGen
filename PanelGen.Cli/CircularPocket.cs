@@ -8,6 +8,20 @@ namespace PanelGen.Cli
         public float diameter; // Pocket diameter
         public float depth; // Pocket depth
 
+        public override Vertex3 Extents
+        {
+            get
+            {
+                return new Vertex3(diameter, diameter, depth);
+            }
+        }
+
+        public override bool Inside(float x, float y)
+        {
+            var p = new Vertex2(x, y) - pos.Xy;
+            return p.Length <= diameter / 2;
+        }
+
         private const float Stepover = 0.1f; // Tool overlap when doing surface milling
 
         public void Draw(StringWriter output, Tool tool)

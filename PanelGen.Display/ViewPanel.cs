@@ -66,6 +66,30 @@ namespace PanelGen.Display
                     // Draw them as well
                 }
             }
+
+            if (Model?.selected != null)
+            {
+                var sel = Model.selected;
+                var ext = Model.selected.Extents;
+                e.Graphics.DrawRectangle(Pens.SeaGreen,
+                    ScreenX(sel.pos.x - ext.x / 2),
+                    ScreenY(sel.pos.y + ext.y/ 2),
+                    ext.x * _zoom,
+                    ext.y * _zoom);
+            }
+        }
+
+        public Vertex2 DrawPosition
+        {
+            get
+            {
+                return DrawPos(_lastMPos);
+            }
+        }
+
+        private Vertex2 DrawPos(Point pos)
+        {
+            return new Vertex2((pos.X - Origo.X) / _zoom, (Origo.Y - pos.Y) / _zoom);
         }
 
         private float ScreenX(float x)

@@ -7,6 +7,7 @@ namespace PanelGen.Display
     {
         public PanelStock panel;
         private PanelGenProject _project;
+        public PanelComponent selected;
 
         public void LoadPanel(string path)
         {

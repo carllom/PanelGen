@@ -31,6 +31,14 @@ namespace PanelGen.Cli
 
         private const float Stepover = 0.1f; // Tool overlap (fraction of tool diameter) when doing surface milling
 
+        public override Vertex3 Extents => new Vertex3(width, height, depth);
+
+        public override bool Inside(float x, float y)
+        {
+            var p = new Vertex2(x, y) - pos.Xy;
+            return Math.Abs(x) <= width / 2 && Math.Abs(y) <= height / 2;
+        }
+
         public void Draw(StringWriter output, Tool tool)
         {
             if (width < tool.diameter || height < tool.diameter)

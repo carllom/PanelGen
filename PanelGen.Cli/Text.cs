@@ -22,6 +22,24 @@ namespace PanelGen.Cli
             anchor = Alignment.Center;
         }
 
+        public override Vertex3 Extents
+        {
+            get
+            {
+                ExtentsRenderer xr = new ExtentsRenderer();
+                Draw(xr);
+                return xr.Extents;
+            }
+        }
+
+        public override bool Inside(float x, float y)
+        {
+            ExtentsRenderer xr = new ExtentsRenderer();
+            Draw(xr);
+            return xr.Inside(x, y);
+        }
+
+
         public void Draw(IDraw drw)
         {
             var align = 0f;

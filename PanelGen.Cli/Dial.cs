@@ -24,6 +24,23 @@ namespace PanelGen.Cli
         public HersheyFont Font { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey");
         public float markerLabelOffset = 1.5f;
 
+        public override Vertex3 Extents
+        {
+            get
+            {
+                ExtentsRenderer xr = new ExtentsRenderer();
+                DrawDial(xr, 0, 0);
+                return xr.Extents;
+            }
+        }
+
+        public override bool Inside(float x, float y)
+        {
+            ExtentsRenderer xr = new ExtentsRenderer();
+            DrawDial(xr, pos.x, pos.y);
+            return xr.Inside(x, y);
+        }
+
         public void DrawDial(IDraw drw, float xc, float yc)
         {
             var startAng = (360 - arcSpan) * Math.PI / 360;

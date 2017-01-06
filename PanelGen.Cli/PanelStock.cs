@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PanelGen.Cli
@@ -8,6 +9,13 @@ namespace PanelGen.Cli
         public float width = 80;
         public float height = 80;
         public float thickness = 1;
+
+        public override Vertex3 Extents => new Vertex3(width, height, thickness);
+        public override bool Inside(float x, float y)
+        {
+            var p = new Vertex2(x, y) - pos.Xy;
+            return Math.Abs(x) <= width / 2 && Math.Abs(y) <= height / 2;
+        }
 
         public ICollection<PanelStockItem> items = new List<PanelStockItem>();
 
@@ -43,7 +51,7 @@ namespace PanelGen.Cli
         }
     }
 
-    public class PanelStockItem : PanelComponent
+    public abstract class PanelStockItem : PanelComponent
     {
     }
 }

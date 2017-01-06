@@ -43,13 +43,15 @@
             this.panelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.viewPanel = new PanelGen.Display.ViewPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.dialTool = new System.Windows.Forms.ToolStripButton();
             this.circPocketTool = new System.Windows.Forms.ToolStripButton();
             this.rectPocketTool = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.viewPanel = new PanelGen.Display.ViewPanel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolEditSelected = new System.Windows.Forms.ToolStripButton();
             addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -186,24 +188,18 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // viewPanel
-            // 
-            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPanel.Location = new System.Drawing.Point(0, 0);
-            this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(621, 476);
-            this.viewPanel.TabIndex = 0;
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dialTool,
             this.circPocketTool,
-            this.rectPocketTool});
+            this.rectPocketTool,
+            this.toolStripSeparator2,
+            this.toolEditSelected});
             this.toolStrip1.Location = new System.Drawing.Point(0, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(93, 99);
+            this.toolStrip1.Size = new System.Drawing.Size(93, 127);
             this.toolStrip1.TabIndex = 0;
             // 
             // dialTool
@@ -243,6 +239,30 @@
             // 
             this.saveFileDialog1.DefaultExt = "pnl";
             this.saveFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
+            // 
+            // viewPanel
+            // 
+            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPanel.Location = new System.Drawing.Point(0, 0);
+            this.viewPanel.Name = "viewPanel";
+            this.viewPanel.Size = new System.Drawing.Size(621, 476);
+            this.viewPanel.TabIndex = 0;
+            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(91, 6);
+            // 
+            // toolEditSelected
+            // 
+            this.toolEditSelected.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolEditSelected.Image = ((System.Drawing.Image)(resources.GetObject("toolEditSelected.Image")));
+            this.toolEditSelected.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEditSelected.Name = "toolEditSelected";
+            this.toolEditSelected.Size = new System.Drawing.Size(91, 19);
+            this.toolEditSelected.Text = "Edit";
+            this.toolEditSelected.Click += new System.EventHandler(this.tool_Click);
             // 
             // PanelEditor
             // 
@@ -290,5 +310,7 @@
         private ViewPanel viewPanel;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolEditSelected;
     }
 }

@@ -94,6 +94,31 @@ namespace PanelGen.Display
             {
                 MenuItem_Click(panelAddRectPocket, e);
             }
+            else if (sender == toolEditSelected)
+            {
+                var sel = _app?.selected;
+                if (sel == null)
+                    return;
+
+                if (sel is CircularPocket)
+                {
+                    var settings = new CircularPocketSettings(sel as CircularPocket);
+                    if (settings.ShowDialog() == DialogResult.OK)
+                        viewPanel.Refresh();
+                }
+                if (sel is Dial)
+                {
+                    var settings = new DialSettings(sel as Dial);
+                    if (settings.ShowDialog() == DialogResult.OK)
+                        viewPanel.Refresh();
+                }
+                if (sel is RectangularPocket)
+                {
+                    var settings = new RectangularPocketSettings(sel as RectangularPocket);
+                    if (settings.ShowDialog() == DialogResult.OK)
+                        viewPanel.Refresh();
+                }
+            }
         }
 
 
@@ -126,5 +151,25 @@ namespace PanelGen.Display
         {
         }
 
+        private void viewPanel_DoubleClick(object sender, EventArgs e)
+        {
+            var dp = viewPanel.DrawPosition;
+            var found = false;
+            foreach (var item in _app.panel.items)
+            {
+                if (item.Inside(dp.x, dp.y))
+                {
+                    if (_app.selected != item)
+                    {
+                        _app.selected = item;
+                        found = true;
+                    }
+                    break;
+                }
+            }
+            if (!found)
+                _app.selected = null;
+            viewPanel.Refresh();
+        }
     }
 }

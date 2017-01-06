@@ -24,9 +24,9 @@ namespace PanelGen.Cli
             {
                 var maxRadius = (diameter / 2) - tool.radius; // tool compensated outer radius
 
-                output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x + maxRadius, y); // Move to center (x,y)
+                output.WriteLine("G00 X{0:0.###} Y{1:0.###}", pos.x + maxRadius, pos.y); // Move to center (x,y)
                                                                                  // z = 0 (surface)
-                for (var z = this.z - tool.zStep; z > -depth; z -= tool.zStep)
+                for (var z = pos.z - tool.zStep; z > -depth; z -= tool.zStep)
                 {
                     output.WriteLine("G02 I{0:0.###} Z{1:0.###}", -maxRadius, z); // Helix w center @x,y
                 }
@@ -35,17 +35,17 @@ namespace PanelGen.Cli
             }
             else // Pocket must be surface milled
             {
-                output.WriteLine("G00 X{0:0.###} Y{1:0.###}", x, y); // Move to center (x,y)
+                output.WriteLine("G00 X{0:0.###} Y{1:0.###}", pos.x, pos.y); // Move to center (x,y)
                                                                      // z = 0 (surface)
 
-                for (var z = this.z - tool.zStep; z > -depth; z -= tool.zStep)
+                for (var z = pos.z - tool.zStep; z > -depth; z -= tool.zStep)
                 {
-                    output.WriteLine("G01 X{0:0.###}", x); // Move to center - we assume to be at safe height
+                    output.WriteLine("G01 X{0:0.###}", pos.x); // Move to center - we assume to be at safe height
                     output.WriteLine("G01 Z{0:0.###}", z); // Next z-step
                                                            //MillSurfaceCircular(output, tool);
                     MillSurfaceSpiral(output, tool);
                 }
-                output.WriteLine("G01 X{0:0.###}", x);
+                output.WriteLine("G01 X{0:0.###}", pos.x);
                 output.WriteLine("G01 Z{0:0.###}", -depth); // Finish with surface @z=depth
                                                             //MillSurfaceCircular(output, tool);
                 MillSurfaceSpiral(output, tool);
@@ -57,16 +57,16 @@ namespace PanelGen.Cli
         {
             var maxRadius = (diameter/2) - tool.radius; // Tool compensated outer radius
             var xDelta = tool.diameter*(1 - Stepover); // Amount to move for each
-            var xr = x + xDelta;
+            var xr = pos.x + xDelta;
 
             while (xr < maxRadius)
             {
                 output.WriteLine("G01 X{0:0.###}", xr); // Move to next radius
-                output.WriteLine("G02 I{0:0.###}", x-xr); // Circle w center @x,y
+                output.WriteLine("G02 I{0:0.###}", pos.x-xr); // Circle w center @x,y
                 xr += xDelta; // Next circle/radius
             }
             // Do outermost circle
-            output.WriteLine("G01 X{0:0.###}", x + maxRadius); // Move to outer radius
+            output.WriteLine("G01 X{0:0.###}", pos.x + maxRadius); // Move to outer radius
             output.WriteLine("G02 I{0:0.###}", -maxRadius); // Circle w center @x,y
         }
 
@@ -84,7 +84,7 @@ namespace PanelGen.Cli
                 xr += xDelta; // Next circle/radius
             }
             // Do outermost circle
-            output.WriteLine("G01 X{0:0.###} Y{1:0.###}", x + maxRadius, y);
+            output.WriteLine("G01 X{0:0.###} Y{1:0.###}", pos.x + maxRadius, pos.y);
             // Explicit move to outer radius just in case that the spiral calculations are a bit off
             output.WriteLine("G02 I{0:0.###}", - maxRadius); // Circle w center @x,y
         }
@@ -97,8 +97,8 @@ namespace PanelGen.Cli
             for (var step = 0; step <= steps; step++)
             {
                 var nRad = beginRadius + (endRadius - beginRadius)*((float) step/steps);
-                var nX = (float) Math.Cos(radStep*step)*(nRad) + x;
-                var nY = -(float) Math.Sin(radStep*step)*(nRad) + y;
+                var nX = (float) Math.Cos(radStep*step)*(nRad) + pos.x;
+                var nY = -(float) Math.Sin(radStep*step)*(nRad) + pos.y;
                 output.WriteLine("G01 X{0:0.###} Y{1:0.###}", nX, nY);
             }
         }

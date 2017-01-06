@@ -20,8 +20,8 @@ namespace PanelGen.Display
         {
             numHoleRadius.Value = Convert.ToDecimal(dial.holeRadius);
 
-            numX.Value = Convert.ToDecimal(dial.x);
-            numY.Value = Convert.ToDecimal(dial.y);
+            numX.Value = Convert.ToDecimal(dial.pos.x);
+            numY.Value = Convert.ToDecimal(dial.pos.y);
 
             numScaleInnerRad.Value = Convert.ToDecimal(dial.innerRadius);
             numScaleArc.Value = Convert.ToDecimal(dial.arcSpan);
@@ -42,8 +42,8 @@ namespace PanelGen.Display
         {
             dial.holeRadius = Convert.ToSingle(numHoleRadius.Value);
 
-            dial.x = Convert.ToSingle(numX.Value);
-            dial.y = Convert.ToSingle(numY.Value);
+            dial.pos.x = Convert.ToSingle(numX.Value);
+            dial.pos.y = Convert.ToSingle(numY.Value);
 
             dial.innerRadius = Convert.ToSingle(numScaleInnerRad.Value);
             dial.arcSpan = Convert.ToSingle(numScaleArc.Value);

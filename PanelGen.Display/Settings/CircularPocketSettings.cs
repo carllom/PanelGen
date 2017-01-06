@@ -20,18 +20,18 @@ namespace PanelGen.Display
         {
             numDiameter.Value = Convert.ToDecimal(pocket.diameter);
             numDepth.Value = Convert.ToDecimal(pocket.depth);
-            numX.Value = Convert.ToDecimal(pocket.x);
-            numY.Value = Convert.ToDecimal(pocket.y);
-            numZ.Value = Convert.ToDecimal(pocket.z);
+            numX.Value = Convert.ToDecimal(pocket.pos.x);
+            numY.Value = Convert.ToDecimal(pocket.pos.y);
+            numZ.Value = Convert.ToDecimal(pocket.pos.z);
         }
 
         private void SetValues(CircularPocket pocket)
         {
             pocket.diameter = Convert.ToSingle(numDiameter.Value);
             pocket.depth = Convert.ToSingle(numDepth.Value);
-            pocket.x = Convert.ToSingle(numX.Value);
-            pocket.y = Convert.ToSingle(numY.Value);
-            pocket.z = Convert.ToSingle(numZ.Value);
+            pocket.pos.x = Convert.ToSingle(numX.Value);
+            pocket.pos.y = Convert.ToSingle(numY.Value);
+            pocket.pos.z = Convert.ToSingle(numZ.Value);
         }
 
         private void CircularPocketSettings_Load(object sender, EventArgs e)

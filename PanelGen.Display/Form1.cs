@@ -59,8 +59,7 @@ namespace PanelGen.Display
 
             var cp = new CircularPocket()
             {
-                x = 10,
-                y = 10,
+                pos = new Vertex3(10,10),
                 diameter = 6.3f,
                 depth = 3
             };
@@ -91,8 +90,7 @@ namespace PanelGen.Display
         {
             return new Dial
             {
-                x = 0,
-                y = 0,
+                pos = new Vertex3(),
                 holeRadius = 6,
 
                 minValue = 0,

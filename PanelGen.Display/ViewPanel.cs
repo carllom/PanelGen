@@ -25,8 +25,8 @@ namespace PanelGen.Display
             {
                 var p = Model.panel;
                 e.Graphics.DrawRectangle(Pens.LightCoral,
-                    ScreenX(p.x),
-                    ScreenY(p.y + p.height),
+                    ScreenX(p.pos.x),
+                    ScreenY(p.pos.y + p.height),
                     p.width * _zoom,
                     p.height * _zoom);
                     
@@ -35,10 +35,10 @@ namespace PanelGen.Display
                     if (item is Dial)
                     {
                         var d = item as Dial;
-                        d.DrawDial(draw, d.x, d.y);
+                        d.DrawDial(draw, d.pos.x, d.pos.y);
                         e.Graphics.DrawEllipse(Pens.Purple,
-                            ScreenX(d.x - d.holeRadius),
-                            ScreenY(d.y + d.holeRadius),
+                            ScreenX(d.pos.x - d.holeRadius),
+                            ScreenY(d.pos.y + d.holeRadius),
                             d.holeRadius * 2 * _zoom,
                             d.holeRadius * 2 * _zoom);
 
@@ -48,8 +48,8 @@ namespace PanelGen.Display
                         var rp = item as RectangularPocket;
                         // Screen representation
                         e.Graphics.DrawRectangle(Pens.Purple,
-                            ScreenX(rp.x - rp.width / 2),
-                            ScreenY(rp.y + rp.height / 2),
+                            ScreenX(rp.pos.x - rp.width / 2),
+                            ScreenY(rp.pos.y + rp.height / 2),
                             rp.width * _zoom,
                             rp.height * _zoom);
                     }
@@ -58,8 +58,8 @@ namespace PanelGen.Display
                         var cp = item as CircularPocket;
                         // Screen representation
                         e.Graphics.DrawEllipse(Pens.Purple,
-                            ScreenX(cp.x - cp.diameter / 2),
-                            ScreenY(cp.y + cp.diameter / 2),
+                            ScreenX(cp.pos.x - cp.diameter / 2),
+                            ScreenY(cp.pos.y + cp.diameter / 2),
                             cp.diameter * _zoom,
                             cp.diameter * _zoom);
                     }

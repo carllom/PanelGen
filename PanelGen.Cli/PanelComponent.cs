@@ -3,24 +3,36 @@ using System.IO;
 
 namespace PanelGen.Cli
 {
-    public abstract class PanelComponent : IPanelGenFileObject
+    public struct Vertex3
     {
+        public Vertex3 (float x, float y, float z = 0)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
         public float x;
         public float y;
         public float z;
+    }
+
+    public abstract class PanelComponent : IPanelGenFileObject
+    {
+        public Vertex3 pos;
 
         public virtual void Load(BinaryReader data)
         {
-            x = data.ReadSingle();
-            y = data.ReadSingle();
-            z = data.ReadSingle();
+            pos.x = data.ReadSingle();
+            pos.y = data.ReadSingle();
+            pos.z = data.ReadSingle();
         }
 
         public virtual void Save(BinaryWriter data)
         {
-            data.Write(x);
-            data.Write(y);
-            data.Write(z);
+            data.Write(pos.x);
+            data.Write(pos.y);
+            data.Write(pos.z);
         }
 
         private const byte TYPE_DIAL = 1;

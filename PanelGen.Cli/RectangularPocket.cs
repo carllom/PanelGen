@@ -45,13 +45,13 @@ namespace PanelGen.Cli
             // Create tool compensated rectangle
             var toolOutline = new Rect
             {
-                centerX = x,
-                centerY = y,
+                centerX = pos.x,
+                centerY = pos.y,
                 width = width - tool.diameter,
                 height = height - tool.diameter
             };
 
-            for (var z = this.z - tool.zStep; z > -depth; z -= tool.zStep)
+            for (var z = pos.z - tool.zStep; z > -depth; z -= tool.zStep)
             {
                 MillPlane(output, tool, z, toolOutline);
             }

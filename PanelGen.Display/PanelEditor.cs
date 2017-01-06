@@ -101,8 +101,7 @@ namespace PanelGen.Display
         {
             return new Dial
             {
-                x = 0,
-                y = 0,
+                pos = new Vertex3(),
                 holeRadius = 6,
 
                 minValue = 0,

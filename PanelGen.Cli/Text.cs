@@ -14,15 +14,23 @@ namespace PanelGen.Cli
         public HersheyFont font;
         public Alignment anchor;
 
+        public Text(string text)
+        {
+            this.text = text;
+
+            font = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey");
+            anchor = Alignment.Center;
+        }
+
         public void Draw(IDraw drw)
         {
-            var w = 0f;
+            var align = 0f;
             if (anchor != Alignment.Right)
-                w = -font.InnerWidth(text);
+                align = -font.InnerWidth(text);
             if (anchor == Alignment.Center)
-                w /= 2;
+                align /= 2;
 
-            font.DrawString(drw, text, x + w, x);
+            font.DrawString(drw, text, pos.x + align, pos.x);
         }
 
         public override void Load(BinaryReader data)

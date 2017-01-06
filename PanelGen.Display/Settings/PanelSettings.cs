@@ -22,8 +22,8 @@ namespace PanelGen.Display
             numWidth.Value = Convert.ToDecimal(panel.width);
             numHeight.Value = Convert.ToDecimal(panel.height);
             numThickness.Value = Convert.ToDecimal(panel.thickness);
-            numX.Value = Convert.ToDecimal(panel.x);
-            numY.Value = Convert.ToDecimal(panel.y);
+            numX.Value = Convert.ToDecimal(panel.pos.x);
+            numY.Value = Convert.ToDecimal(panel.pos.y);
         }
 
         private void SetValues(PanelStock panel)
@@ -31,8 +31,8 @@ namespace PanelGen.Display
             panel.width = Convert.ToSingle(numWidth.Value);
             panel.height = Convert.ToSingle(numHeight.Value);
             panel.thickness = Convert.ToSingle(numThickness.Value);
-            panel.x = Convert.ToSingle(numX.Value);
-            panel.y = Convert.ToSingle(numY.Value);
+            panel.pos.x = Convert.ToSingle(numX.Value);
+            panel.pos.y = Convert.ToSingle(numY.Value);
         }
 
         private void PanelSettings_FormClosing(object sender, FormClosingEventArgs e)

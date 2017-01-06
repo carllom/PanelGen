@@ -64,6 +64,12 @@
       <DependentUpon>PanelEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelGenApplication.cs" />
+    <Compile Include="Settings\TextSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\TextSettings.Designer.cs">
+      <DependentUpon>TextSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings\RectangularPocketSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelEditor.resx">
       <DependentUpon>PanelEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\TextSettings.resx">
+      <DependentUpon>TextSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\RectangularPocketSettings.resx">
       <DependentUpon>RectangularPocketSettings.cs</DependentUpon>

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace PanelGen.Cli
 {
     public enum Alignment { Left, Center, Right}
-    class Text : PanelStockItem
+    public class Text : PanelStockItem
     {
         public string text;
         public HersheyFont font;
@@ -48,7 +43,7 @@ namespace PanelGen.Cli
             if (anchor == Alignment.Center)
                 align /= 2;
 
-            font.DrawString(drw, text, pos.x + align, pos.x);
+            font.DrawString(drw, text, pos.x + align, pos.y);
         }
 
         public override void Load(BinaryReader data)

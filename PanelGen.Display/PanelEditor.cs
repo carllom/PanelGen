@@ -78,6 +78,22 @@ namespace PanelGen.Display
                     viewPanel.Invalidate();
                 }
             }
+            else if (sender == panelAddText)
+            {
+                var cp = new Text("TEXT");
+                var settings = new TextSettings(cp);
+                if (settings.ShowDialog() == DialogResult.OK)
+                {
+                    _app.panel.items.Add(cp);
+                    viewPanel.Invalidate();
+                }
+            }
+            else if (sender == viewShowGridMenuItem)
+            {
+                viewPanel.ShowGrid = !viewPanel.ShowGrid;
+                viewShowGridMenuItem.Checked = viewPanel.ShowGrid;
+
+            }
         }
 
         private void tool_Click(object sender, EventArgs e)
@@ -94,6 +110,10 @@ namespace PanelGen.Display
             {
                 MenuItem_Click(panelAddRectPocket, e);
             }
+            else if (sender == textTool)
+            {
+                MenuItem_Click(panelAddText, e);
+            }
             else if (sender == toolEditSelected)
             {
                 var sel = _app?.selected;
@@ -106,15 +126,21 @@ namespace PanelGen.Display
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }
-                if (sel is Dial)
+                else if (sel is Dial)
                 {
                     var settings = new DialSettings(sel as Dial);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }
-                if (sel is RectangularPocket)
+                else if (sel is RectangularPocket)
                 {
                     var settings = new RectangularPocketSettings(sel as RectangularPocket);
+                    if (settings.ShowDialog() == DialogResult.OK)
+                        viewPanel.Refresh();
+                }
+                else if (sel is Text)
+                {
+                    var settings = new TextSettings(sel as Text);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }

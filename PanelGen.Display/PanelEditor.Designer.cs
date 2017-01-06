@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+            System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelEditor));
             this.panelAddDialMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelAddCircPocket = new System.Windows.Forms.ToolStripMenuItem();
             this.panelAddRectPocket = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelAddText = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewShowGridMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileNewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,16 +46,18 @@
             this.panelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.viewPanel = new PanelGen.Display.ViewPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.dialTool = new System.Windows.Forms.ToolStripButton();
             this.circPocketTool = new System.Windows.Forms.ToolStripButton();
             this.rectPocketTool = new System.Windows.Forms.ToolStripButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.viewPanel = new PanelGen.Display.ViewPanel();
+            this.textTool = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolEditSelected = new System.Windows.Forms.ToolStripButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.LeftToolStripPanel.SuspendLayout();
@@ -65,7 +70,8 @@
             addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.panelAddDialMenuItem,
             this.panelAddCircPocket,
-            this.panelAddRectPocket});
+            this.panelAddRectPocket,
+            this.panelAddText});
             addToolStripMenuItem.Name = "addToolStripMenuItem";
             addToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             addToolStripMenuItem.Text = "Add";
@@ -91,11 +97,34 @@
             this.panelAddRectPocket.Text = "Rectangular pocket";
             this.panelAddRectPocket.Click += new System.EventHandler(this.MenuItem_Click);
             // 
+            // panelAddText
+            // 
+            this.panelAddText.Name = "panelAddText";
+            this.panelAddText.Size = new System.Drawing.Size(176, 22);
+            this.panelAddText.Text = "Text";
+            this.panelAddText.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewShowGridMenuItem});
+            viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            viewToolStripMenuItem.Text = "&View";
+            // 
+            // viewShowGridMenuItem
+            // 
+            this.viewShowGridMenuItem.Name = "viewShowGridMenuItem";
+            this.viewShowGridMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewShowGridMenuItem.Text = "Show grid";
+            this.viewShowGridMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
-            this.panelToolStripMenuItem});
+            this.panelToolStripMenuItem,
+            viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(714, 24);
@@ -188,6 +217,15 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
+            // viewPanel
+            // 
+            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPanel.Location = new System.Drawing.Point(0, 0);
+            this.viewPanel.Name = "viewPanel";
+            this.viewPanel.Size = new System.Drawing.Size(621, 476);
+            this.viewPanel.TabIndex = 0;
+            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
@@ -195,16 +233,18 @@
             this.dialTool,
             this.circPocketTool,
             this.rectPocketTool,
+            this.textTool,
             this.toolStripSeparator2,
             this.toolEditSelected});
             this.toolStrip1.Location = new System.Drawing.Point(0, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(93, 127);
+            this.toolStrip1.Size = new System.Drawing.Size(93, 131);
             this.toolStrip1.TabIndex = 0;
             // 
             // dialTool
             // 
             this.dialTool.Image = ((System.Drawing.Image)(resources.GetObject("dialTool.Image")));
+            this.dialTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dialTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.dialTool.Name = "dialTool";
             this.dialTool.Size = new System.Drawing.Size(91, 20);
@@ -214,6 +254,7 @@
             // circPocketTool
             // 
             this.circPocketTool.Image = ((System.Drawing.Image)(resources.GetObject("circPocketTool.Image")));
+            this.circPocketTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.circPocketTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.circPocketTool.Name = "circPocketTool";
             this.circPocketTool.Size = new System.Drawing.Size(91, 20);
@@ -223,31 +264,22 @@
             // rectPocketTool
             // 
             this.rectPocketTool.Image = ((System.Drawing.Image)(resources.GetObject("rectPocketTool.Image")));
+            this.rectPocketTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.rectPocketTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rectPocketTool.Name = "rectPocketTool";
             this.rectPocketTool.Size = new System.Drawing.Size(91, 20);
             this.rectPocketTool.Text = "Rect. pocket";
             this.rectPocketTool.Click += new System.EventHandler(this.tool_Click);
             // 
-            // openFileDialog1
+            // textTool
             // 
-            this.openFileDialog1.DefaultExt = "pnl";
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "pnl";
-            this.saveFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
-            // 
-            // viewPanel
-            // 
-            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPanel.Location = new System.Drawing.Point(0, 0);
-            this.viewPanel.Name = "viewPanel";
-            this.viewPanel.Size = new System.Drawing.Size(621, 476);
-            this.viewPanel.TabIndex = 0;
-            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
+            this.textTool.Image = ((System.Drawing.Image)(resources.GetObject("textTool.Image")));
+            this.textTool.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.textTool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textTool.Name = "textTool";
+            this.textTool.Size = new System.Drawing.Size(91, 20);
+            this.textTool.Text = "Text";
+            this.textTool.Click += new System.EventHandler(this.tool_Click);
             // 
             // toolStripSeparator2
             // 
@@ -263,6 +295,17 @@
             this.toolEditSelected.Size = new System.Drawing.Size(91, 19);
             this.toolEditSelected.Text = "Edit";
             this.toolEditSelected.Click += new System.EventHandler(this.tool_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "pnl";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "pnl";
+            this.saveFileDialog1.Filter = "PanelGen files|*.pnl|All files|*.*";
             // 
             // PanelEditor
             // 
@@ -312,5 +355,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolEditSelected;
+        private System.Windows.Forms.ToolStripMenuItem panelAddText;
+        private System.Windows.Forms.ToolStripButton textTool;
+        private System.Windows.Forms.ToolStripMenuItem viewShowGridMenuItem;
     }
 }

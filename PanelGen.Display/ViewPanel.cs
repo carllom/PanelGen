@@ -11,7 +11,18 @@ namespace PanelGen.Display
         private float origoSize = 10;
 
         public PanelGenApplication Model;
-        private float _zoom = 1;
+        private float _zoom = 10; // 1mm = 10pixels
+
+        private Pen gridPen = new Pen(Color.FromArgb(10, Color.White));
+        private bool _showgrid;
+        public bool ShowGrid
+        {
+            get { return _showgrid; }
+            set
+            {
+                var changed = _showgrid != value; _showgrid = value; if (changed) Refresh();
+            }
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -19,6 +30,26 @@ namespace PanelGen.Display
             e.Graphics.Clear(Color.Black);
             e.Graphics.DrawLine(Pens.Red, Origo.X - origoSize, Origo.Y, Origo.X + origoSize, Origo.Y);
             e.Graphics.DrawLine(Pens.Green, Origo.X, Origo.Y - origoSize, Origo.X, Origo.Y + origoSize);
+
+            if (ShowGrid)
+            {
+                var gridsize = _zoom;
+                if (gridsize > 9) // Do not display too tight grid
+                {
+                    var gridX = Origo.X % gridsize;
+                    var gridY = Origo.Y % gridsize;
+                    while (gridX < Width)
+                    {
+                        e.Graphics.DrawLine(gridPen, gridX, 0, gridX, Height);
+                        gridX += gridsize;
+                    }
+                    while (gridY < Height)
+                    {
+                        e.Graphics.DrawLine(gridPen, 0, gridY, Width, gridY);
+                        gridY += gridsize;
+                    }
+                }
+            }
 
             var draw = new ScreenDraw(e.Graphics, Pens.LightCyan, _zoom, Origo);
             if (Model?.panel != null)
@@ -42,6 +73,11 @@ namespace PanelGen.Display
                             d.holeRadius * 2 * _zoom,
                             d.holeRadius * 2 * _zoom);
 
+                    }
+                    else if (item is Text)
+                    {
+                        var t = item as Text;
+                        t.Draw(draw);
                     }
                     else if (item is RectangularPocket)
                     {

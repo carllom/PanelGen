@@ -57,12 +57,16 @@ namespace PanelGen.Cli
         {
             base.Load(data);
             text = data.ReadString();
+            font.Size = data.ReadSingle();
+            anchor = (Alignment)data.ReadByte();
         }
 
         public override void Save(BinaryWriter data)
         {
             base.Save(data);
             data.Write(text);
+            data.Write(font.Size);
+            data.Write((byte)anchor);
         }
     }
 }

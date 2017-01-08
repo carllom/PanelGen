@@ -32,17 +32,24 @@
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label13;
+            System.Windows.Forms.Label label1;
+            System.Windows.Forms.Label label2;
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.txtLabelText = new System.Windows.Forms.TextBox();
+            this.numFontsize = new System.Windows.Forms.NumericUpDown();
+            this.cboAlign = new System.Windows.Forms.ComboBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFontsize)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -148,11 +155,72 @@
             this.txtLabelText.Size = new System.Drawing.Size(198, 20);
             this.txtLabelText.TabIndex = 12;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(150, 28);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(49, 13);
+            label1.TabIndex = 13;
+            label1.Text = "Font size";
+            // 
+            // numFontsize
+            // 
+            this.numFontsize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numFontsize.DecimalPlaces = 1;
+            this.numFontsize.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numFontsize.Location = new System.Drawing.Point(205, 26);
+            this.numFontsize.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numFontsize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numFontsize.Name = "numFontsize";
+            this.numFontsize.Size = new System.Drawing.Size(43, 20);
+            this.numFontsize.TabIndex = 14;
+            this.numFontsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numFontsize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // cboAlign
+            // 
+            this.cboAlign.FormattingEnabled = true;
+            this.cboAlign.Location = new System.Drawing.Point(205, 51);
+            this.cboAlign.Name = "cboAlign";
+            this.cboAlign.Size = new System.Drawing.Size(116, 21);
+            this.cboAlign.TabIndex = 15;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(150, 54);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(30, 13);
+            label2.TabIndex = 16;
+            label2.Text = "Align";
+            // 
             // TextSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(333, 127);
+            this.Controls.Add(label2);
+            this.Controls.Add(this.cboAlign);
+            this.Controls.Add(label1);
+            this.Controls.Add(this.numFontsize);
             this.Controls.Add(this.txtLabelText);
             this.Controls.Add(label13);
             this.Controls.Add(this.button1);
@@ -165,6 +233,7 @@
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numFontsize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,5 +244,7 @@
         private System.Windows.Forms.NumericUpDown numX;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtLabelText;
+        private System.Windows.Forms.NumericUpDown numFontsize;
+        private System.Windows.Forms.ComboBox cboAlign;
     }
 }

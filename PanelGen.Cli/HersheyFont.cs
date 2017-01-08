@@ -15,6 +15,7 @@ namespace PanelGen.Cli
 
         private float _height = 2f;
         public float Size {
+            get { return _height; }
             set {
                 _height = value;
                 var g = GetGlyph('M');

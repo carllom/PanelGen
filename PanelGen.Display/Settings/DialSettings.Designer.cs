@@ -44,6 +44,9 @@
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label12;
             System.Windows.Forms.Label label13;
+            System.Windows.Forms.GroupBox groupBox6;
+            System.Windows.Forms.Label label14;
+            System.Windows.Forms.Label label15;
             this.numHoleRadius = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
@@ -60,6 +63,8 @@
             this.numTickCount = new System.Windows.Forms.NumericUpDown();
             this.numTickLength = new System.Windows.Forms.NumericUpDown();
             this.txtLabelText = new System.Windows.Forms.TextBox();
+            this.numLabelFontSize = new System.Windows.Forms.NumericUpDown();
+            this.numMarkerFontSize = new System.Windows.Forms.NumericUpDown();
             groupBox1 = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
@@ -76,6 +81,9 @@
             label11 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
+            groupBox6 = new System.Windows.Forms.GroupBox();
+            label14 = new System.Windows.Forms.Label();
+            label15 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).BeginInit();
             groupBox2.SuspendLayout();
@@ -93,6 +101,9 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).BeginInit();
+            groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLabelFontSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMarkerFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -383,8 +394,9 @@
             // 
             // label13
             // 
+            label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(8, 256);
+            label13.Location = new System.Drawing.Point(8, 304);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(28, 13);
             label13.TabIndex = 8;
@@ -394,7 +406,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(246, 251);
+            this.button1.Location = new System.Drawing.Point(246, 299);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -495,16 +507,112 @@
             // 
             // txtLabelText
             // 
-            this.txtLabelText.Location = new System.Drawing.Point(42, 253);
+            this.txtLabelText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLabelText.Location = new System.Drawing.Point(42, 301);
             this.txtLabelText.Name = "txtLabelText";
             this.txtLabelText.Size = new System.Drawing.Size(198, 20);
             this.txtLabelText.TabIndex = 12;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(this.numLabelFontSize);
+            groupBox6.Controls.Add(label14);
+            groupBox6.Controls.Add(label15);
+            groupBox6.Controls.Add(this.numMarkerFontSize);
+            groupBox6.Location = new System.Drawing.Point(12, 216);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new System.Drawing.Size(129, 71);
+            groupBox6.TabIndex = 10;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Font sizes";
+            // 
+            // numLabelFontSize
+            // 
+            this.numLabelFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLabelFontSize.DecimalPlaces = 1;
+            this.numLabelFontSize.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numLabelFontSize.Location = new System.Drawing.Point(51, 40);
+            this.numLabelFontSize.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numLabelFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numLabelFontSize.Name = "numLabelFontSize";
+            this.numLabelFontSize.Size = new System.Drawing.Size(68, 20);
+            this.numLabelFontSize.TabIndex = 9;
+            this.numLabelFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numLabelFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(6, 42);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(33, 13);
+            label14.TabIndex = 8;
+            label14.Text = "Label";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(6, 16);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(40, 13);
+            label15.TabIndex = 6;
+            label15.Text = "Marker";
+            // 
+            // numMarkerFontSize
+            // 
+            this.numMarkerFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMarkerFontSize.DecimalPlaces = 1;
+            this.numMarkerFontSize.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numMarkerFontSize.Location = new System.Drawing.Point(51, 14);
+            this.numMarkerFontSize.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numMarkerFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMarkerFontSize.Name = "numMarkerFontSize";
+            this.numMarkerFontSize.Size = new System.Drawing.Size(68, 20);
+            this.numMarkerFontSize.TabIndex = 7;
+            this.numMarkerFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numMarkerFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // DialSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 286);
+            this.ClientSize = new System.Drawing.Size(333, 334);
+            this.Controls.Add(groupBox6);
             this.Controls.Add(this.txtLabelText);
             this.Controls.Add(label13);
             this.Controls.Add(groupBox5);
@@ -539,6 +647,10 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).EndInit();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLabelFontSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMarkerFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -561,5 +673,7 @@
         private System.Windows.Forms.NumericUpDown numTickLength;
         private System.Windows.Forms.TextBox txtLabelText;
         private System.Windows.Forms.NumericUpDown numLabelOffset;
+        private System.Windows.Forms.NumericUpDown numLabelFontSize;
+        private System.Windows.Forms.NumericUpDown numMarkerFontSize;
     }
 }

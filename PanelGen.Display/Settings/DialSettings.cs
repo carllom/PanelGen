@@ -36,6 +36,8 @@ namespace PanelGen.Display
             numTickCount.Value = Convert.ToDecimal(dial.tickCount);
 
             txtLabelText.Text = dial.text;
+            numMarkerFontSize.Value = Convert.ToDecimal(dial.MarkerFont.Size);
+            numLabelFontSize.Value = Convert.ToDecimal(dial.LabelFont.Size);
         }
 
         private void SetValues(Dial dial)
@@ -58,6 +60,8 @@ namespace PanelGen.Display
             dial.tickCount = Convert.ToInt32(numTickCount.Value);
 
             dial.text = txtLabelText.Text;
+            dial.MarkerFont.Size = Convert.ToSingle(numMarkerFontSize.Value);
+            dial.LabelFont.Size = Convert.ToSingle(numLabelFontSize.Value);
         }
 
         private void CircularPocketSettings_Load(object sender, EventArgs e)

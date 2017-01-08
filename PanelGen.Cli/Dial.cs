@@ -21,7 +21,8 @@ namespace PanelGen.Cli
 
         // Labels and text
         public string text; // Dial label
-        public HersheyFont Font { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey");
+        public HersheyFont LabelFont { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey") { Size = 3f };
+        public HersheyFont MarkerFont { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey") { Size = 1.5f };
         public float markerLabelOffset = 1.5f;
 
         public override Vertex3 Extents
@@ -49,13 +50,11 @@ namespace PanelGen.Cli
             var tickArc = markerArc / (tickCount + 1);
             var outerRadius = innerRadius + markerLength;
 
-            Font.Size = 1.5f;
-
             for (var i = 0; i < mCount; i++)
             {
                 var mArc = startAng + i * markerArc;
                 DrawTick(mArc, pos.x, pos.y, innerRadius, outerRadius, drw);
-                DrawTickLabel((minValue + i * step).ToString(), mArc, pos.x, pos.y, outerRadius + markerLabelOffset, drw);
+                DrawTickLabel((minValue + i * step).ToString(), mArc, pos.x, pos.y, outerRadius + markerLabelOffset, MarkerFont, drw);
                 for (var j = tickArc; j < markerArc; j += tickArc)
                 {
                     DrawTick(mArc + j, pos.x, pos.y, innerRadius, innerRadius + tickLength, drw);
@@ -64,12 +63,11 @@ namespace PanelGen.Cli
             // Max marker
             var maxAngle = startAng + mCount * markerArc;
             DrawTick(maxAngle, pos.x, pos.y, innerRadius, outerRadius, drw);
-            DrawTickLabel(maxValue.ToString(), maxAngle, pos.x, pos.y, outerRadius + markerLabelOffset, drw);
+            DrawTickLabel(maxValue.ToString(), maxAngle, pos.x, pos.y, outerRadius + markerLabelOffset, MarkerFont, drw);
 
             // Dial text
-            Font.Size = 3f;
-            var fWidth = Font.Width(text);
-            Font.DrawString(drw, text, pos.x - fWidth / 2, pos.y - innerRadius - markerLength - 3f, false); //TODO: Fix offsets - letters are rendered offset to center
+            var fWidth = LabelFont.Width(text);
+            LabelFont.DrawString(drw, text, pos.x - fWidth / 2, pos.y - innerRadius - markerLength - 3f, false); //TODO: Fix offsets - letters are rendered offset to center
         }
 
         public override void GenerateCode(TextWriter writer, Tool tool)
@@ -87,9 +85,9 @@ namespace PanelGen.Cli
             drw.LineTo(xc + xk * rOuter, yc - yk * rOuter);
         }
 
-        private void DrawTickLabel(string text, double angle, float xc, float yc, float dist, IDraw drw)
+        private void DrawTickLabel(string text, double angle, float xc, float yc, float dist, HersheyFont font, IDraw drw)
         {
-            var w = Font.InnerWidth(text);
+            var w = font.InnerWidth(text);
             var xk = -(float)Math.Sin(angle);
             var yk = (float)Math.Cos(angle);
             if (xk < -1e-8)
@@ -99,7 +97,7 @@ namespace PanelGen.Cli
             else
                 w = 0; // Right side align to start
 
-            Font.DrawString(drw, text, xc + xk * dist + w, yc - yk * dist);
+            font.DrawString(drw, text, xc + xk * dist + w, yc - yk * dist);
         }
 
         #region Save/Restore object
@@ -117,6 +115,8 @@ namespace PanelGen.Cli
             tickCount = data.ReadInt32();
             text = data.ReadString();
             markerLabelOffset = data.ReadSingle();
+            MarkerFont.Size = data.ReadSingle();
+            LabelFont.Size = data.ReadSingle();
         }
 
         public override void Save(BinaryWriter data)
@@ -133,6 +133,8 @@ namespace PanelGen.Cli
             data.Write(tickCount);
             data.Write(text);
             data.Write(markerLabelOffset);
+            data.Write(MarkerFont.Size);
+            data.Write(LabelFont.Size);
         }
         #endregion
     }

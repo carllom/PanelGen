@@ -56,11 +56,13 @@ namespace PanelGen.Cli
         public override void Load(BinaryReader data)
         {
             base.Load(data);
+            text = data.ReadString();
         }
 
         public override void Save(BinaryWriter data)
         {
             base.Save(data);
+            data.Write(text);
         }
     }
 }

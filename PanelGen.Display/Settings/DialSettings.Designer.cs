@@ -35,6 +35,7 @@
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.GroupBox groupBox5;
+            System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label8;
             System.Windows.Forms.Label label7;
@@ -42,11 +43,11 @@
             System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label11;
             System.Windows.Forms.Label label12;
-            System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label13;
             this.numHoleRadius = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
+            this.numLabelOffset = new System.Windows.Forms.NumericUpDown();
             this.numStep = new System.Windows.Forms.NumericUpDown();
             this.numMaxValue = new System.Windows.Forms.NumericUpDown();
             this.numMinValue = new System.Windows.Forms.NumericUpDown();
@@ -58,7 +59,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.numTickCount = new System.Windows.Forms.NumericUpDown();
             this.numTickLength = new System.Windows.Forms.NumericUpDown();
-            this.numLabelOffset = new System.Windows.Forms.NumericUpDown();
             this.txtLabelText = new System.Windows.Forms.TextBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
@@ -67,6 +67,7 @@
             label5 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             groupBox5 = new System.Windows.Forms.GroupBox();
+            label2 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
@@ -74,7 +75,6 @@
             label10 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).BeginInit();
@@ -82,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
             groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLabelOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinValue)).BeginInit();
@@ -92,7 +93,6 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLabelOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -235,6 +235,36 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "Marker";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(6, 120);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(73, 13);
+            label2.TabIndex = 10;
+            label2.Text = "Labeloff. (mm)";
+            // 
+            // numLabelOffset
+            // 
+            this.numLabelOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLabelOffset.DecimalPlaces = 1;
+            this.numLabelOffset.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numLabelOffset.Location = new System.Drawing.Point(85, 118);
+            this.numLabelOffset.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numLabelOffset.Name = "numLabelOffset";
+            this.numLabelOffset.Size = new System.Drawing.Size(55, 20);
+            this.numLabelOffset.TabIndex = 11;
+            this.numLabelOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // numStep
             // 
             this.numStep.Location = new System.Drawing.Point(77, 92);
@@ -255,6 +285,11 @@
             // numMaxValue
             // 
             this.numMaxValue.Location = new System.Drawing.Point(77, 66);
+            this.numMaxValue.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numMaxValue.Name = "numMaxValue";
             this.numMaxValue.Size = new System.Drawing.Size(63, 20);
             this.numMaxValue.TabIndex = 9;
@@ -272,6 +307,11 @@
             // numMinValue
             // 
             this.numMinValue.Location = new System.Drawing.Point(77, 40);
+            this.numMinValue.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numMinValue.Name = "numMinValue";
             this.numMinValue.Size = new System.Drawing.Size(63, 20);
             this.numMinValue.TabIndex = 7;
@@ -340,6 +380,15 @@
             label12.Size = new System.Drawing.Size(77, 13);
             label12.TabIndex = 4;
             label12.Text = "Inner rad. (mm)";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(8, 256);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(28, 13);
+            label13.TabIndex = 8;
+            label13.Text = "Text";
             // 
             // button1
             // 
@@ -444,45 +493,6 @@
             this.numTickLength.TabIndex = 9;
             this.numTickLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // numLabelOffset
-            // 
-            this.numLabelOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numLabelOffset.DecimalPlaces = 1;
-            this.numLabelOffset.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numLabelOffset.Location = new System.Drawing.Point(85, 118);
-            this.numLabelOffset.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numLabelOffset.Name = "numLabelOffset";
-            this.numLabelOffset.Size = new System.Drawing.Size(55, 20);
-            this.numLabelOffset.TabIndex = 11;
-            this.numLabelOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(6, 120);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(73, 13);
-            label2.TabIndex = 10;
-            label2.Text = "Labeloff. (mm)";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(8, 256);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(28, 13);
-            label13.TabIndex = 8;
-            label13.Text = "Text";
-            // 
             // txtLabelText
             // 
             this.txtLabelText.Location = new System.Drawing.Point(42, 253);
@@ -516,6 +526,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
             groupBox5.ResumeLayout(false);
             groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLabelOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinValue)).EndInit();
@@ -528,7 +539,6 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLabelOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

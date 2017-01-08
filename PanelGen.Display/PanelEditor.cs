@@ -44,8 +44,7 @@ namespace PanelGen.Display
             }
             else if (sender == panelSettingsMenuItem)
             {
-                var p = new PanelStock();
-                var settings = new PanelSettings(p);
+                var settings = new PanelSettings(_app.panel);
                 settings.ShowDialog();
             }
             else if (sender == panelAddDialMenuItem)

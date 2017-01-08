@@ -39,11 +39,11 @@ namespace PanelGen.Cli
         public void Draw(IDraw drw)
         {
             var p = points.ElementAt(0);
-            drw.MoveTo(p.x, p.y);
+            drw.MoveTo(p.x + pos.x, p.y + pos.y);
             for (int i = 1; i < points.Count; i++)
             {
                 p = points.ElementAt(i);
-                drw.LineTo(p.x, p.y);
+                drw.LineTo(p.x + pos.x, p.y + pos.y);
             }
         }
 

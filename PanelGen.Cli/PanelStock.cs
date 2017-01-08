@@ -53,6 +53,21 @@ namespace PanelGen.Cli
 
     public abstract class PanelStockItem : PanelComponent
     {
+        public byte toolNumber;
+
         public abstract void GenerateCode(TextWriter writer, Tool tool);
+        public virtual bool UsesTool(int toolNumber) { return toolNumber == this.toolNumber; }
+
+        public override void Load(BinaryReader data)
+        {
+            base.Load(data);
+            toolNumber = data.ReadByte();
+        }
+
+        public override void Save(BinaryWriter data)
+        {
+            base.Save(data);
+            data.Write(toolNumber);
+        }
     }
 }

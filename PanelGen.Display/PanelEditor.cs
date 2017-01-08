@@ -97,6 +97,11 @@ namespace PanelGen.Display
                     viewPanel.Invalidate();
                 }
             }
+            else if (sender == panelToolSettingsMenuItem)
+            {
+                var settings = new ToolSettings(_app);
+                settings.ShowDialog();
+            }
             else if (sender == panelGenGCode)
             {
                 if (saveGCodeFileDialog.ShowDialog() == DialogResult.OK)

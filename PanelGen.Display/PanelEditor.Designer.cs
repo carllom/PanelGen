@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+            System.Windows.Forms.ToolStripMenuItem panelAddMenuItem;
             System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelEditor));
             this.panelAddDialMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +46,10 @@
             this.fileExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.panelGenGCode = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.viewPanel = new PanelGen.Display.ViewPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.dialTool = new System.Windows.Forms.ToolStripButton();
             this.circPocketTool = new System.Windows.Forms.ToolStripButton();
@@ -57,11 +60,9 @@
             this.toolEditSelected = new System.Windows.Forms.ToolStripButton();
             this.openProjectFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveProjectFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.panelGenGCode = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewPanel = new PanelGen.Display.ViewPanel();
             this.saveGCodeFileDialog = new System.Windows.Forms.SaveFileDialog();
-            addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelToolSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            panelAddMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -70,17 +71,17 @@
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // addToolStripMenuItem
+            // panelAddMenuItem
             // 
-            addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            panelAddMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.panelAddDialMenuItem,
             this.panelAddCircPocket,
             this.panelAddRectPocket,
             this.panelAddText,
             this.panelAddPolyline});
-            addToolStripMenuItem.Name = "addToolStripMenuItem";
-            addToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            addToolStripMenuItem.Text = "Add";
+            panelAddMenuItem.Name = "panelAddMenuItem";
+            panelAddMenuItem.Size = new System.Drawing.Size(179, 22);
+            panelAddMenuItem.Text = "Add component";
             // 
             // panelAddDialMenuItem
             // 
@@ -198,7 +199,8 @@
             // 
             this.panelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.panelSettingsMenuItem,
-            addToolStripMenuItem,
+            panelAddMenuItem,
+            this.panelToolSettingsMenuItem,
             this.toolStripSeparator3,
             this.panelGenGCode});
             this.panelToolStripMenuItem.Name = "panelToolStripMenuItem";
@@ -211,6 +213,19 @@
             this.panelSettingsMenuItem.Size = new System.Drawing.Size(179, 22);
             this.panelSettingsMenuItem.Text = "Settings...";
             this.panelSettingsMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(176, 6);
+            // 
+            // panelGenGCode
+            // 
+            this.panelGenGCode.Name = "panelGenGCode";
+            this.panelGenGCode.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.panelGenGCode.Size = new System.Drawing.Size(179, 22);
+            this.panelGenGCode.Text = "Generate GCode";
+            this.panelGenGCode.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // toolStripContainer1
             // 
@@ -232,6 +247,16 @@
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
+            // 
+            // viewPanel
+            // 
+            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPanel.Location = new System.Drawing.Point(0, 0);
+            this.viewPanel.Name = "viewPanel";
+            this.viewPanel.ShowGrid = false;
+            this.viewPanel.Size = new System.Drawing.Size(621, 476);
+            this.viewPanel.TabIndex = 0;
+            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
             // 
             // toolStrip1
             // 
@@ -325,33 +350,18 @@
             this.saveProjectFileDialog.DefaultExt = "pnl";
             this.saveProjectFileDialog.Filter = "PanelGen files|*.pnl|All files|*.*";
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(176, 6);
-            // 
-            // panelGenGCode
-            // 
-            this.panelGenGCode.Name = "panelGenGCode";
-            this.panelGenGCode.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.panelGenGCode.Size = new System.Drawing.Size(179, 22);
-            this.panelGenGCode.Text = "Generate GCode";
-            this.panelGenGCode.Click += new System.EventHandler(this.MenuItem_Click);
-            // 
-            // viewPanel
-            // 
-            this.viewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPanel.Location = new System.Drawing.Point(0, 0);
-            this.viewPanel.Name = "viewPanel";
-            this.viewPanel.ShowGrid = false;
-            this.viewPanel.Size = new System.Drawing.Size(621, 476);
-            this.viewPanel.TabIndex = 0;
-            this.viewPanel.DoubleClick += new System.EventHandler(this.viewPanel_DoubleClick);
-            // 
             // saveGCodeFileDialog
             // 
             this.saveGCodeFileDialog.DefaultExt = "nc";
             this.saveGCodeFileDialog.Filter = "GCode Files|*.nc|All files|*.*";
+            // 
+            // panelToolSettingsMenuItem
+            // 
+            this.panelToolSettingsMenuItem.Name = "panelToolSettingsMenuItem";
+            this.panelToolSettingsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
+            this.panelToolSettingsMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.panelToolSettingsMenuItem.Text = "Tools...";
+            this.panelToolSettingsMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // PanelEditor
             // 
@@ -409,5 +419,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem panelGenGCode;
         private System.Windows.Forms.SaveFileDialog saveGCodeFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem panelToolSettingsMenuItem;
     }
 }

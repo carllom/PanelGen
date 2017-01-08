@@ -64,6 +64,12 @@
       <DependentUpon>PanelEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelGenApplication.cs" />
+    <Compile Include="Settings\ToolSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\ToolSettings.Designer.cs">
+      <DependentUpon>ToolSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings\PolyLineSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelEditor.resx">
       <DependentUpon>PanelEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\ToolSettings.resx">
+      <DependentUpon>ToolSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\PolyLineSettings.resx">
       <DependentUpon>PolyLineSettings.cs</DependentUpon>

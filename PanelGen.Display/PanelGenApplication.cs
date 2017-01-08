@@ -1,5 +1,8 @@
 ﻿using PanelGen.Cli;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PanelGen.Display
 {
@@ -8,6 +11,16 @@ namespace PanelGen.Display
         public PanelStock panel;
         private PanelGenProject _project;
         public PanelComponent selected;
+
+        public PanelGenApplication()
+        {
+            // Default engraving tool - used by all components by default
+            _tools.Add(new Tool()
+            {
+                diameter = 3.175f,
+                zStep = 0.256f
+            });
+        }
 
         public void LoadPanel(string path)
         {
@@ -52,12 +65,6 @@ namespace PanelGen.Display
 
         internal void Generate(string path)
         {
-            var t = new Tool()
-            {
-                diameter = 3.175f,
-                zStep = 0.256f
-            };
-
             var saveCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
             System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             using (var file = new StreamWriter(path))
@@ -65,15 +72,49 @@ namespace PanelGen.Display
 
                 var engraver = new GCodeEngraver();
                 // Write prologue
-                foreach (var item in panel.items)
+
+
+                foreach (var tool in _tools)
                 {
-                    item.GenerateCode(file, t);
-                    file.WriteLine("G0 Z{0:0.###} F{1}", 1, 1500); // move to travel height
+                    foreach (var item in panel.items)
+                    {
+                        if (!item.UsesTool(tool.number))
+                            continue; // Do not render in this tool pass
+
+                        item.GenerateCode(file, tool);
+                        file.WriteLine("G0 Z{0:0.###} F{1}", 1, 1500); // move to travel height
+                    }
                 }
                 // Write epilogue
 
             }
             System.Threading.Thread.CurrentThread.CurrentCulture = saveCulture;
         }
+        #region Tools
+        private List<Tool> _tools = new List<Tool>();
+
+        public void AddTool(Tool tool)
+        {
+            if (_tools.Any(t => t.number == tool.number))
+                throw new ApplicationException($"Tool number {tool.number} already exists!");
+
+            _tools.Add(tool);
+        }
+
+        public void RemoveTool(int toolNumber)
+        {
+            var tool = _tools.SingleOrDefault(t => t.number == toolNumber);
+            if (tool == null)
+                throw new ApplicationException($"Tool number {toolNumber} not found!");
+            _tools.Remove(tool);
+        }
+
+        public IEnumerable<Tool> Tools => _tools;
+
+        public Tool GetTool(int toolNumber)
+        {
+            return _tools.SingleOrDefault(t => t.number == toolNumber);
+        }
+        #endregion
     }
 }

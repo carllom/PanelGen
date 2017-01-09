@@ -1,6 +1,7 @@
 ﻿using PanelGen.Cli;
 using System;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace PanelGen.Display
 {
@@ -8,12 +9,15 @@ namespace PanelGen.Display
     {
         private Text _text;
 
-        public TextSettings(Text text)
+        public TextSettings(Text text, PanelGenApplication app)
         {
             _text = text;
             InitializeComponent();
             Load += TextSettings_Load;
             FormClosing += TextSettings_FormClosing;
+
+            cboTool.Items.AddRange(app.Tools.ToArray());
+
             cboAlign.Items.Clear();
             foreach (var item in Enum.GetValues(typeof(Alignment)))
             {
@@ -30,6 +34,12 @@ namespace PanelGen.Display
 
             numFontsize.Value = Convert.ToDecimal(text.font.Size);
             cboAlign.SelectedItem = text.anchor;
+
+            foreach (Tool t in cboTool.Items)
+            {
+                if (t.number == text.toolNumber)
+                    cboTool.SelectedItem = t;
+            }
         }
 
         private void SetValues(Text text)
@@ -41,6 +51,7 @@ namespace PanelGen.Display
 
             text.font.Size = Convert.ToSingle(numFontsize.Value);
             text.anchor = (Alignment)cboAlign.SelectedItem;
+            text.toolNumber = (byte)((Tool)cboTool.SelectedItem).number;
         }
 
         private void TextSettings_Load(object sender, EventArgs e)

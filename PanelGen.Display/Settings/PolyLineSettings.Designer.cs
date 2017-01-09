@@ -35,16 +35,18 @@
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label6;
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pointList = new System.Windows.Forms.ListBox();
+            this.applyChanges = new System.Windows.Forms.Button();
+            this.removePoint = new System.Windows.Forms.Button();
+            this.addPoint = new System.Windows.Forms.Button();
             this.numPointY = new System.Windows.Forms.NumericUpDown();
             this.numPointX = new System.Windows.Forms.NumericUpDown();
-            this.addPoint = new System.Windows.Forms.Button();
-            this.removePoint = new System.Windows.Forms.Button();
-            this.applyChanges = new System.Windows.Forms.Button();
+            this.pointList = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.numRadius = new System.Windows.Forms.NumericUpDown();
+            this.cboTool = new System.Windows.Forms.ComboBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -52,6 +54,7 @@
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
@@ -135,17 +138,6 @@
             this.numX.TabIndex = 7;
             this.numX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(380, 224);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -166,17 +158,35 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Points";
             // 
-            // pointList
+            // applyChanges
             // 
-            this.pointList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pointList.FormattingEnabled = true;
-            this.pointList.Location = new System.Drawing.Point(6, 19);
-            this.pointList.Name = "pointList";
-            this.pointList.Size = new System.Drawing.Size(177, 199);
-            this.pointList.TabIndex = 0;
-            this.pointList.SelectedIndexChanged += new System.EventHandler(this.pointList_SelectedIndexChanged);
+            this.applyChanges.Location = new System.Drawing.Point(192, 66);
+            this.applyChanges.Name = "applyChanges";
+            this.applyChanges.Size = new System.Drawing.Size(50, 23);
+            this.applyChanges.TabIndex = 16;
+            this.applyChanges.Text = "<=";
+            this.applyChanges.UseVisualStyleBackColor = true;
+            this.applyChanges.Click += new System.EventHandler(this.button_Click);
+            // 
+            // removePoint
+            // 
+            this.removePoint.Location = new System.Drawing.Point(192, 95);
+            this.removePoint.Name = "removePoint";
+            this.removePoint.Size = new System.Drawing.Size(50, 23);
+            this.removePoint.TabIndex = 15;
+            this.removePoint.Text = "-";
+            this.removePoint.UseVisualStyleBackColor = true;
+            this.removePoint.Click += new System.EventHandler(this.button_Click);
+            // 
+            // addPoint
+            // 
+            this.addPoint.Location = new System.Drawing.Point(248, 66);
+            this.addPoint.Name = "addPoint";
+            this.addPoint.Size = new System.Drawing.Size(54, 23);
+            this.addPoint.TabIndex = 14;
+            this.addPoint.Text = "+";
+            this.addPoint.UseVisualStyleBackColor = true;
+            this.addPoint.Click += new System.EventHandler(this.button_Click);
             // 
             // numPointY
             // 
@@ -238,35 +248,37 @@
             this.numPointX.TabIndex = 11;
             this.numPointX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // addPoint
+            // pointList
             // 
-            this.addPoint.Location = new System.Drawing.Point(248, 66);
-            this.addPoint.Name = "addPoint";
-            this.addPoint.Size = new System.Drawing.Size(54, 23);
-            this.addPoint.TabIndex = 14;
-            this.addPoint.Text = "+";
-            this.addPoint.UseVisualStyleBackColor = true;
-            this.addPoint.Click += new System.EventHandler(this.button_Click);
+            this.pointList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pointList.FormattingEnabled = true;
+            this.pointList.Location = new System.Drawing.Point(6, 19);
+            this.pointList.Name = "pointList";
+            this.pointList.Size = new System.Drawing.Size(177, 199);
+            this.pointList.TabIndex = 0;
+            this.pointList.SelectedIndexChanged += new System.EventHandler(this.pointList_SelectedIndexChanged);
             // 
-            // removePoint
+            // label3
             // 
-            this.removePoint.Location = new System.Drawing.Point(192, 95);
-            this.removePoint.Name = "removePoint";
-            this.removePoint.Size = new System.Drawing.Size(50, 23);
-            this.removePoint.TabIndex = 15;
-            this.removePoint.Text = "-";
-            this.removePoint.UseVisualStyleBackColor = true;
-            this.removePoint.Click += new System.EventHandler(this.button_Click);
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(336, 91);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(40, 13);
+            label3.TabIndex = 14;
+            label3.Text = "Radius";
             // 
-            // applyChanges
+            // button1
             // 
-            this.applyChanges.Location = new System.Drawing.Point(192, 66);
-            this.applyChanges.Name = "applyChanges";
-            this.applyChanges.Size = new System.Drawing.Size(50, 23);
-            this.applyChanges.TabIndex = 16;
-            this.applyChanges.Text = "<=";
-            this.applyChanges.UseVisualStyleBackColor = true;
-            this.applyChanges.Click += new System.EventHandler(this.button_Click);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(380, 224);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "OK";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // numRadius
             // 
@@ -289,20 +301,30 @@
             this.numRadius.TabIndex = 15;
             this.numRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label3
+            // cboTool
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(336, 91);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(40, 13);
-            label3.TabIndex = 14;
-            label3.Text = "Radius";
+            this.cboTool.FormattingEnabled = true;
+            this.cboTool.Location = new System.Drawing.Point(339, 134);
+            this.cboTool.Name = "cboTool";
+            this.cboTool.Size = new System.Drawing.Size(110, 21);
+            this.cboTool.TabIndex = 16;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(336, 118);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(28, 13);
+            label6.TabIndex = 17;
+            label6.Text = "Tool";
             // 
             // PolyLineSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 259);
+            this.Controls.Add(label6);
+            this.Controls.Add(this.cboTool);
             this.Controls.Add(this.numRadius);
             this.Controls.Add(label3);
             this.Controls.Add(groupBox1);
@@ -337,5 +359,6 @@
         private System.Windows.Forms.Button addPoint;
         private System.Windows.Forms.Button applyChanges;
         private System.Windows.Forms.NumericUpDown numRadius;
+        private System.Windows.Forms.ComboBox cboTool;
     }
 }

@@ -47,6 +47,8 @@
             System.Windows.Forms.GroupBox groupBox6;
             System.Windows.Forms.Label label14;
             System.Windows.Forms.Label label15;
+            System.Windows.Forms.Label label16;
+            System.Windows.Forms.Label label17;
             this.numHoleRadius = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
@@ -55,6 +57,8 @@
             this.numMaxValue = new System.Windows.Forms.NumericUpDown();
             this.numMinValue = new System.Windows.Forms.NumericUpDown();
             this.numMarkerLength = new System.Windows.Forms.NumericUpDown();
+            this.numLabelFontSize = new System.Windows.Forms.NumericUpDown();
+            this.numMarkerFontSize = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.numScaleInnerRad = new System.Windows.Forms.NumericUpDown();
@@ -63,8 +67,8 @@
             this.numTickCount = new System.Windows.Forms.NumericUpDown();
             this.numTickLength = new System.Windows.Forms.NumericUpDown();
             this.txtLabelText = new System.Windows.Forms.TextBox();
-            this.numLabelFontSize = new System.Windows.Forms.NumericUpDown();
-            this.numMarkerFontSize = new System.Windows.Forms.NumericUpDown();
+            this.cboEngravingTool = new System.Windows.Forms.ComboBox();
+            this.cboMillTool = new System.Windows.Forms.ComboBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
@@ -84,6 +88,8 @@
             groupBox6 = new System.Windows.Forms.GroupBox();
             label14 = new System.Windows.Forms.Label();
             label15 = new System.Windows.Forms.Label();
+            label16 = new System.Windows.Forms.Label();
+            label17 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).BeginInit();
             groupBox2.SuspendLayout();
@@ -95,15 +101,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMaxValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMarkerLength)).BeginInit();
+            groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLabelFontSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMarkerFontSize)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numScaleInnerRad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numScaleArc)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).BeginInit();
-            groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLabelFontSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMarkerFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -396,17 +402,110 @@
             // 
             label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(8, 304);
+            label13.Location = new System.Drawing.Point(8, 312);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(28, 13);
             label13.TabIndex = 8;
             label13.Text = "Text";
             // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(this.numLabelFontSize);
+            groupBox6.Controls.Add(label14);
+            groupBox6.Controls.Add(label15);
+            groupBox6.Controls.Add(this.numMarkerFontSize);
+            groupBox6.Location = new System.Drawing.Point(12, 216);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new System.Drawing.Size(129, 71);
+            groupBox6.TabIndex = 10;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Font sizes";
+            // 
+            // numLabelFontSize
+            // 
+            this.numLabelFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLabelFontSize.DecimalPlaces = 1;
+            this.numLabelFontSize.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numLabelFontSize.Location = new System.Drawing.Point(51, 40);
+            this.numLabelFontSize.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numLabelFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numLabelFontSize.Name = "numLabelFontSize";
+            this.numLabelFontSize.Size = new System.Drawing.Size(68, 20);
+            this.numLabelFontSize.TabIndex = 9;
+            this.numLabelFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numLabelFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(6, 42);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(33, 13);
+            label14.TabIndex = 8;
+            label14.Text = "Label";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(6, 16);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(40, 13);
+            label15.TabIndex = 6;
+            label15.Text = "Marker";
+            // 
+            // numMarkerFontSize
+            // 
+            this.numMarkerFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMarkerFontSize.DecimalPlaces = 1;
+            this.numMarkerFontSize.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numMarkerFontSize.Location = new System.Drawing.Point(51, 14);
+            this.numMarkerFontSize.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numMarkerFontSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMarkerFontSize.Name = "numMarkerFontSize";
+            this.numMarkerFontSize.Size = new System.Drawing.Size(68, 20);
+            this.numMarkerFontSize.TabIndex = 7;
+            this.numMarkerFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numMarkerFontSize.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(246, 299);
+            this.button1.Location = new System.Drawing.Point(246, 307);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -509,109 +608,54 @@
             // 
             this.txtLabelText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLabelText.Location = new System.Drawing.Point(42, 301);
+            this.txtLabelText.Location = new System.Drawing.Point(42, 309);
             this.txtLabelText.Name = "txtLabelText";
             this.txtLabelText.Size = new System.Drawing.Size(198, 20);
             this.txtLabelText.TabIndex = 12;
             // 
-            // groupBox6
+            // cboEngravingTool
             // 
-            groupBox6.Controls.Add(this.numLabelFontSize);
-            groupBox6.Controls.Add(label14);
-            groupBox6.Controls.Add(label15);
-            groupBox6.Controls.Add(this.numMarkerFontSize);
-            groupBox6.Location = new System.Drawing.Point(12, 216);
-            groupBox6.Name = "groupBox6";
-            groupBox6.Size = new System.Drawing.Size(129, 71);
-            groupBox6.TabIndex = 10;
-            groupBox6.TabStop = false;
-            groupBox6.Text = "Font sizes";
+            this.cboEngravingTool.FormattingEnabled = true;
+            this.cboEngravingTool.Location = new System.Drawing.Point(215, 250);
+            this.cboEngravingTool.Name = "cboEngravingTool";
+            this.cboEngravingTool.Size = new System.Drawing.Size(106, 21);
+            this.cboEngravingTool.TabIndex = 13;
             // 
-            // numLabelFontSize
+            // cboMillTool
             // 
-            this.numLabelFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numLabelFontSize.DecimalPlaces = 1;
-            this.numLabelFontSize.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numLabelFontSize.Location = new System.Drawing.Point(51, 40);
-            this.numLabelFontSize.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numLabelFontSize.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numLabelFontSize.Name = "numLabelFontSize";
-            this.numLabelFontSize.Size = new System.Drawing.Size(68, 20);
-            this.numLabelFontSize.TabIndex = 9;
-            this.numLabelFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numLabelFontSize.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.cboMillTool.FormattingEnabled = true;
+            this.cboMillTool.Location = new System.Drawing.Point(215, 277);
+            this.cboMillTool.Name = "cboMillTool";
+            this.cboMillTool.Size = new System.Drawing.Size(106, 21);
+            this.cboMillTool.TabIndex = 14;
             // 
-            // label14
+            // label16
             // 
-            label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(6, 42);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(33, 13);
-            label14.TabIndex = 8;
-            label14.Text = "Label";
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(157, 253);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(52, 13);
+            label16.TabIndex = 12;
+            label16.Text = "Engr. tool";
             // 
-            // label15
+            // label17
             // 
-            label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(6, 16);
-            label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(40, 13);
-            label15.TabIndex = 6;
-            label15.Text = "Marker";
-            // 
-            // numMarkerFontSize
-            // 
-            this.numMarkerFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numMarkerFontSize.DecimalPlaces = 1;
-            this.numMarkerFontSize.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numMarkerFontSize.Location = new System.Drawing.Point(51, 14);
-            this.numMarkerFontSize.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numMarkerFontSize.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMarkerFontSize.Name = "numMarkerFontSize";
-            this.numMarkerFontSize.Size = new System.Drawing.Size(68, 20);
-            this.numMarkerFontSize.TabIndex = 7;
-            this.numMarkerFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numMarkerFontSize.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(165, 280);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(42, 13);
+            label17.TabIndex = 15;
+            label17.Text = "Mill tool";
             // 
             // DialSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 334);
+            this.ClientSize = new System.Drawing.Size(333, 342);
+            this.Controls.Add(label17);
+            this.Controls.Add(label16);
+            this.Controls.Add(this.cboMillTool);
+            this.Controls.Add(this.cboEngravingTool);
             this.Controls.Add(groupBox6);
             this.Controls.Add(this.txtLabelText);
             this.Controls.Add(label13);
@@ -639,6 +683,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMaxValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMarkerLength)).EndInit();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLabelFontSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMarkerFontSize)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numScaleInnerRad)).EndInit();
@@ -647,10 +695,6 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).EndInit();
-            groupBox6.ResumeLayout(false);
-            groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLabelFontSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMarkerFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -675,5 +719,7 @@
         private System.Windows.Forms.NumericUpDown numLabelOffset;
         private System.Windows.Forms.NumericUpDown numLabelFontSize;
         private System.Windows.Forms.NumericUpDown numMarkerFontSize;
+        private System.Windows.Forms.ComboBox cboEngravingTool;
+        private System.Windows.Forms.ComboBox cboMillTool;
     }
 }

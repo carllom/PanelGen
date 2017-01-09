@@ -50,7 +50,7 @@ namespace PanelGen.Display
             else if (sender == panelAddDialMenuItem)
             {
                 var d = CreateDummyDial();//new Dial();
-                var settings = new DialSettings(d);
+                var settings = new DialSettings(d, _app);
                 if (settings.ShowDialog() == DialogResult.OK)
                 {
                     _app.panel.items.Add(d);
@@ -60,7 +60,7 @@ namespace PanelGen.Display
             else if (sender == panelAddRectPocket)
             {
                 var rp = new RectangularPocket();
-                var settings = new RectangularPocketSettings(rp);
+                var settings = new RectangularPocketSettings(rp, _app);
                 if (settings.ShowDialog() == DialogResult.OK)
                 {
                     _app.panel.items.Add(rp);
@@ -70,7 +70,7 @@ namespace PanelGen.Display
             else if (sender == panelAddCircPocket)
             {
                 var cp = new CircularPocket();
-                var settings = new CircularPocketSettings(cp);
+                var settings = new CircularPocketSettings(cp, _app);
                 if (settings.ShowDialog()==DialogResult.OK)
                 {
                     _app.panel.items.Add(cp);
@@ -80,7 +80,7 @@ namespace PanelGen.Display
             else if (sender == panelAddText)
             {
                 var t = new Text("TEXT");
-                var settings = new TextSettings(t);
+                var settings = new TextSettings(t, _app);
                 if (settings.ShowDialog() == DialogResult.OK)
                 {
                     _app.panel.items.Add(t);
@@ -90,7 +90,7 @@ namespace PanelGen.Display
             else if (sender == panelAddPolyline)
             {
                 var pl = new PolyLine();
-                var settings = new PolyLineSettings(pl);
+                var settings = new PolyLineSettings(pl, _app);
                 if (settings.ShowDialog() == DialogResult.OK)
                 {
                     _app.panel.items.Add(pl);
@@ -147,31 +147,31 @@ namespace PanelGen.Display
 
                 if (sel is CircularPocket)
                 {
-                    var settings = new CircularPocketSettings(sel as CircularPocket);
+                    var settings = new CircularPocketSettings(sel as CircularPocket, _app);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }
                 else if (sel is Dial)
                 {
-                    var settings = new DialSettings(sel as Dial);
+                    var settings = new DialSettings(sel as Dial, _app);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }
                 else if (sel is RectangularPocket)
                 {
-                    var settings = new RectangularPocketSettings(sel as RectangularPocket);
+                    var settings = new RectangularPocketSettings(sel as RectangularPocket, _app);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }
                 else if (sel is Text)
                 {
-                    var settings = new TextSettings(sel as Text);
+                    var settings = new TextSettings(sel as Text, _app);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }
                 else if (sel is PolyLine)
                 {
-                    var settings = new PolyLineSettings(sel as PolyLine);
+                    var settings = new PolyLineSettings(sel as PolyLine, _app);
                     if (settings.ShowDialog() == DialogResult.OK)
                         viewPanel.Refresh();
                 }

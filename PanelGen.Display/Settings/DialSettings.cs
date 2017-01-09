@@ -1,6 +1,7 @@
 ﻿using PanelGen.Cli;
 using System;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace PanelGen.Display
 {
@@ -8,10 +9,15 @@ namespace PanelGen.Display
     {
         private Dial _dial;
 
-        public DialSettings(Dial dial)
+        public DialSettings(Dial dial, PanelGenApplication app)
         {
             _dial = dial;
             InitializeComponent();
+
+            var tools = app.Tools.ToArray();
+            cboMillTool.Items.AddRange(tools);
+            cboEngravingTool.Items.AddRange(tools);
+
             Load += CircularPocketSettings_Load;
             FormClosing += CircularPocketSettings_FormClosing;
         }
@@ -38,6 +44,18 @@ namespace PanelGen.Display
             txtLabelText.Text = dial.text;
             numMarkerFontSize.Value = Convert.ToDecimal(dial.MarkerFont.Size);
             numLabelFontSize.Value = Convert.ToDecimal(dial.LabelFont.Size);
+
+            foreach (Tool t in cboEngravingTool.Items)
+            {
+                if (t.number == dial.toolNumber)
+                    cboEngravingTool.SelectedItem = t;
+            }
+
+            foreach (Tool t in cboMillTool.Items)
+            {
+                if (t.number == dial.holeToolNumber)
+                    cboMillTool.SelectedItem = t;
+            }
         }
 
         private void SetValues(Dial dial)

@@ -32,29 +32,32 @@
             System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.GroupBox groupBox2;
+            System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
-            System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label6;
             this.numDepth = new System.Windows.Forms.NumericUpDown();
             this.numDiameter = new System.Windows.Forms.NumericUpDown();
+            this.numZ = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
-            this.numZ = new System.Windows.Forms.NumericUpDown();
+            this.cboTool = new System.Windows.Forms.ComboBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
+            label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDiameter)).BeginInit();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numZ)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -141,6 +144,34 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Position (Center)";
             // 
+            // numZ
+            // 
+            this.numZ.DecimalPlaces = 3;
+            this.numZ.Location = new System.Drawing.Point(51, 66);
+            this.numZ.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numZ.Minimum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            -2147483648});
+            this.numZ.Name = "numZ";
+            this.numZ.Size = new System.Drawing.Size(66, 20);
+            this.numZ.TabIndex = 11;
+            this.numZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(6, 68);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(39, 13);
+            label3.TabIndex = 10;
+            label3.Text = "Z (mm)";
+            // 
             // numY
             // 
             this.numY.DecimalPlaces = 3;
@@ -201,46 +232,37 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(232, 92);
+            this.button1.Location = new System.Drawing.Point(232, 122);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // numZ
+            // cboTool
             // 
-            this.numZ.DecimalPlaces = 3;
-            this.numZ.Location = new System.Drawing.Point(51, 66);
-            this.numZ.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numZ.Minimum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            -2147483648});
-            this.numZ.Name = "numZ";
-            this.numZ.Size = new System.Drawing.Size(66, 20);
-            this.numZ.TabIndex = 11;
-            this.numZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cboTool.FormattingEnabled = true;
+            this.cboTool.Location = new System.Drawing.Point(186, 89);
+            this.cboTool.Name = "cboTool";
+            this.cboTool.Size = new System.Drawing.Size(121, 21);
+            this.cboTool.TabIndex = 3;
             // 
-            // label3
+            // label6
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(6, 68);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(39, 13);
-            label3.TabIndex = 10;
-            label3.Text = "Z (mm)";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(152, 92);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(28, 13);
+            label6.TabIndex = 4;
+            label6.Text = "Tool";
             // 
             // CircularPocketSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 127);
+            this.ClientSize = new System.Drawing.Size(319, 157);
+            this.Controls.Add(label6);
+            this.Controls.Add(this.cboTool);
             this.Controls.Add(this.button1);
             this.Controls.Add(groupBox2);
             this.Controls.Add(groupBox1);
@@ -254,10 +276,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDiameter)).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numZ)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -268,5 +291,6 @@
         private System.Windows.Forms.NumericUpDown numX;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numZ;
+        private System.Windows.Forms.ComboBox cboTool;
     }
 }

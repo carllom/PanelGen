@@ -59,6 +59,8 @@ namespace PanelGen.Display
             }
             else if (sender == applyChanges)
             {
+                if (toolList.SelectedItem == null)
+                    return;
                 var item = (Tool)toolList.SelectedItem;
                 item.number = Convert.ToByte(numToolNumber.Value);
                 item.diameter = Convert.ToSingle(numDiameter.Value);

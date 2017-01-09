@@ -10,10 +10,14 @@ namespace PanelGen.Display
     {
         private PolyLine _polyline;
 
-        public PolyLineSettings(PolyLine polyline)
+        public PolyLineSettings(PolyLine polyline, PanelGenApplication app)
         {
             _polyline = polyline;
             InitializeComponent();
+
+            cboTool.Items.Clear();
+            cboTool.Items.AddRange(app.Tools.ToArray());
+
             Load += PolyLineSettings_Load;
             FormClosing += PolyLineSettings_Closing;
         }
@@ -30,6 +34,12 @@ namespace PanelGen.Display
                 pointList.Items.Add(new P(point));
             }
             pointList.EndUpdate();
+
+            foreach (Tool t in cboTool.Items)
+            {
+                if (t.number == polyline.toolNumber)
+                    cboTool.SelectedItem = t;
+            }
         }
 
         private void SetValues(PolyLine polyline)
@@ -42,6 +52,7 @@ namespace PanelGen.Display
             {
                 polyline.points.Add(point.Vertex);
             }
+            polyline.toolNumber = (byte)((Tool)cboTool.SelectedItem).number;
         }
 
         private void PolyLineSettings_Load(object sender, EventArgs e)

@@ -34,18 +34,21 @@
             System.Windows.Forms.Label label13;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
+            System.Windows.Forms.Label label3;
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.txtLabelText = new System.Windows.Forms.TextBox();
             this.numFontsize = new System.Windows.Forms.NumericUpDown();
             this.cboAlign = new System.Windows.Forms.ComboBox();
+            this.cboTool = new System.Windows.Forms.ComboBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
@@ -129,17 +132,35 @@
             // 
             label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(8, 95);
+            label13.Location = new System.Drawing.Point(8, 114);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(28, 13);
             label13.TabIndex = 8;
             label13.Text = "Text";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(150, 28);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(49, 13);
+            label1.TabIndex = 13;
+            label1.Text = "Font size";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(150, 54);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(30, 13);
+            label2.TabIndex = 16;
+            label2.Text = "Align";
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(246, 92);
+            this.button1.Location = new System.Drawing.Point(246, 111);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -150,19 +171,10 @@
             // 
             this.txtLabelText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLabelText.Location = new System.Drawing.Point(42, 92);
+            this.txtLabelText.Location = new System.Drawing.Point(42, 111);
             this.txtLabelText.Name = "txtLabelText";
             this.txtLabelText.Size = new System.Drawing.Size(198, 20);
             this.txtLabelText.TabIndex = 12;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(150, 28);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(49, 13);
-            label1.TabIndex = 13;
-            label1.Text = "Font size";
             // 
             // numFontsize
             // 
@@ -203,20 +215,30 @@
             this.cboAlign.Size = new System.Drawing.Size(116, 21);
             this.cboAlign.TabIndex = 15;
             // 
-            // label2
+            // cboTool
             // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(150, 54);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(30, 13);
-            label2.TabIndex = 16;
-            label2.Text = "Align";
+            this.cboTool.FormattingEnabled = true;
+            this.cboTool.Location = new System.Drawing.Point(205, 82);
+            this.cboTool.Name = "cboTool";
+            this.cboTool.Size = new System.Drawing.Size(116, 21);
+            this.cboTool.TabIndex = 17;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(150, 85);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(28, 13);
+            label3.TabIndex = 18;
+            label3.Text = "Tool";
             // 
             // TextSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 127);
+            this.ClientSize = new System.Drawing.Size(333, 146);
+            this.Controls.Add(label3);
+            this.Controls.Add(this.cboTool);
             this.Controls.Add(label2);
             this.Controls.Add(this.cboAlign);
             this.Controls.Add(label1);
@@ -246,5 +268,6 @@
         private System.Windows.Forms.TextBox txtLabelText;
         private System.Windows.Forms.NumericUpDown numFontsize;
         private System.Windows.Forms.ComboBox cboAlign;
+        private System.Windows.Forms.ComboBox cboTool;
     }
 }

@@ -13,7 +13,7 @@ namespace PanelGen.Cli
         {
             this.text = text;
 
-            font = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey");
+            font = new HersheyFont(FontFace.RomanSimplex);
             anchor = Alignment.Center;
         }
 

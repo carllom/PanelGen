@@ -5,6 +5,7 @@ namespace PanelGen.Cli
 {
     public class Dial : PanelStockItem
     {
+        public byte holeToolNumber; // Tool number for hole
         public float holeRadius; // radius of hole for pot axis
         public float innerRadius; // inner radius for marker/tick lines
 
@@ -21,9 +22,14 @@ namespace PanelGen.Cli
 
         // Labels and text
         public string text; // Dial label
-        public HersheyFont LabelFont { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey") { Size = 3f };
-        public HersheyFont MarkerFont { get; set; } = new HersheyFont(@"C:\Projekt\PanelGen\tool\hershey") { Size = 1.5f };
+        public HersheyFont LabelFont { get; set; } = new HersheyFont(FontFace.RomanSimplex, 3f);
+        public HersheyFont MarkerFont { get; set; } = new HersheyFont(FontFace.RomanSimplex, 1.5f);
         public float markerLabelOffset = 1.5f;
+
+        public override bool UsesTool(int toolNumber)
+        {
+            return base.UsesTool(toolNumber) || toolNumber == holeToolNumber;
+        }
 
         public override Vertex3 Extents
         {

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PanelGen.Cli
 {
@@ -38,6 +36,9 @@ namespace PanelGen.Cli
 
         public void Draw(IDraw drw)
         {
+            if (points.Count < 2)
+                return; // No point in drawing if less than 1 segment
+
             var p = points.ElementAt(0);
             drw.MoveTo(p.x + pos.x, p.y + pos.y);
             for (int i = 1; i < points.Count; i++)

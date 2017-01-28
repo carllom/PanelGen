@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Globalization;
+using System;
 
 namespace PanelGen.Cli
 {
@@ -8,13 +9,11 @@ namespace PanelGen.Cli
     {
         public readonly float X;
         public readonly float Y;
-        public readonly float Z;
 
-        public CncPoint(float x, float y, float z=0)
+        public CncPoint(float x, float y)
         {
             X = x;
             Y = y;
-            Z = z;
         }
     }
 
@@ -40,7 +39,7 @@ namespace PanelGen.Cli
 
         public void Finish()
         {
-            Raise(); // Move to safe Z
+            RaiseTool(); // Move to safe Z
             _writer.WriteLine("M5"); // Spindle off
             MoveTo(0, 0); // Move home
         }
@@ -66,6 +65,62 @@ namespace PanelGen.Cli
                 End();
         }
 
+        public void AddFatLine(Vertex2[] points, Tool t, float width)
+        {
+            // 1. Calc offsets from startpoint 
+            var offset = (width - t.diameter) / 2f;
+            // total width - 2*tool radius (either side), the rest divided by 2 to get +/- offset from center line
+
+            var seg = new Segment2();
+
+            for (int i = 0; i < points.Length - 1; i++)
+            {
+                seg.begin = points[i];
+                seg.end = points[i + 1];
+                FatSegment(seg, t, offset);
+            }
+        }
+
+        private const float overlap = 0.2f;
+
+        private void FatSegment(Segment2 seg, Tool t, float offset)
+        {
+            // 1 Start with center line (begin-end)
+            MoveTo(seg.begin); //G0(seg.begin); Lower();
+            LineTo(seg.end); //G1(seg.end);
+
+            // 1.5 Prepare extrude values
+            var n = seg.Normal.Normalize; // +extrude
+            //var n2 = -n; // -extrude
+            var toff = 0f;
+
+
+            while (toff < offset)
+            {
+
+                toff += Math.Min(offset, t.diameter * (1 - overlap)); // extend extrude
+                var xtr1 = seg.Offset(n * toff);
+                var xtr2 = seg.Offset(-n * toff);
+
+                // 2 Move to +extrude "end"
+                LineTo(xtr1.end); //G1(xtr1.end);
+
+                // 3 Draw +extrude(end - begin)
+                LineTo(xtr1.begin); // G1(xtr1.begin);
+
+                // 4 Endcap(begin) to -extrude "begin"
+                LineTo(xtr2.begin); //G1(xtr2.begin); // Just linear endcap for now
+
+                // 5 Draw -extrude(begin - end)
+                LineTo(xtr2.end); //G1(xtr2.end);
+
+                // 6 Endcap(end) to +extrude "end"
+                LineTo(xtr1.end); //G1(xtr1.end);
+
+            } // 7 if < width pick next extrude size and goto 2
+        }
+
+
         private void Begin(CncPoint pos)
         {
             _writer.WriteLine("G0 X{0:0.###} Y{1:0.###}", pos.X, pos.Y); // move to start point
@@ -86,30 +141,38 @@ namespace PanelGen.Cli
         private CncPoint _currPos;
         private bool _raised;
 
-        private void Raise()
+        private void RaiseTool()
         {
             if (!_raised)
                 _writer.WriteLine("G0 Z{0:0.###} F{1}", Surface + TravelZ, Travelspeed); // move to travel height
             _raised = true;
         }
-        private void Lower()
+        private void LowerTool()
         {
             if (_raised)
                 _writer.WriteLine("G0 Z{0:0.###} F{1}", Surface - EngravingDepth, Feedrate); // move to engraving depth
             _raised = false;
         }
 
+        public void Raise()
+        {
+            _writer.WriteLine("G0 Z{0:0.###} F{1}", Surface + TravelZ, Travelspeed); // move to travel height
+        }
+
         public void MoveTo(float x, float y)
         {
-            Raise();
-            _writer.WriteLine("G0 X{0:0.###} Y{1:0.###}", -x, y); // move to start point
+            RaiseTool();
+            _writer.WriteLine("G0 X{0:0.###} Y{1:0.###}", x, y); // move to start point
         }
 
         public void LineTo(float x, float y)
         {
-            Lower();
-            _writer.WriteLine("G1 X{0:0.###} Y{1:0.###}", -x, y);
+            LowerTool();
+            _writer.WriteLine("G1 X{0:0.###} Y{1:0.###}", x, y);
         }
+
+        public void MoveTo(Vertex2 v) => MoveTo(v.x, v.y);
+        public void LineTo(Vertex2 v) => LineTo(v.x, v.y);
 
         #endregion
     }

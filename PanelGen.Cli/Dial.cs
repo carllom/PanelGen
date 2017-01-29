@@ -7,8 +7,9 @@ namespace PanelGen.Cli
     {
         public byte holeToolNumber; // Tool number for hole
         public float holeRadius; // radius of hole for pot axis
-        public float innerRadius; // inner radius for marker/tick lines
+        public float holeDepth; // depth of pot axis hole
 
+        public float innerRadius; // inner radius for marker/tick lines
         // Marker lines are labeled lines
         public float arcSpan; // Dial segment arc angle
         public float markerLength; // Length of marker line
@@ -78,9 +79,23 @@ namespace PanelGen.Cli
 
         public override void GenerateCode(TextWriter writer, Tool tool)
         {
-            var engr = new GCodeEngraver();
-            Draw(engr);
-            writer.WriteLine(engr.GCode());
+            if (tool.number == toolNumber)
+            {
+                var engr = new GCodeEngraver();
+                Draw(engr);
+                writer.WriteLine(engr.GCode());
+            }
+            else if (tool.number == holeToolNumber)
+            {
+                var cp = new CircularPocket()
+                {
+                    diameter = holeRadius * 2,
+                    pos = pos,
+                    toolNumber = holeToolNumber,
+                    depth = holeDepth
+                };
+                cp.GenerateCode(writer, tool);
+            }
         }
 
         private static void DrawTick(double angle, float xc, float yc, float rInner, float rOuter, IDraw drw)
@@ -111,6 +126,7 @@ namespace PanelGen.Cli
         {
             base.Load(data);
             holeRadius = data.ReadSingle();
+            holeDepth = data.ReadSingle();
             innerRadius = data.ReadSingle();
             arcSpan = data.ReadSingle();
             markerLength = data.ReadSingle();
@@ -123,12 +139,14 @@ namespace PanelGen.Cli
             markerLabelOffset = data.ReadSingle();
             MarkerFont.Size = data.ReadSingle();
             LabelFont.Size = data.ReadSingle();
+            holeToolNumber = data.ReadByte();
         }
 
         public override void Save(BinaryWriter data)
         {
             base.Save(data);
             data.Write(holeRadius);
+            data.Write(holeDepth);
             data.Write(innerRadius);
             data.Write(arcSpan);
             data.Write(markerLength);
@@ -141,6 +159,7 @@ namespace PanelGen.Cli
             data.Write(markerLabelOffset);
             data.Write(MarkerFont.Size);
             data.Write(LabelFont.Size);
+            data.Write(holeToolNumber);
         }
         #endregion
     }

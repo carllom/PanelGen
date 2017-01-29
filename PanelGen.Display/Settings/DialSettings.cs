@@ -25,6 +25,7 @@ namespace PanelGen.Display
         private void GetValues(Dial dial)
         {
             numHoleRadius.Value = Convert.ToDecimal(dial.holeRadius);
+            numHoleDepth.Value = Convert.ToDecimal(dial.holeDepth);
 
             numX.Value = Convert.ToDecimal(dial.pos.x);
             numY.Value = Convert.ToDecimal(dial.pos.y);
@@ -61,6 +62,7 @@ namespace PanelGen.Display
         private void SetValues(Dial dial)
         {
             dial.holeRadius = Convert.ToSingle(numHoleRadius.Value);
+            dial.holeDepth = Convert.ToSingle(numHoleDepth.Value);
 
             dial.pos.x = Convert.ToSingle(numX.Value);
             dial.pos.y = Convert.ToSingle(numY.Value);
@@ -80,6 +82,9 @@ namespace PanelGen.Display
             dial.text = txtLabelText.Text;
             dial.MarkerFont.Size = Convert.ToSingle(numMarkerFontSize.Value);
             dial.LabelFont.Size = Convert.ToSingle(numLabelFontSize.Value);
+
+            dial.toolNumber = (byte)((Tool)cboEngravingTool.SelectedItem).number;
+            dial.holeToolNumber = (byte)((Tool)cboMillTool.SelectedItem).number;
         }
 
         private void CircularPocketSettings_Load(object sender, EventArgs e)

@@ -34,6 +34,7 @@ namespace PanelGen.Display
                     _project.Load(br);
                     // TODO: Load view state
                     panel = _project.Stock;
+                    _tools = _project.Tools;
                 }
             }
         }
@@ -45,6 +46,7 @@ namespace PanelGen.Display
                 using (var br = new BinaryWriter(str))
                 {
                     _project.Stock = panel;
+                    _project.Tools = _tools;
                     _project.Save(br);
                     // TODO: Save view state
                 }
@@ -81,6 +83,8 @@ namespace PanelGen.Display
                         if (!item.UsesTool(tool.number))
                             continue; // Do not render in this tool pass
 
+                        file.WriteLine("T{0}", tool.number + 1); //TODO: fix for gcode simulator (tools 1+)
+                        file.WriteLine("M06");
                         item.GenerateCode(file, tool);
                         file.WriteLine("G0 Z{0:0.###} F{1}", 1, 1500); // move to travel height
                     }

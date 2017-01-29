@@ -165,10 +165,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gcode\Gcode.csproj">
-      <Project>{EEC73CC2-8DF8-45E7-8A52-3B283970589C}</Project>
-      <Name>Gcode</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PanelGen.Cli\PanelGen.Cli.csproj">
       <Project>{1f2fed2c-d2e1-4b93-ab2e-dd8d6d774e66}</Project>
       <Name>PanelGen.Cli</Name>

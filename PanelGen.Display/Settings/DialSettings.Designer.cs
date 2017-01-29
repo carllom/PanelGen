@@ -49,6 +49,7 @@
             System.Windows.Forms.Label label15;
             System.Windows.Forms.Label label16;
             System.Windows.Forms.Label label17;
+            System.Windows.Forms.Label label18;
             this.numHoleRadius = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
@@ -69,6 +70,7 @@
             this.txtLabelText = new System.Windows.Forms.TextBox();
             this.cboEngravingTool = new System.Windows.Forms.ComboBox();
             this.cboMillTool = new System.Windows.Forms.ComboBox();
+            this.numHoleDepth = new System.Windows.Forms.NumericUpDown();
             groupBox1 = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
@@ -90,6 +92,7 @@
             label15 = new System.Windows.Forms.Label();
             label16 = new System.Windows.Forms.Label();
             label17 = new System.Windows.Forms.Label();
+            label18 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).BeginInit();
             groupBox2.SuspendLayout();
@@ -110,15 +113,18 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label18);
+            groupBox1.Controls.Add(this.numHoleDepth);
             groupBox1.Controls.Add(this.numHoleRadius);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new System.Drawing.Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(161, 43);
+            groupBox1.Size = new System.Drawing.Size(161, 71);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Dimensions";
@@ -245,7 +251,7 @@
             groupBox5.Controls.Add(label7);
             groupBox5.Controls.Add(this.numMarkerLength);
             groupBox5.Controls.Add(label6);
-            groupBox5.Location = new System.Drawing.Point(11, 61);
+            groupBox5.Location = new System.Drawing.Point(12, 76);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new System.Drawing.Size(152, 149);
             groupBox5.TabIndex = 4;
@@ -414,7 +420,7 @@
             groupBox6.Controls.Add(label14);
             groupBox6.Controls.Add(label15);
             groupBox6.Controls.Add(this.numMarkerFontSize);
-            groupBox6.Location = new System.Drawing.Point(12, 216);
+            groupBox6.Location = new System.Drawing.Point(12, 231);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new System.Drawing.Size(129, 71);
             groupBox6.TabIndex = 10;
@@ -500,6 +506,24 @@
             0,
             0,
             0});
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(157, 253);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(52, 13);
+            label16.TabIndex = 12;
+            label16.Text = "Engr. tool";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(165, 280);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(42, 13);
+            label17.TabIndex = 15;
+            label17.Text = "Mill tool";
             // 
             // button1
             // 
@@ -629,23 +653,33 @@
             this.cboMillTool.Size = new System.Drawing.Size(106, 21);
             this.cboMillTool.TabIndex = 14;
             // 
-            // label16
+            // numHoleDepth
             // 
-            label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(157, 253);
-            label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(52, 13);
-            label16.TabIndex = 12;
-            label16.Text = "Engr. tool";
+            this.numHoleDepth.DecimalPlaces = 3;
+            this.numHoleDepth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numHoleDepth.Location = new System.Drawing.Point(89, 40);
+            this.numHoleDepth.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numHoleDepth.Name = "numHoleDepth";
+            this.numHoleDepth.Size = new System.Drawing.Size(63, 20);
+            this.numHoleDepth.TabIndex = 2;
+            this.numHoleDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label17
+            // label18
             // 
-            label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(165, 280);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(42, 13);
-            label17.TabIndex = 15;
-            label17.Text = "Mill tool";
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(8, 42);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(61, 13);
+            label18.TabIndex = 3;
+            label18.Text = "Depth (mm)";
             // 
             // DialSettings
             // 
@@ -695,6 +729,7 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,5 +756,6 @@
         private System.Windows.Forms.NumericUpDown numMarkerFontSize;
         private System.Windows.Forms.ComboBox cboEngravingTool;
         private System.Windows.Forms.ComboBox cboMillTool;
+        private System.Windows.Forms.NumericUpDown numHoleDepth;
     }
 }

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelGen.Cli", "PanelGen.Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelGen.Display", "PanelGen.Display\PanelGen.Display.csproj", "{FF39CE93-B3AF-4D03-9F1A-FA1E9F2A2951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcode", "Gcode\Gcode.csproj", "{EEC73CC2-8DF8-45E7-8A52-3B283970589C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{FF39CE93-B3AF-4D03-9F1A-FA1E9F2A2951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF39CE93-B3AF-4D03-9F1A-FA1E9F2A2951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF39CE93-B3AF-4D03-9F1A-FA1E9F2A2951}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEC73CC2-8DF8-45E7-8A52-3B283970589C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEC73CC2-8DF8-45E7-8A52-3B283970589C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEC73CC2-8DF8-45E7-8A52-3B283970589C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEC73CC2-8DF8-45E7-8A52-3B283970589C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

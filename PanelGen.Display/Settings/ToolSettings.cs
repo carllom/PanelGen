@@ -27,6 +27,7 @@ namespace PanelGen.Display
                 toolList.Items.Add(tool);
             }
             toolList.EndUpdate();
+            chkToolGenSeparate.Checked = _app.genToolsSeparate;
         }
 
         private void ToolSettings_Load(object sender, EventArgs e)
@@ -67,6 +68,14 @@ namespace PanelGen.Display
                 item.zStep = Convert.ToSingle(numZStep.Value);
             }
             GetValues(_app.Tools);
+        }
+
+        private void chk_Changed(object sender, EventArgs e)
+        {
+            if (sender == chkToolGenSeparate)
+            {
+                _app.genToolsSeparate = chkToolGenSeparate.Checked;
+            }
         }
     }
 }

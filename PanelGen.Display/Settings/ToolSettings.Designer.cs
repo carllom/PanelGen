@@ -40,6 +40,7 @@
             this.applyChanges = new System.Windows.Forms.Button();
             this.removePoint = new System.Windows.Forms.Button();
             this.addPoint = new System.Windows.Forms.Button();
+            this.chkToolGenSeparate = new System.Windows.Forms.CheckBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -165,7 +166,7 @@
             groupBox1.Controls.Add(this.toolList);
             groupBox1.Location = new System.Drawing.Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(151, 189);
+            groupBox1.Size = new System.Drawing.Size(151, 211);
             groupBox1.TabIndex = 13;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tools";
@@ -176,7 +177,7 @@
             this.toolList.FormattingEnabled = true;
             this.toolList.Location = new System.Drawing.Point(3, 16);
             this.toolList.Name = "toolList";
-            this.toolList.Size = new System.Drawing.Size(145, 170);
+            this.toolList.Size = new System.Drawing.Size(145, 192);
             this.toolList.TabIndex = 0;
             this.toolList.SelectedIndexChanged += new System.EventHandler(this.pointList_SelectedIndexChanged);
             // 
@@ -213,11 +214,24 @@
             this.addPoint.UseVisualStyleBackColor = true;
             this.addPoint.Click += new System.EventHandler(this.button_Click);
             // 
+            // chkToolGenSeparate
+            // 
+            this.chkToolGenSeparate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkToolGenSeparate.AutoSize = true;
+            this.chkToolGenSeparate.Location = new System.Drawing.Point(166, 209);
+            this.chkToolGenSeparate.Name = "chkToolGenSeparate";
+            this.chkToolGenSeparate.Size = new System.Drawing.Size(146, 17);
+            this.chkToolGenSeparate.TabIndex = 17;
+            this.chkToolGenSeparate.Text = "Generate in separate files";
+            this.chkToolGenSeparate.UseVisualStyleBackColor = true;
+            this.chkToolGenSeparate.CheckedChanged += new System.EventHandler(this.chk_Changed);
+            // 
             // ToolSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 213);
+            this.ClientSize = new System.Drawing.Size(324, 235);
+            this.Controls.Add(this.chkToolGenSeparate);
             this.Controls.Add(this.addPoint);
             this.Controls.Add(this.applyChanges);
             this.Controls.Add(this.removePoint);
@@ -234,6 +248,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numToolNumber)).EndInit();
             groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -245,5 +260,6 @@
         private System.Windows.Forms.Button addPoint;
         private System.Windows.Forms.Button applyChanges;
         private System.Windows.Forms.NumericUpDown numZStep;
+        private System.Windows.Forms.CheckBox chkToolGenSeparate;
     }
 }

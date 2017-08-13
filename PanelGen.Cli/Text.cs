@@ -34,6 +34,18 @@ namespace PanelGen.Cli
             return xr.Inside(x, y);
         }
 
+        public override PanelStockItem Clone()
+        {
+            var copy = new Text(text)
+            {
+                pos = pos,
+                toolNumber = toolNumber,
+                anchor = anchor,
+                font = {Size = font.Size } // Font is created by constructor (for now)
+            };
+            return copy;
+        }
+
 
         public void Draw(IDraw drw)
         {

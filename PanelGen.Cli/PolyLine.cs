@@ -31,6 +31,18 @@ namespace PanelGen.Cli
             return false;
         }
 
+        public override PanelStockItem Clone()
+        {
+            var copy = new PolyLine
+            {
+                pos = pos,
+                toolNumber = toolNumber,
+                radius = radius,
+                points = new List<Vertex2>(points) // TODO: Does this really make a copy of the elements?
+            };
+            return copy;
+        }
+
         public float radius;
         public ICollection<Vertex2> points = new List<Vertex2>();
 

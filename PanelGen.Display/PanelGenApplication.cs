@@ -6,11 +6,17 @@ using System.Linq;
 
 namespace PanelGen.Display
 {
+    /// <summary>
+    /// CAD application operations (no UI dependency)
+    /// Translates user/ui operations to model updates
+    /// </summary>
     public class PanelGenApplication
     {
         public PanelStock panel;
         private PanelGenProject _project;
         public PanelComponent selected;
+
+        public bool genToolsSeparate;
 
         public PanelGenApplication()
         {
@@ -69,31 +75,62 @@ namespace PanelGen.Display
         {
             var saveCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
             System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-            using (var file = new StreamWriter(path))
+
+            if (genToolsSeparate) // Generate one file per tool
             {
-
-                var engraver = new GCodeEngraver();
-                // Write prologue
-
-
                 foreach (var tool in _tools)
                 {
-                    foreach (var item in panel.items)
-                    {
-                        if (!item.UsesTool(tool.number))
-                            continue; // Do not render in this tool pass
+                    Generate(path, tool);
+                }
+            }
+            else // All tools in one file
+            {
+                using (var file = new StreamWriter(path))
+                {
+                    var engraver = new GCodeEngraver();
+                    // Write prologue
 
+                    foreach (var tool in _tools)
+                    {
                         file.WriteLine("T{0}", tool.number + 1); //TODO: fix for gcode simulator (tools 1+)
                         file.WriteLine("M06");
-                        item.GenerateCode(file, tool);
-                        file.WriteLine("G0 Z{0:0.###} F{1}", 1, 1500); // move to travel height
+                        GenerateToolPath(file, tool);
                     }
-                }
-                // Write epilogue
+                    // Write epilogue
 
+                }
             }
             System.Threading.Thread.CurrentThread.CurrentCulture = saveCulture;
         }
+
+        private void Generate(string path, Tool tool)
+        {
+            var ext = Path.GetExtension(path);
+            // rewrite filename with suffix "-T<number>"
+            path = Path.Combine(Path.GetDirectoryName(path),
+                Path.GetFileNameWithoutExtension(path) + $"-T{tool.number+1}{ext}");
+            using (var file = new StreamWriter(path))
+            {
+                var engraver = new GCodeEngraver();
+                // Write prologue
+                GenerateToolPath(file, tool);
+                // Write epilogue
+            }
+        }
+
+        private void GenerateToolPath(StreamWriter wr, Tool tool)
+        {
+            wr.WriteLine("T{0}", tool.number + 1); //TODO: fix for gcode simulator (tools 1+)
+            wr.WriteLine("M06");
+            foreach (var item in panel.items)
+            {
+                if (!item.UsesTool(tool.number))
+                    continue; // Do not render in this tool pass
+                item.GenerateCode(wr, tool);
+                wr.WriteLine("G0 Z{0:0.###} F{1}", 1, 1500); // move to travel height
+            }
+        }
+
         #region Tools
         private List<Tool> _tools = new List<Tool>();
 

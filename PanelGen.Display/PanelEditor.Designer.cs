@@ -44,8 +44,11 @@
             this.fileSaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.fileExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editParametersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelToolSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.panelGenGCode = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
@@ -58,10 +61,13 @@
             this.polylineTool = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolEditSelected = new System.Windows.Forms.ToolStripButton();
+            this.toolCopySelected = new System.Windows.Forms.ToolStripButton();
+            this.toolDeleteSelected = new System.Windows.Forms.ToolStripButton();
             this.openProjectFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveProjectFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.saveGCodeFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.panelToolSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editCloneMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editDeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panelAddMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -138,6 +144,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
+            this.editToolStripMenuItem,
             viewToolStripMenuItem,
             this.panelToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -195,6 +202,24 @@
             this.fileExitMenuItem.Text = "Exit";
             this.fileExitMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editParametersMenuItem,
+            this.editCloneMenuItem,
+            this.editDeleteMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "&Edit";
+            // 
+            // editParametersMenuItem
+            // 
+            this.editParametersMenuItem.Name = "editParametersMenuItem";
+            this.editParametersMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.editParametersMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editParametersMenuItem.Text = "Edit selected...";
+            this.editParametersMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
             // panelToolStripMenuItem
             // 
             this.panelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -213,6 +238,14 @@
             this.panelSettingsMenuItem.Size = new System.Drawing.Size(179, 22);
             this.panelSettingsMenuItem.Text = "Settings...";
             this.panelSettingsMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // panelToolSettingsMenuItem
+            // 
+            this.panelToolSettingsMenuItem.Name = "panelToolSettingsMenuItem";
+            this.panelToolSettingsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
+            this.panelToolSettingsMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.panelToolSettingsMenuItem.Text = "Tools...";
+            this.panelToolSettingsMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -268,10 +301,12 @@
             this.textTool,
             this.polylineTool,
             this.toolStripSeparator2,
-            this.toolEditSelected});
+            this.toolEditSelected,
+            this.toolCopySelected,
+            this.toolDeleteSelected});
             this.toolStrip1.Location = new System.Drawing.Point(0, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(93, 154);
+            this.toolStrip1.Size = new System.Drawing.Size(93, 198);
             this.toolStrip1.TabIndex = 0;
             // 
             // dialTool
@@ -339,6 +374,26 @@
             this.toolEditSelected.Text = "Edit";
             this.toolEditSelected.Click += new System.EventHandler(this.tool_Click);
             // 
+            // toolCopySelected
+            // 
+            this.toolCopySelected.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolCopySelected.Image = ((System.Drawing.Image)(resources.GetObject("toolCopySelected.Image")));
+            this.toolCopySelected.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCopySelected.Name = "toolCopySelected";
+            this.toolCopySelected.Size = new System.Drawing.Size(91, 19);
+            this.toolCopySelected.Text = "Copy";
+            this.toolCopySelected.Click += new System.EventHandler(this.tool_Click);
+            // 
+            // toolDeleteSelected
+            // 
+            this.toolDeleteSelected.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolDeleteSelected.Image = ((System.Drawing.Image)(resources.GetObject("toolDeleteSelected.Image")));
+            this.toolDeleteSelected.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolDeleteSelected.Name = "toolDeleteSelected";
+            this.toolDeleteSelected.Size = new System.Drawing.Size(91, 19);
+            this.toolDeleteSelected.Text = "Delete";
+            this.toolDeleteSelected.Click += new System.EventHandler(this.tool_Click);
+            // 
             // openProjectFileDialog
             // 
             this.openProjectFileDialog.DefaultExt = "pnl";
@@ -355,13 +410,21 @@
             this.saveGCodeFileDialog.DefaultExt = "nc";
             this.saveGCodeFileDialog.Filter = "GCode Files|*.nc|All files|*.*";
             // 
-            // panelToolSettingsMenuItem
+            // editCloneMenuItem
             // 
-            this.panelToolSettingsMenuItem.Name = "panelToolSettingsMenuItem";
-            this.panelToolSettingsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
-            this.panelToolSettingsMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.panelToolSettingsMenuItem.Text = "Tools...";
-            this.panelToolSettingsMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            this.editCloneMenuItem.Name = "editCloneMenuItem";
+            this.editCloneMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.editCloneMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editCloneMenuItem.Text = "Clone";
+            this.editCloneMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // editDeleteMenuItem
+            // 
+            this.editDeleteMenuItem.Name = "editDeleteMenuItem";
+            this.editDeleteMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.editDeleteMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editDeleteMenuItem.Text = "Delete";
+            this.editDeleteMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // PanelEditor
             // 
@@ -370,9 +433,11 @@
             this.ClientSize = new System.Drawing.Size(714, 500);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PanelEditor";
             this.Text = "PanelEditor";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PanelEditor_KeyUp);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -420,5 +485,11 @@
         private System.Windows.Forms.ToolStripMenuItem panelGenGCode;
         private System.Windows.Forms.SaveFileDialog saveGCodeFileDialog;
         private System.Windows.Forms.ToolStripMenuItem panelToolSettingsMenuItem;
+        private System.Windows.Forms.ToolStripButton toolCopySelected;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editParametersMenuItem;
+        private System.Windows.Forms.ToolStripButton toolDeleteSelected;
+        private System.Windows.Forms.ToolStripMenuItem editCloneMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editDeleteMenuItem;
     }
 }

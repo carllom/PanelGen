@@ -49,6 +49,31 @@ namespace PanelGen.Cli
             return xr.Inside(x, y);
         }
 
+        public override PanelStockItem Clone()
+        {
+            var copy = new Dial
+            {
+                pos = pos,
+                toolNumber = toolNumber,
+                holeToolNumber = holeToolNumber,
+                holeRadius = holeRadius,
+                holeDepth = holeDepth,
+                innerRadius = innerRadius,
+                arcSpan = arcSpan,
+                markerLength = markerLength,
+                minValue = minValue,
+                maxValue = maxValue,
+                step = step,
+                tickLength = tickLength,
+                tickCount = tickCount,
+                text = text,
+                LabelFont = LabelFont,
+                MarkerFont = MarkerFont,
+                markerLabelOffset = markerLabelOffset
+            };
+            return copy;
+        }
+
         public void Draw(IDraw drw)
         {
             var startAng = (360 - arcSpan) * Math.PI / 360;

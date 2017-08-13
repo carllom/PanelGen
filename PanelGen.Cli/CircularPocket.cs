@@ -36,6 +36,24 @@ namespace PanelGen.Cli
             return p.Length <= diameter / 2;
         }
 
+        public override PanelStockItem Clone()
+        {
+            var copy = new CircularPocket
+            {
+                pos = pos,
+                toolNumber = toolNumber,
+                diameter = diameter,
+                depth = depth,
+                steps = new List<Step>(steps.Count)
+            };
+            foreach (var step in steps)
+            {
+                var newStep = new Step(step.diameter, step.depth);
+                copy.steps.Add(newStep);
+            }
+            return copy;
+        }
+
         private const float Stepover = 0.1f; // Tool overlap when doing surface milling
 
         public override void GenerateCode(TextWriter output, Tool tool)

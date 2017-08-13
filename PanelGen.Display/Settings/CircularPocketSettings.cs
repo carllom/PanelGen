@@ -84,12 +84,16 @@ namespace PanelGen.Display
             else if (sender == applyChanges)
             {
                 var item = (CircularPocket.Step)stepList.SelectedItem;
+                if (item == null)
+                    return;
                 item.diameter = Convert.ToSingle(numStepDiam.Value);
                 item.depth = Convert.ToSingle(numStepDepth.Value);
                 stepList.Refresh();
             }
             else if (sender == removeStep)
             {
+                if (stepList.SelectedIndex == -1)
+                    return;
                 stepList.Items.RemoveAt(stepList.SelectedIndex);
                 ApplyEnabledState();
             }
@@ -120,8 +124,8 @@ namespace PanelGen.Display
             var numItems = stepList.Items.Count;
             stepList.Enabled = stepsActive;
             addStep.Enabled = stepsActive;
-            applyChanges.Enabled = stepsActive;
-            removeStep.Enabled = stepsActive && numItems > 1;
+            applyChanges.Enabled = stepsActive && stepList.SelectedIndex > -1;
+            removeStep.Enabled = stepsActive && numItems > 1 && stepList.SelectedIndex > -1;
             numStepDiam.Enabled = stepsActive;
             numStepDepth.Enabled = stepsActive;
 
@@ -131,8 +135,11 @@ namespace PanelGen.Display
         private void stepList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var item = (CircularPocket.Step)stepList.SelectedItem;
+            if (item == null)
+                return;
             numStepDiam.Value = Convert.ToDecimal(item.diameter);
             numStepDepth.Value = Convert.ToDecimal(item.depth);
+            ApplyEnabledState();
         }
     }
 }

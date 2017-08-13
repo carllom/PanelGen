@@ -57,6 +57,7 @@ namespace PanelGen.Cli
 
         public abstract void GenerateCode(TextWriter writer, Tool tool);
         public virtual bool UsesTool(int toolNumber) { return toolNumber == this.toolNumber; }
+        public abstract PanelStockItem Clone();
 
         public override void Load(BinaryReader data)
         {

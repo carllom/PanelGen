@@ -4,6 +4,10 @@ using System.IO;
 
 namespace PanelGen.Cli
 {
+    /// <summary>
+    /// PanelGen project file
+    /// Contains panel component data and tool parameters
+    /// </summary>
     public class PanelGenProject : IPanelGenFileObject
     {
         public PanelStock Stock { get; set; } = new PanelStock();

@@ -14,6 +14,7 @@ namespace PanelGen.Display
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new PanelEditor());
+            //Application.Run(new Form2());
         }
     }
 }

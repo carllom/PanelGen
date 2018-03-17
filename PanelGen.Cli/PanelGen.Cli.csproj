@@ -58,6 +58,7 @@
     <Compile Include="RectangularPocket.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="Tool.cs" />
+    <Compile Include="Type1Font.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

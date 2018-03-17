@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using PanelGen.Cli;
 
 namespace PanelGen.Display
 {
@@ -21,6 +22,8 @@ namespace PanelGen.Display
             InitializeComponent();
             panel1.Paint += Panel1_Paint;
             var q = float.Parse("0.5", CultureInfo.InvariantCulture);
+            var atf = new Type1Font(@"C:\Projekt\PanelGen\tool\psfonts\Eng_UniversLine.pfa");
+            atf.Parse();
             ReadFontFile(@"C:\Projekt\PanelGen\PanelGen.Display\font1.txt");
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace PanelGen.Cli
 {
@@ -53,6 +54,11 @@ namespace PanelGen.Cli
 
         public static Vertex3 operator -(Vertex3 a, Vertex3 b) => new Vertex3(a.x - b.x, a.y - b.y, a.z - b.z);
         public static Vertex3 operator +(Vertex3 a, Vertex3 b) => new Vertex3(a.x + b.x, a.y + b.y, a.z + b.z);
+
+        public Vertex3 Rot(bool rotate)
+        {
+            return rotate ? new Vertex3(y, -x) : this;
+        }
     }
 
     public struct Vertex2
@@ -79,6 +85,10 @@ namespace PanelGen.Cli
             return $"({x}:{y})";
         }
 
+        public Vertex2 Rot(bool rotate)
+        {
+            return rotate ? new Vertex2(y, -x) : this;
+        }
     }
 
     public struct Segment2

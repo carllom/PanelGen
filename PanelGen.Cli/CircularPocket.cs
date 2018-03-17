@@ -65,7 +65,6 @@ namespace PanelGen.Cli
             }
 
             output.WriteLine("(DEBUG: CircularPocket start)");
-
             if (steps.Count == 0)
                 MillPocket(output, tool);
             else
@@ -94,18 +93,20 @@ namespace PanelGen.Cli
                 var maxRadius = (step.diameter / 2) - tool.radius; // tool compensated outer radius
 
                 output.WriteLine("G00 X{0:0.###} Y{1:0.###}", pos.x + maxRadius, pos.y); // Move to center (x,y)
-                                                                                         // z = 0 (surface)
+                output.WriteLine("F75"); //TODO: get feed rate from tool
+                                         // z = 0 (surface)
                 for (var z = startZ - tool.zStep; z > (startZ-step.depth); z -= tool.zStep)
                 {
-                    output.WriteLine("G02 I{0:0.###} Z{1:0.###}", -maxRadius, z); // Helix w center @x,y
+                    output.WriteLine("G02 I{0:0.###} X{1:0.###} Y{2:0.###} Z{3:0.###}", -maxRadius, pos.x + maxRadius, pos.y, z); // Helix w center @x,y
                 }
-                output.WriteLine("G02 I{0:0.###} Z{1:0.###}", -maxRadius, startZ-step.depth); // Helix w center @x,y
-                output.WriteLine("G02 I{0:0.###}", -maxRadius); // Circle w center @x,y
+                output.WriteLine("G02 I{0:0.###} X{1:0.###} Y{2:0.###} Z{3:0.###}", -maxRadius, pos.x + maxRadius, pos.y, startZ -step.depth); // Helix w center @x,y
+                output.WriteLine("G02 I{0:0.###} X{1:0.###} Y{2:0.###}", -maxRadius, pos.x + maxRadius, pos.y); // Circle w center @x,y
             }
             else // Pocket must be surface milled
             {
                 output.WriteLine("G00 X{0:0.###} Y{1:0.###}", pos.x, pos.y); // Move to center (x,y)
                                                                              // z = 0 (surface)
+                output.WriteLine("F75"); //TODO: get feed rate from tool
 
                 for (var z = pos.z - tool.zStep; z > (startZ-step.depth); z -= tool.zStep)
                 {
@@ -155,7 +156,7 @@ namespace PanelGen.Cli
             // Do outermost circle
             output.WriteLine("G01 X{0:0.###} Y{1:0.###}", pos.x + maxRadius, pos.y);
             // Explicit move to outer radius just in case that the spiral calculations are a bit off
-            output.WriteLine("G02 I{0:0.###}", - maxRadius); // Circle w center @x,y
+            output.WriteLine("G02 I{0:0.###} X{1:0.###} Y{2:0.###}", - maxRadius, pos.x + maxRadius, pos.y); // Circle w center @x,y
         }
 
         // Create 1 spiral segment 360 degrees by plain G1 moves

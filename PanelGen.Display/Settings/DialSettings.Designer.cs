@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.GroupBox groupBox1;
+            System.Windows.Forms.Label label18;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.GroupBox groupBox2;
             System.Windows.Forms.Label label4;
@@ -49,7 +50,7 @@
             System.Windows.Forms.Label label15;
             System.Windows.Forms.Label label16;
             System.Windows.Forms.Label label17;
-            System.Windows.Forms.Label label18;
+            this.numHoleDepth = new System.Windows.Forms.NumericUpDown();
             this.numHoleRadius = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
@@ -70,8 +71,8 @@
             this.txtLabelText = new System.Windows.Forms.TextBox();
             this.cboEngravingTool = new System.Windows.Forms.ComboBox();
             this.cboMillTool = new System.Windows.Forms.ComboBox();
-            this.numHoleDepth = new System.Windows.Forms.NumericUpDown();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            label18 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
             label4 = new System.Windows.Forms.Label();
@@ -92,8 +93,8 @@
             label15 = new System.Windows.Forms.Label();
             label16 = new System.Windows.Forms.Label();
             label17 = new System.Windows.Forms.Label();
-            label18 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
@@ -113,7 +114,6 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -128,6 +128,34 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Dimensions";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(8, 42);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(61, 13);
+            label18.TabIndex = 3;
+            label18.Text = "Depth (mm)";
+            // 
+            // numHoleDepth
+            // 
+            this.numHoleDepth.DecimalPlaces = 3;
+            this.numHoleDepth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numHoleDepth.Location = new System.Drawing.Point(89, 40);
+            this.numHoleDepth.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numHoleDepth.Name = "numHoleDepth";
+            this.numHoleDepth.Size = new System.Drawing.Size(63, 20);
+            this.numHoleDepth.TabIndex = 2;
+            this.numHoleDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numHoleRadius
             // 
@@ -492,11 +520,6 @@
             0,
             0,
             0});
-            this.numMarkerFontSize.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numMarkerFontSize.Name = "numMarkerFontSize";
             this.numMarkerFontSize.Size = new System.Drawing.Size(68, 20);
             this.numMarkerFontSize.TabIndex = 7;
@@ -653,34 +676,6 @@
             this.cboMillTool.Size = new System.Drawing.Size(106, 21);
             this.cboMillTool.TabIndex = 14;
             // 
-            // numHoleDepth
-            // 
-            this.numHoleDepth.DecimalPlaces = 3;
-            this.numHoleDepth.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numHoleDepth.Location = new System.Drawing.Point(89, 40);
-            this.numHoleDepth.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numHoleDepth.Name = "numHoleDepth";
-            this.numHoleDepth.Size = new System.Drawing.Size(63, 20);
-            this.numHoleDepth.TabIndex = 2;
-            this.numHoleDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(8, 42);
-            label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(61, 13);
-            label18.TabIndex = 3;
-            label18.Text = "Depth (mm)";
-            // 
             // DialSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -705,6 +700,7 @@
             this.Text = "PanelSettings";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
@@ -729,7 +725,6 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

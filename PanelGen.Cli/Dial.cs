@@ -133,6 +133,9 @@ namespace PanelGen.Cli
 
         private void DrawTickLabel(string text, double angle, float xc, float yc, float dist, HersheyFont font, IDraw drw)
         {
+            if (font.Size < 1)
+                return;
+
             var w = font.InnerWidth(text);
             var xk = -(float)Math.Sin(angle);
             var yk = (float)Math.Cos(angle);

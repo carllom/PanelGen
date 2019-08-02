@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 
 namespace PanelGen.Cli
 {
@@ -58,6 +59,33 @@ namespace PanelGen.Cli
             {
                 tool.Save(bw);
             }
+        }
+
+        public void ReadXml(XmlElement elem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public XmlElement AsXml(XmlDocument doc)
+        {
+            var root = doc.CreateElement("PanelGenProject");
+            root.SetAttribute("version", "100");
+            doc.AppendChild(root);
+
+            // Stock components
+            var stockElem = Stock.AsXml(doc);
+            root.AppendChild(stockElem);
+
+
+            // Tools
+            var tools = doc.CreateElement("Tools");
+            foreach (var tool in Tools)
+            {
+                tools.AppendChild(tool.AsXml(doc));
+            }
+            root.AppendChild(tools);
+
+            return root;
         }
     }
 }

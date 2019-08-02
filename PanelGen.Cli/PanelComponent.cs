@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
+using System.Xml;
 
 namespace PanelGen.Cli
 {
@@ -132,6 +133,21 @@ namespace PanelGen.Cli
             data.Write(pos.x);
             data.Write(pos.y);
             data.Write(pos.z);
+        }
+
+        public void ReadXml(XmlElement elem)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public virtual XmlElement AsXml(XmlDocument doc)
+        {
+            var elem = doc.CreateElement("Position");
+            elem.SetAttribute("x", pos.x.ToString(CultureInfo.InvariantCulture));
+            elem.SetAttribute("y", pos.y.ToString(CultureInfo.InvariantCulture));
+            elem.SetAttribute("z", pos.z.ToString(CultureInfo.InvariantCulture));
+            return elem;
         }
 
         private const byte TYPE_DIAL = 1;

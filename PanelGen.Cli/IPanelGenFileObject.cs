@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Xml;
 
 namespace PanelGen.Cli
 {
@@ -6,5 +7,8 @@ namespace PanelGen.Cli
     {
         void Save(BinaryWriter bw);
         void Load(BinaryReader br);
+
+        XmlElement AsXml(XmlDocument doc);
+        void ReadXml(XmlElement elem);
     }
 }

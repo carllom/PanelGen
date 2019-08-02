@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Xml;
 
 namespace PanelGen.Cli
 {
@@ -49,6 +51,24 @@ namespace PanelGen.Cli
                 WriteObject(data, item);
             }
         }
+
+        public override XmlElement AsXml(XmlDocument doc)
+        {
+            var panel = doc.CreateElement("Panel");
+            panel.AppendChild(base.AsXml(doc));
+            var dimensions = doc.CreateElement("Dimensions");
+            dimensions.SetAttribute("width", width.ToString(CultureInfo.InvariantCulture));
+            dimensions.SetAttribute("height", width.ToString(CultureInfo.InvariantCulture));
+            dimensions.SetAttribute("thickness", width.ToString(CultureInfo.InvariantCulture));
+            panel.AppendChild(dimensions);
+            var itemRoot = doc.CreateElement("Items");
+            foreach (var item in items)
+            {
+                itemRoot.AppendChild(item.AsXml(doc));
+            }
+            panel.AppendChild(itemRoot);
+            return panel;
+        }
     }
 
     public abstract class PanelStockItem : PanelComponent
@@ -69,6 +89,14 @@ namespace PanelGen.Cli
         {
             base.Save(data);
             data.Write(toolNumber);
+        }
+
+        public override XmlElement AsXml(XmlDocument doc)
+        {
+            var stock = doc.CreateElement("Stock");
+            stock.AppendChild(base.AsXml(doc));
+            stock.SetAttribute("tool", toolNumber.ToString(CultureInfo.InvariantCulture));
+            return stock;
         }
     }
 }

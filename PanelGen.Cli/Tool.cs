@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using System.Xml;
 
 namespace PanelGen.Cli
 {
@@ -27,6 +29,20 @@ namespace PanelGen.Cli
             number = br.ReadInt32();
             diameter = br.ReadSingle();
             zStep = br.ReadSingle();
+        }
+
+        public XmlElement AsXml(XmlDocument doc)
+        {
+            var tool = doc.CreateElement("Tool");
+            tool.SetAttribute("number", number.ToString());
+            tool.SetAttribute("diameter", diameter.ToString(CultureInfo.InvariantCulture));
+            tool.SetAttribute("zStep", zStep.ToString(CultureInfo.InvariantCulture));
+            return tool;
+        }
+
+        public void ReadXml(XmlElement elem)
+        {
+            throw new NotImplementedException();
         }
     }
 }

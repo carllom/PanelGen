@@ -50,6 +50,9 @@
             System.Windows.Forms.Label label15;
             System.Windows.Forms.Label label16;
             System.Windows.Forms.Label label17;
+            System.Windows.Forms.GroupBox groupBox7;
+            System.Windows.Forms.Label label19;
+            System.Windows.Forms.Label label21;
             this.numHoleDepth = new System.Windows.Forms.NumericUpDown();
             this.numHoleRadius = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
@@ -71,6 +74,9 @@
             this.txtLabelText = new System.Windows.Forms.TextBox();
             this.cboEngravingTool = new System.Windows.Forms.ComboBox();
             this.cboMillTool = new System.Windows.Forms.ComboBox();
+            this.numLockHeight = new System.Windows.Forms.NumericUpDown();
+            this.numLockOffset = new System.Windows.Forms.NumericUpDown();
+            this.chkPotLock = new System.Windows.Forms.CheckBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
             label18 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
@@ -93,6 +99,9 @@
             label15 = new System.Windows.Forms.Label();
             label16 = new System.Windows.Forms.Label();
             label17 = new System.Windows.Forms.Label();
+            groupBox7 = new System.Windows.Forms.GroupBox();
+            label19 = new System.Windows.Forms.Label();
+            label21 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoleRadius)).BeginInit();
@@ -114,6 +123,9 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).BeginInit();
+            groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLockHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLockOffset)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -216,7 +228,7 @@
             -2147483648});
             this.numY.Name = "numY";
             this.numY.Size = new System.Drawing.Size(68, 20);
-            this.numY.TabIndex = 9;
+            this.numY.TabIndex = 11;
             this.numY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
@@ -255,7 +267,7 @@
             -2147483648});
             this.numX.Name = "numX";
             this.numX.Size = new System.Drawing.Size(68, 20);
-            this.numX.TabIndex = 7;
+            this.numX.TabIndex = 10;
             this.numX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
@@ -313,7 +325,7 @@
             0});
             this.numLabelOffset.Name = "numLabelOffset";
             this.numLabelOffset.Size = new System.Drawing.Size(55, 20);
-            this.numLabelOffset.TabIndex = 11;
+            this.numLabelOffset.TabIndex = 7;
             this.numLabelOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numStep
@@ -321,7 +333,7 @@
             this.numStep.Location = new System.Drawing.Point(77, 92);
             this.numStep.Name = "numStep";
             this.numStep.Size = new System.Drawing.Size(63, 20);
-            this.numStep.TabIndex = 11;
+            this.numStep.TabIndex = 6;
             this.numStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
@@ -343,7 +355,7 @@
             -2147483648});
             this.numMaxValue.Name = "numMaxValue";
             this.numMaxValue.Size = new System.Drawing.Size(63, 20);
-            this.numMaxValue.TabIndex = 9;
+            this.numMaxValue.TabIndex = 5;
             this.numMaxValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
@@ -365,7 +377,7 @@
             -2147483648});
             this.numMinValue.Name = "numMinValue";
             this.numMinValue.Size = new System.Drawing.Size(63, 20);
-            this.numMinValue.TabIndex = 7;
+            this.numMinValue.TabIndex = 4;
             this.numMinValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
@@ -393,7 +405,7 @@
             0});
             this.numMarkerLength.Name = "numMarkerLength";
             this.numMarkerLength.Size = new System.Drawing.Size(63, 20);
-            this.numMarkerLength.TabIndex = 5;
+            this.numMarkerLength.TabIndex = 3;
             this.numMarkerLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
@@ -522,7 +534,7 @@
             0});
             this.numMarkerFontSize.Name = "numMarkerFontSize";
             this.numMarkerFontSize.Size = new System.Drawing.Size(68, 20);
-            this.numMarkerFontSize.TabIndex = 7;
+            this.numMarkerFontSize.TabIndex = 8;
             this.numMarkerFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numMarkerFontSize.Value = new decimal(new int[] {
             1,
@@ -552,7 +564,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(246, 307);
+            this.button1.Location = new System.Drawing.Point(388, 307);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -588,7 +600,7 @@
             0});
             this.numScaleInnerRad.Name = "numScaleInnerRad";
             this.numScaleInnerRad.Size = new System.Drawing.Size(63, 20);
-            this.numScaleInnerRad.TabIndex = 5;
+            this.numScaleInnerRad.TabIndex = 13;
             this.numScaleInnerRad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numScaleArc
@@ -602,20 +614,18 @@
             0});
             this.numScaleArc.Name = "numScaleArc";
             this.numScaleArc.Size = new System.Drawing.Size(63, 20);
-            this.numScaleArc.TabIndex = 3;
+            this.numScaleArc.TabIndex = 12;
             this.numScaleArc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.numTickCount);
             this.groupBox4.Controls.Add(label10);
             this.groupBox4.Controls.Add(this.numTickLength);
             this.groupBox4.Controls.Add(label11);
             this.groupBox4.Location = new System.Drawing.Point(168, 176);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(153, 68);
+            this.groupBox4.Size = new System.Drawing.Size(162, 68);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tick";
@@ -626,8 +636,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.numTickCount.Location = new System.Drawing.Point(77, 40);
             this.numTickCount.Name = "numTickCount";
-            this.numTickCount.Size = new System.Drawing.Size(66, 20);
-            this.numTickCount.TabIndex = 11;
+            this.numTickCount.Size = new System.Drawing.Size(75, 20);
+            this.numTickCount.TabIndex = 15;
             this.numTickCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numTickLength
@@ -647,8 +657,8 @@
             0,
             0});
             this.numTickLength.Name = "numTickLength";
-            this.numTickLength.Size = new System.Drawing.Size(66, 20);
-            this.numTickLength.TabIndex = 9;
+            this.numTickLength.Size = new System.Drawing.Size(75, 20);
+            this.numTickLength.TabIndex = 14;
             this.numTickLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtLabelText
@@ -657,8 +667,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLabelText.Location = new System.Drawing.Point(42, 309);
             this.txtLabelText.Name = "txtLabelText";
-            this.txtLabelText.Size = new System.Drawing.Size(198, 20);
-            this.txtLabelText.TabIndex = 12;
+            this.txtLabelText.Size = new System.Drawing.Size(340, 20);
+            this.txtLabelText.TabIndex = 18;
             // 
             // cboEngravingTool
             // 
@@ -666,7 +676,7 @@
             this.cboEngravingTool.Location = new System.Drawing.Point(215, 250);
             this.cboEngravingTool.Name = "cboEngravingTool";
             this.cboEngravingTool.Size = new System.Drawing.Size(106, 21);
-            this.cboEngravingTool.TabIndex = 13;
+            this.cboEngravingTool.TabIndex = 16;
             // 
             // cboMillTool
             // 
@@ -674,13 +684,98 @@
             this.cboMillTool.Location = new System.Drawing.Point(215, 277);
             this.cboMillTool.Name = "cboMillTool";
             this.cboMillTool.Size = new System.Drawing.Size(106, 21);
-            this.cboMillTool.TabIndex = 14;
+            this.cboMillTool.TabIndex = 17;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(label21);
+            groupBox7.Controls.Add(this.chkPotLock);
+            groupBox7.Controls.Add(this.numLockHeight);
+            groupBox7.Controls.Add(label19);
+            groupBox7.Controls.Add(this.numLockOffset);
+            groupBox7.Location = new System.Drawing.Point(334, 12);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new System.Drawing.Size(129, 232);
+            groupBox7.TabIndex = 10;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Panel backside";
+            // 
+            // numLockHeight
+            // 
+            this.numLockHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLockHeight.DecimalPlaces = 3;
+            this.numLockHeight.Location = new System.Drawing.Point(68, 68);
+            this.numLockHeight.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numLockHeight.Minimum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            -2147483648});
+            this.numLockHeight.Name = "numLockHeight";
+            this.numLockHeight.Size = new System.Drawing.Size(55, 20);
+            this.numLockHeight.TabIndex = 9;
+            this.numLockHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(6, 70);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(63, 13);
+            label19.TabIndex = 8;
+            label19.Text = "Height (mm)";
+            // 
+            // numLockOffset
+            // 
+            this.numLockOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLockOffset.DecimalPlaces = 3;
+            this.numLockOffset.Location = new System.Drawing.Point(67, 42);
+            this.numLockOffset.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numLockOffset.Minimum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            -2147483648});
+            this.numLockOffset.Name = "numLockOffset";
+            this.numLockOffset.Size = new System.Drawing.Size(55, 20);
+            this.numLockOffset.TabIndex = 7;
+            this.numLockOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // chkPotLock
+            // 
+            this.chkPotLock.AutoSize = true;
+            this.chkPotLock.Location = new System.Drawing.Point(9, 19);
+            this.chkPotLock.Name = "chkPotLock";
+            this.chkPotLock.Size = new System.Drawing.Size(114, 17);
+            this.chkPotLock.TabIndex = 10;
+            this.chkPotLock.Text = "Potentiometer lock";
+            this.chkPotLock.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new System.Drawing.Point(6, 44);
+            label21.Name = "label21";
+            label21.Size = new System.Drawing.Size(60, 13);
+            label21.TabIndex = 11;
+            label21.Text = "Offset (mm)";
             // 
             // DialSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 342);
+            this.ClientSize = new System.Drawing.Size(475, 342);
+            this.Controls.Add(groupBox7);
             this.Controls.Add(label17);
             this.Controls.Add(label16);
             this.Controls.Add(this.cboMillTool);
@@ -725,6 +820,10 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTickCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTickLength)).EndInit();
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numLockHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLockOffset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -752,5 +851,8 @@
         private System.Windows.Forms.ComboBox cboEngravingTool;
         private System.Windows.Forms.ComboBox cboMillTool;
         private System.Windows.Forms.NumericUpDown numHoleDepth;
+        private System.Windows.Forms.CheckBox chkPotLock;
+        private System.Windows.Forms.NumericUpDown numLockHeight;
+        private System.Windows.Forms.NumericUpDown numLockOffset;
     }
 }

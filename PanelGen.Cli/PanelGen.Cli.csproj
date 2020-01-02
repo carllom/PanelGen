@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1F2FED2C-D2E1-4B93-AB2E-DD8D6D774E66}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PanelGen.Cli</RootNamespace>
     <AssemblyName>PanelGen.Cli</AssemblyName>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,16 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dial.cs" />
+    <Compile Include="FileFormats\BinaryPanelGenFileStrategy.cs" />
+    <Compile Include="FileFormats\IPanelGenFileStrategy.cs" />
+    <Compile Include="FileFormats\PanelGenFileStrategyFactory.cs" />
+    <Compile Include="FileFormats\XmlPanelGenFileStrategy.cs" />
     <Compile Include="GCodeEngraver.cs" />
     <Compile Include="HersheyFont.cs" />
     <Compile Include="IDraw.cs" />
     <Compile Include="IDrawableItem.cs" />
-    <Compile Include="IPanelGenFileObject.cs" />
     <Compile Include="PanelComponent.cs" />
     <Compile Include="PanelGenProject.cs" />
     <Compile Include="PanelStock.cs" />
     <Compile Include="PolyLine.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CircularPocket.cs" />
     <Compile Include="RectangularPocket.cs" />

@@ -148,47 +148,5 @@ namespace PanelGen.Cli
 
             font.DrawString(drw, text, xc + xk * dist + w, yc - yk * dist);
         }
-
-        #region Save/Restore object
-        public override void Load(BinaryReader data)
-        {
-            base.Load(data);
-            holeRadius = data.ReadSingle();
-            holeDepth = data.ReadSingle();
-            innerRadius = data.ReadSingle();
-            arcSpan = data.ReadSingle();
-            markerLength = data.ReadSingle();
-            minValue = data.ReadInt32();
-            maxValue = data.ReadInt32();
-            step = data.ReadInt32();
-            tickLength = data.ReadSingle();
-            tickCount = data.ReadInt32();
-            text = data.ReadString();
-            markerLabelOffset = data.ReadSingle();
-            MarkerFont.Size = data.ReadSingle();
-            LabelFont.Size = data.ReadSingle();
-            holeToolNumber = data.ReadByte();
-        }
-
-        public override void Save(BinaryWriter data)
-        {
-            base.Save(data);
-            data.Write(holeRadius);
-            data.Write(holeDepth);
-            data.Write(innerRadius);
-            data.Write(arcSpan);
-            data.Write(markerLength);
-            data.Write(minValue);
-            data.Write(maxValue);
-            data.Write(step);
-            data.Write(tickLength);
-            data.Write(tickCount);
-            data.Write(text);
-            data.Write(markerLabelOffset);
-            data.Write(MarkerFont.Size);
-            data.Write(LabelFont.Size);
-            data.Write(holeToolNumber);
-        }
-        #endregion
     }
 }

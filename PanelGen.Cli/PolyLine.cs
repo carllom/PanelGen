@@ -67,32 +67,6 @@ namespace PanelGen.Cli
             writer.WriteLine(engr.GCode());
         }
 
-        public override void Load(BinaryReader data)
-        {
-            base.Load(data);
-            radius = data.ReadSingle();
-            var numPoints = data.ReadByte();
-            for (int i = 0; i < numPoints; i++)
-            {
-                var p = new Vertex2();
-                p.x = data.ReadSingle();
-                p.y = data.ReadSingle();
-                points.Add(p);
-            }
-        }
-
-        public override void Save(BinaryWriter data)
-        {
-            base.Save(data);
-            data.Write(radius);
-            data.Write((byte)points.Count);
-            foreach(var point in points)
-            {
-                data.Write(point.x);
-                data.Write(point.y);
-            }
-        }
-
         private float Sqr(float x) => x * x;
         private float Dist2(Vertex2 v, Vertex2 w) => Sqr(v.x - w.x) + Sqr(v.y - w.y);
         private float DistToSegment(Vertex2 p, Vertex2 v, Vertex2 w)

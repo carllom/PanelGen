@@ -165,13 +165,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="font1.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PanelGen.Cli\PanelGen.Cli.csproj">
       <Project>{1f2fed2c-d2e1-4b93-ab2e-dd8d6d774e66}</Project>
       <Name>PanelGen.Cli</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="font1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

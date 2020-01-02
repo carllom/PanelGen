@@ -1,4 +1,5 @@
 ﻿using PanelGen.Cli;
+using PanelGen.Cli.FileFormats;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,8 @@ namespace PanelGen.Display
 
         public bool genToolsSeparate;
 
+        private PanelGenFileStrategyFactory _fileHandlerFactory = new PanelGenFileStrategyFactory();
+
         public PanelGenApplication()
         {
             // Default engraving tool - used by all components by default
@@ -30,18 +33,13 @@ namespace PanelGen.Display
 
         public void LoadPanel(string path)
         {
-            if (_project == null)
-                _project = new PanelGenProject();
             using (var str = File.OpenRead(path))
             {
-                using (var br = new BinaryReader(str))
-                {
-                    var _project = new PanelGenProject();
-                    _project.Load(br);
-                    // TODO: Load view state
-                    panel = _project.Stock;
-                    _tools = _project.Tools;
-                }
+                IPanelGenFileStrategy loadStrategy = _fileHandlerFactory.GetStrategy(path);
+                _project = loadStrategy.Read(str);
+                // TODO: Load view state
+                panel = _project.Stock;
+                _tools = _project.Tools;
             }
         }
 
@@ -49,13 +47,11 @@ namespace PanelGen.Display
         {
             using (var str = File.Create(path))
             {
-                using (var br = new BinaryWriter(str))
-                {
-                    _project.Stock = panel;
-                    _project.Tools = _tools;
-                    _project.Save(br);
-                    // TODO: Save view state
-                }
+                _project.Stock = panel;
+                _project.Tools = _tools;
+                IPanelGenFileStrategy saveStrategy = _fileHandlerFactory.GetStrategy(path);
+                saveStrategy.Write(str, _project);
+                // TODO: Save view state
             }
         }
 

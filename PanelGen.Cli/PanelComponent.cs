@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Xml;
 
 namespace PanelGen.Cli
 {
@@ -114,89 +111,11 @@ namespace PanelGen.Cli
         }
     }
 
-    public abstract class PanelComponent : IPanelGenFileObject
+    public abstract class PanelComponent 
     {
         public Vertex3 pos;
 
         public abstract Vertex3 Extents { get; }
         public abstract bool Inside(float x, float y);
-
-        public virtual void Load(BinaryReader data)
-        {
-            pos.x = data.ReadSingle();
-            pos.y = data.ReadSingle();
-            pos.z = data.ReadSingle();
-        }
-
-        public virtual void Save(BinaryWriter data)
-        {
-            data.Write(pos.x);
-            data.Write(pos.y);
-            data.Write(pos.z);
-        }
-
-        public void ReadXml(XmlElement elem)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public virtual XmlElement AsXml(XmlDocument doc)
-        {
-            var elem = doc.CreateElement("Position");
-            elem.SetAttribute("x", pos.x.ToString(CultureInfo.InvariantCulture));
-            elem.SetAttribute("y", pos.y.ToString(CultureInfo.InvariantCulture));
-            elem.SetAttribute("z", pos.z.ToString(CultureInfo.InvariantCulture));
-            return elem;
-        }
-
-        private const byte TYPE_DIAL = 1;
-        private const byte TYPE_CIRCPOCKET = 2;
-        private const byte TYPE_RECTPOCKET = 3;
-        private const byte TYPE_TEXT = 4;
-        private const byte TYPE_POLYLINE = 5;
-
-        public static PanelComponent ReadObject(BinaryReader data)
-        {
-            var type = data.ReadByte();
-            PanelComponent obj;
-            switch (type)
-            {
-                case TYPE_DIAL:
-                    obj = new Dial();
-                    break;
-                case TYPE_CIRCPOCKET:
-                    obj = new CircularPocket();
-                    break;
-                case TYPE_RECTPOCKET:
-                    obj = new RectangularPocket();
-                    break;
-                case TYPE_TEXT:
-                    obj = new Text("");
-                    break;
-                case TYPE_POLYLINE:
-                    obj = new PolyLine();
-                    break;
-                default:
-                    throw new Exception($"Got unknown Panel component type {type}");
-            }
-            obj.Load(data);
-            return obj;
-        }
-
-        public static void WriteObject(BinaryWriter data, PanelComponent obj)
-        {
-            if (obj is Dial)
-                data.Write(TYPE_DIAL);
-            else if (obj is CircularPocket)
-                data.Write(TYPE_CIRCPOCKET);
-            else if (obj is RectangularPocket)
-                data.Write(TYPE_RECTPOCKET);
-            else if (obj is Text)
-                data.Write(TYPE_TEXT);
-            else if (obj is PolyLine)
-                data.Write(TYPE_POLYLINE);
-            obj.Save(data);
-        }
     }
 }

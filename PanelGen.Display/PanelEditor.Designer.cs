@@ -46,6 +46,8 @@
             this.fileExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editParametersMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editCloneMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editDeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelToolSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,8 +68,6 @@
             this.openProjectFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveProjectFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.saveGCodeFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.editCloneMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editDeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panelAddMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -219,6 +219,22 @@
             this.editParametersMenuItem.Size = new System.Drawing.Size(189, 22);
             this.editParametersMenuItem.Text = "Edit selected...";
             this.editParametersMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // editCloneMenuItem
+            // 
+            this.editCloneMenuItem.Name = "editCloneMenuItem";
+            this.editCloneMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.editCloneMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editCloneMenuItem.Text = "Clone";
+            this.editCloneMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // editDeleteMenuItem
+            // 
+            this.editDeleteMenuItem.Name = "editDeleteMenuItem";
+            this.editDeleteMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.editDeleteMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.editDeleteMenuItem.Text = "Delete";
+            this.editDeleteMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // panelToolStripMenuItem
             // 
@@ -398,33 +414,17 @@
             // 
             this.openProjectFileDialog.DefaultExt = "pnl";
             this.openProjectFileDialog.FileName = "openFileDialog1";
-            this.openProjectFileDialog.Filter = "PanelGen files|*.pnl|All files|*.*";
+            this.openProjectFileDialog.Filter = "PanelGen files (binary)|*.pnl|PanelGen files (xml)|*.xpnl|All files|*.*";
             // 
             // saveProjectFileDialog
             // 
             this.saveProjectFileDialog.DefaultExt = "pnl";
-            this.saveProjectFileDialog.Filter = "PanelGen files|*.pnl|All files|*.*";
+            this.saveProjectFileDialog.Filter = "PanelGen files (binary)|*.pnl|PanelGen files (xml)|*.xpnl|All files|*.*";
             // 
             // saveGCodeFileDialog
             // 
             this.saveGCodeFileDialog.DefaultExt = "nc";
             this.saveGCodeFileDialog.Filter = "GCode Files|*.nc|All files|*.*";
-            // 
-            // editCloneMenuItem
-            // 
-            this.editCloneMenuItem.Name = "editCloneMenuItem";
-            this.editCloneMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.editCloneMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.editCloneMenuItem.Text = "Clone";
-            this.editCloneMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
-            // 
-            // editDeleteMenuItem
-            // 
-            this.editDeleteMenuItem.Name = "editDeleteMenuItem";
-            this.editDeleteMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
-            this.editDeleteMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.editDeleteMenuItem.Text = "Delete";
-            this.editDeleteMenuItem.Click += new System.EventHandler(this.MenuItem_Click);
             // 
             // PanelEditor
             // 
